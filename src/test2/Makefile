@@ -32,7 +32,3 @@ clean :
 	rm -rf $(TARGET) $(OBJS)
 run :
 	./$(TARGET)
-test :
-	$(CC) -o test test.cpp $(LDLIBS)
-	./test
-	rm test

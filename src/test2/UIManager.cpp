@@ -12,6 +12,13 @@ UIManager::UIManager(GameManager& game_info) : game_manager(game_info)
   wborder(window_mission, '*', '*', '*', '*', '*', '*', '*', '*');
 }
 
+// 실행 시 한번
+void UIManager::Start()
+{
+
+}
+
+// 종료 시 한번
 void UIManager::GameEnd()
 {
   EraseWindow(window_game);

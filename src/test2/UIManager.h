@@ -9,6 +9,7 @@ class UIManager
 public:
   UIManager(GameManager& game_info);
 
+  void Start();
   void Update();
   void GameEnd();
 

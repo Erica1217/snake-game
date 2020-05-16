@@ -8,6 +8,7 @@ GameFlow::GameFlow()
     
 }
 
+// 크레딧 출력하는 창
 void GameFlow::RenderAbout()
 {
     WINDOW* window_about = newwin(8, 20, 5, 3);
@@ -74,7 +75,7 @@ int GameFlow::RenderStartMenu()
     
     wrefresh(window_start);
 
-    // 키입력받아서 엔터시 start or exit 값 반환
+    // 키입력받아서 엔터 누를 경우엔 choice 값 반환
     key = wgetch(window_start);
     switch(key)
     {
@@ -93,4 +94,11 @@ int GameFlow::RenderStartMenu()
         break;
     }
   }
+}
+
+
+// 게임 종료 시 한번 호출
+void GameFlow::RenderGameEnd()
+{
+
 }
