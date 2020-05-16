@@ -4,7 +4,7 @@ CFLAGS = -std=c++14
 LDFLAGS =
 LDLIBS = -lncurses
 
-OBJS = SnakeGame.o WindowManager.o
+OBJS = SnakeGame.o UIManager.o GameManager.o
 
 TARGET = SnakeGame
 
@@ -13,14 +13,13 @@ all : $(TARGET)
 $(TARGET) : $(OBJS)
 	$(CC) -o $@ $^ $(LDLIBS) $(CFLAGS)
 
-input.o : input.cpp input.h
-	$(CC) -c input.cpp
+GameManager.o : GameManager.cpp GameManager.h
+	$(CC) -c GameManager.cpp
 
+UIManager.o : UIManager.cpp UIManager.h
+	$(CC) -c UIManager.cpp
 
-WindowManager.o : WindowManager.cpp WindowManager.h
-	$(CC) -c WindowManager.cpp
-
-SnakeGame.o : SnakeGame.cpp WindowManager.h NcursesSetting.h
+SnakeGame.o : SnakeGame.cpp UIManager.h NcursesSetting.h
 	$(CC) -c SnakeGame.cpp
 
 clean :

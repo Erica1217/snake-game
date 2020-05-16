@@ -1,15 +1,30 @@
-#include "WindowManager.h"
+#include "UIManager.h"
+#include <vector>
 #include <ncurses.h>
 
-WindowManager::WindowManager()
+UIManager::UIManager(GameManager& game_info) : game_manager(game_info)
 {
-  win_game = newwin(21, 21, 11, 11);
-  win_score = newwin(11, 21, 1, 23);
-  win_mission = newwin(11, 21, 11, 23);
+  window_game = newwin(21, 21, 1, 1);
+}
+
+
+// 매 프레임 호출됨
+void UIManager::Update()
+{
+  std::vector<std::vector<int>> canvas = game_manager.GetCurMap();
+  
+  for(int i = 0 ; i < canvas.size() ; i++)
+  {
+    for(int j = 0 ; j < canvas[i].size() ; j++)
+    {
+      mvwprintw(window_game, i, j, "%d", canvas[i][j]);
+    }
+  }
+  wrefresh(window_game);
 }
 
 // 첫화면 시작메뉴
-int WindowManager::RenderStartWindow()
+int UIManager::RenderStartMenu()
 {
   WINDOW* win_start = newwin(8, 15, 5, 3);
   keypad(win_start, TRUE);
@@ -48,41 +63,11 @@ int WindowManager::RenderStartWindow()
         break;
       case 10:
         keypad(win_start, FALSE);
+        werase(win_start);
+        wrefresh(win_start);
         delwin(win_start);
-        endwin();
         return choice % 2;
         break;
     }
   }
-}
-
-void WindowManager::Render(WINDOW* window)
-{
-  mvprintw(1,3," ");
-  printw("12345");
-  start_color();
-  init_pair(1, COLOR_WHITE, COLOR_RED);
-  wbkgd(window, COLOR_PAIR(1));
-  wattron(window, COLOR_PAIR(1));
-  mvwprintw(window, 1, 1, "A NEW WINDOW");
-  wborder(window, '*', '*', '*', '*', '*', '*', '*', '*');
-  wattroff(window, COLOR_PAIR(1));
-
-  wrefresh(window);
-}
-
-void WindowManager::RenderCurWindows()
-{
-  Render(win_game);
-  Render(win_score);
-  Render(win_mission);
-}
-
-void WindowManager::DeleteCurWindows()
-{
-  delwin(win_game);
-  delwin(win_score);
-  delwin(win_mission);
-  mvprintw(1, 1, "delete");
-  refresh();
 }
