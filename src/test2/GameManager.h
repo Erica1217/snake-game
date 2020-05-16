@@ -10,7 +10,7 @@ public :
     GameManager();
 
     void StartGame();
-    void Update();
+    int Update();
 
     vector<vector<int>> GetCurMap();
 private :

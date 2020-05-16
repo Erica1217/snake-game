@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "kbhit.h"
 #include <vector>
 
 using namespace std;
@@ -25,13 +26,20 @@ void GameManager::StartGame()
 
 
 // 매 프레임 호출됨
-void GameManager::Update()
+int GameManager::Update()
 {
     cur_map[2][2]++;
     if(cur_map[2][2] > 9)
     {
         cur_map[2][2] = 0;
     }
+
+    if(kbhit())
+    {
+        getchar();
+        return 0;
+    }
+    return 1;
 }
 
 vector<vector<int>> GameManager::GetCurMap()

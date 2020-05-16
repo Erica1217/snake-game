@@ -5,11 +5,30 @@
 UIManager::UIManager(GameManager& game_info) : game_manager(game_info)
 {
   window_game = newwin(21, 21, 1, 1);
+  window_score = newwin(11, 21, 1, 22);
+  window_mission = newwin(11, 21, 11, 22);
+
+  wborder(window_score, '*', '*', '*', '*', '*', '*', '*', '*');
+  wborder(window_mission, '*', '*', '*', '*', '*', '*', '*', '*');
 }
 
+void UIManager::GameEnd()
+{
+  EraseWindow(window_game);
+  EraseWindow(window_score);
+  EraseWindow(window_mission);
+}
 
 // 매 프레임 호출됨
 void UIManager::Update()
+{
+  RenderGame();
+  RenderScore();
+  RenderMission();
+}
+
+// 게임화면 렌더링, Update 에서 매 프레임 호출
+void UIManager::RenderGame()
 {
   std::vector<std::vector<int>> canvas = game_manager.GetCurMap();
   
@@ -23,51 +42,23 @@ void UIManager::Update()
   wrefresh(window_game);
 }
 
-// 첫화면 시작메뉴
-int UIManager::RenderStartMenu()
+// 스코어보드 렌더링, Update 에서 매 프레임 호출
+void UIManager::RenderScore()
 {
-  WINDOW* win_start = newwin(8, 15, 5, 3);
-  keypad(win_start, TRUE);
-  box(win_start, 0, 0);
+  mvwprintw(window_score, 1, 1, "ScoreBoard");
+  wrefresh(window_score);
+}
 
-  // start/exit 중 선택된것
-  int choice = 1;
-  int key;
-  
-  while(1)
-  {
-    // choice 기준으로 start / exit 하이라이트 표시
-    if(choice % 2)
-    {
-      wattron(win_start, A_REVERSE);
-      mvwprintw(win_start, 2, 2, "start");
-      wattroff(win_start, A_REVERSE);
-      mvwprintw(win_start, 3, 2, "exit");
-    }
-    else
-    {
-      mvwprintw(win_start, 2, 2, "start");
-      wattron(win_start, A_REVERSE);
-      mvwprintw(win_start, 3 , 2, "exit");
-      wattroff(win_start, A_REVERSE);
-    }
-    wrefresh(win_start);
+// 미션 렌더링, Update 에서 매 프레임 호출
+void UIManager::RenderMission()
+{
+  mvwprintw(window_mission, 1, 1, "Mission");
+  wrefresh(window_mission);
+}
 
-    // 키입력받아서 엔터시 start or exit 값 반환
-    key = wgetch(win_start);
-    switch(key)
-    {
-      case KEY_UP:
-      case KEY_DOWN:
-        choice++;
-        break;
-      case 10:
-        keypad(win_start, FALSE);
-        werase(win_start);
-        wrefresh(win_start);
-        delwin(win_start);
-        return choice % 2;
-        break;
-    }
-  }
+void UIManager::EraseWindow(WINDOW* window)
+{
+  werase(window);
+  wrefresh(window);
+  delwin(window);
 }
