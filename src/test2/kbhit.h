@@ -8,6 +8,7 @@
 
 using namespace std;
 
+static int curKey;
 int kbhit();
 
 #endif

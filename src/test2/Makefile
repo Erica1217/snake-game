@@ -19,10 +19,10 @@ kbhit.o : kbhit.cpp kbhit.h
 GameFlow.o : GameFlow.cpp GameFlow.h kbhit.h
 	$(CC) -c GameFlow.cpp
 
-GameManager.o : GameManager.cpp GameManager.h kbhit.h
+GameManager.o : GameManager.cpp GameManager.h
 	$(CC) -c GameManager.cpp
 
-UIManager.o : UIManager.cpp UIManager.h
+UIManager.o : UIManager.cpp UIManager.h kbhit.h
 	$(CC) -c UIManager.cpp
 
 SnakeGame.o : SnakeGame.cpp UIManager.h GameManager.h NcursesSetting.h GameFlow.h

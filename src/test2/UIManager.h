@@ -13,6 +13,8 @@ public:
   void Update();
   void GameEnd();
 
+  void GameInput();
+
 private :
   WINDOW* window_game;
   WINDOW* window_score;

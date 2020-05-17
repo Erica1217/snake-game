@@ -1,6 +1,6 @@
 #include "UIManager.h"
+#include "kbhit.h"
 #include <vector>
-#include <ncurses.h>
 
 UIManager::UIManager(GameManager& game_info) : game_manager(game_info)
 {
@@ -8,14 +8,24 @@ UIManager::UIManager(GameManager& game_info) : game_manager(game_info)
   window_score = newwin(11, 21, 1, 22);
   window_mission = newwin(11, 21, 11, 22);
 
-  wborder(window_score, '*', '*', '*', '*', '*', '*', '*', '*');
-  wborder(window_mission, '*', '*', '*', '*', '*', '*', '*', '*');
+  //wborder(window_score, '*', '*', '*', '*', '*', '*', '*', '*');
+  //wborder(window_mission, '*', '*', '*', '*', '*', '*', '*', '*');
+}
+
+// 계속 검사
+// 입력받는 키값을 게임매니저에 넣어줌
+void UIManager::GameInput()
+{
+  if(kbhit())
+  {
+    game_manager.SetInput(wgetch(window_game));
+  }
 }
 
 // 실행 시 한번
 void UIManager::Start()
 {
-
+  keypad(window_game, TRUE);
 }
 
 // 종료 시 한번
@@ -29,6 +39,10 @@ void UIManager::GameEnd()
 // 매 프레임 호출됨
 void UIManager::Update()
 {
+  if(game_manager.isValid == false)
+  {
+    return;
+  }
   RenderGame();
   RenderScore();
   RenderMission();
@@ -65,6 +79,7 @@ void UIManager::RenderMission()
 
 void UIManager::EraseWindow(WINDOW* window)
 {
+  keypad(window, FALSE);
   werase(window);
   wrefresh(window);
   delwin(window);
