@@ -1,4 +1,3 @@
-#include <ncurses.h>
 #include <unistd.h>
 #include "GameFlow.h"
 #include "kbhit.h"
@@ -13,7 +12,7 @@ void GameFlow::RenderAbout()
 {
     WINDOW* window_about = newwin(8, 20, 5, 3);
     keypad(window_about, TRUE);
-    wborder(window_about, '*', '*', '*', '*', '*', '*', '*', '*');
+    //wborder(window_about, '*', '*', '*', '*', '*', '*', '*', '*');
 
     mvwprintw(window_about, 1, 1, "");
     for(int i = 0 ; i < 400 ; i++)
@@ -26,16 +25,13 @@ void GameFlow::RenderAbout()
     // 버퍼비워주기
     getchar();
 
-    keypad(window_about, FALSE);
-    werase(window_about);
-    wrefresh(window_about);
-    delwin(window_about);
+    EraseWindow(window_about);
 }
 
 // 첫화면 시작메뉴 (처음 한번만 호출)
 int GameFlow::RenderStartMenu()
 {
-  WINDOW* window_start = newwin(8, 15, 5, 3);
+  WINDOW* window_start = newwin(12, 15, 5, 3);
   keypad(window_start, TRUE);
   wborder(window_start, '*', '*', '*', '*', '*', '*', '*', '*');
 
@@ -46,7 +42,6 @@ int GameFlow::RenderStartMenu()
   while(1)
   {
     choice = choice % 3;
-    werase(window_start);
     // choice 기준으로 start / about / exit 하이라이트 표시
     if(choice == 0)
     {
@@ -86,10 +81,7 @@ int GameFlow::RenderStartMenu()
         choice++;
         break;
       case 10:
-        keypad(window_start, FALSE);
-        werase(window_start);
-        wrefresh(window_start);
-        delwin(window_start);
+        EraseWindow(window_start);
         return choice;
         break;
     }
@@ -101,4 +93,59 @@ int GameFlow::RenderStartMenu()
 void GameFlow::RenderGameEnd()
 {
 
+}
+
+// 게임매니저가 스테이지 시작 전 호출 (클리어 시 자동호출)
+int GameFlow::RenderStageEnter(int stage)
+{ 
+  WINDOW* window_enter = newwin(21, 42, 1, 1);
+
+  keypad(window_enter, TRUE);
+  werase(window_enter);
+  mvwprintw(window_enter, 10, 20, "");
+  wprintw(window_enter, "%s %d\n%25s", "Stage", stage, "Press Key to Start");
+  wrefresh(window_enter);
+
+  int key = wgetch(window_enter);
+  EraseWindow(window_enter);
+
+  if(key == 263)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+// 게임매니저가 스테이지 클리어 시 호출
+int GameFlow::RenderStageClear(int stage)
+{
+  WINDOW* window_clear = newwin(21, 42, 1, 1);
+
+  mvwprintw(window_clear, 5, 10, "");
+  wprintw(window_clear, "%s %d %s", "stage", stage, "clear!");
+  wrefresh(window_clear);
+
+  usleep(1500000);
+  EraseWindow(window_clear);
+
+  if(stage < 4)
+  {
+    if(RenderStageEnter(stage + 1))
+    {
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
+void GameFlow::EraseWindow(WINDOW* window)
+{
+  keypad(window, FALSE);
+  werase(window);
+  wrefresh(window);
+  delwin(window);
 }
