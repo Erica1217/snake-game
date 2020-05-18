@@ -24,7 +24,7 @@ int main(void)
     }
     else if(game_status == 1) 
     {
-      game_flow.RenderAbout();
+      game_flow.RenderMakers(); // 제작자들 말고 게임설명 들어가는것도 좋을듯
     }
     else
     {
@@ -61,11 +61,11 @@ int main(void)
       timer = 0;
     }
 
-    usleep(5000); // 시간간격이 일정하지는 않은 것 같음
+    usleep(5000); // 시간 간격 정확히 확인 필요
   }
 
   game_flow.RenderGameEnd();  // 종료 시 보여줄 화면 // 아직안만듦
-  game_flow.RenderAbout();    // 크레딧
+  game_flow.RenderMakers();    // 크레딧
 
   endwin();
 

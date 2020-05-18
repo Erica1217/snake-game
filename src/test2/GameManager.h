@@ -1,16 +1,16 @@
 #ifndef _GAME_MANAGER_
 #define _GAME_MANAGER_
 
-#include <vector>
+#include "GameSettings.h"
 #include "GameFlow.h"
+#include "Game.h"
 
 using namespace std;
 
 class GameManager
 {
 public :
-    int curStage = 0;
-    bool isValid = true;
+    int curStage;
     
     GameManager(GameFlow& gameflow);
 
@@ -22,13 +22,10 @@ public :
 
     vector<vector<int>> GetCurMap();
 private :
-    bool isClear = false;
-    int key = 0;
+    Game* games;
+    Game* curGame;
 
     GameFlow game_flow;
-    vector<vector<int>> cur_map; // 현재 스테이지 맵. 전체맵정보는 따로만들어놓고 거기서 가져오기
-
-    vector<vector<vector<int>>> maps;
 
     void StageSetting();
 };
