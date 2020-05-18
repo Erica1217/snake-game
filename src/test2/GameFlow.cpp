@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include "GameFlow.h"
 #include "kbhit.h"
+#include "GameSettings.h"
 
 GameFlow::GameFlow()
 {
@@ -8,7 +9,7 @@ GameFlow::GameFlow()
 }
 
 // 크레딧 출력하는 창
-void GameFlow::RenderAbout()
+void GameFlow::RenderMakers()
 {
     WINDOW* window_about = newwin(8, 20, 5, 3);
     keypad(window_about, TRUE);
@@ -131,7 +132,7 @@ int GameFlow::RenderStageClear(int stage)
   usleep(1500000);
   EraseWindow(window_clear);
 
-  if(stage < 4)
+  if(stage < MAX_STAGE)
   {
     if(RenderStageEnter(stage + 1))
     {

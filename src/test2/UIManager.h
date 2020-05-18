@@ -19,14 +19,14 @@ private :
   WINDOW* window_game;
   WINDOW* window_score;
   WINDOW* window_mission;
+  GameManager& game_manager;
 
   void RenderGame();
   void RenderScore();
   void RenderMission();
 
   void EraseWindow(WINDOW* window);
-
-  GameManager& game_manager;
+  char ChangeMap(int i);
 };
 
 #endif

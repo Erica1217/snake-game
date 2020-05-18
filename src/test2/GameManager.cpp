@@ -1,98 +1,88 @@
 #include "GameManager.h"
-
-using namespace std;
+#include "MapInfo.h"
 
 GameManager::GameManager(GameFlow& gameflow) : game_flow(gameflow)
 {
-    // 아무거나 넣어놨음
-    vector<int> row1 = {1, 1, 1, 1, 1};
-    vector<int> row2 = {1, 0, 0, 0, 1};
-    vector<int> row3 = {1, 0, 0, 0, 1};
-    vector<int> row4 = {1, 0, 0, 0, 1};
-    vector<int> row5 = {1, 1, 1, 1, 1};
+    curStage = 0;
 
-    cur_map.push_back(row1);
-    cur_map.push_back(row2);
-    cur_map.push_back(row3);
-    cur_map.push_back(row4);
-    cur_map.push_back(row5);
-}
+    games = new Game[MAX_STAGE];
 
-// 게임 시작 시 한번
-void GameManager::Start()
-{
-    if(game_flow.RenderStageEnter(curStage + 1) == 0)
+    for(int i = 0 ; i < MAX_STAGE ; i++)
     {
-        isValid = false;
+        games[i].Init(maps[i]);
     }
 }
 
-// ui_manager 가 키 입력받고 얘한테 세팅해줌
-void GameManager::SetInput(int input_key)
+// 게임 시작 (첫 스테이지 시작) 시 한번
+void GameManager::Start()
 {
-    key = input_key;
+    // 첫스테이지 로드
+    curGame = games;
+
+    if(game_flow.RenderStageEnter(curStage + 1) == 0)
+    {
+        curGame->isValid = false;
+    }
 }
 
-// 매 프레임. 게임 완료 검사
-int GameManager::IsStageClear()
+// ui_manager 가 키 입력받고 게임에 세팅해줌
+void GameManager::SetInput(int input_key)
 {
-    return isClear;
+    curGame->key = input_key;
 }
 
 // 매 프레임, 유효성 검사만
 int GameManager::IsValid()
 {
-    if(isValid == false)
-    {
-        return 0;
-    }
-    if(key == 263)  // 백스페이스 누름
-    {
-        return 0;
-    }
-    if(key == 98)
-    {
-        isClear = true;
-    }
-    return 1;   
+    return curGame->IsValid();
 }
 
 // 매 프레임, 게임데이터 업데이트
 void GameManager::Update()
 {
-    // 데이터 모두 업데이트
-    cur_map[1][1] = key % 10;
-    
-    cur_map[2][2]++;
-    if(cur_map[2][2] > 9)
-    {
-        cur_map[2][2] = 0;
-    }
-    
+    curGame->Update();
 
-
-    // 스테이지 클리어 확인
     if(IsStageClear())
     {
         StageSetting();
     }
 }
 
+// 매 프레임. 게임 완료 검사
+int GameManager::IsStageClear()
+{
+    return curGame->isClear;
+}
+
 // 스테이지 클리어 시 다음 스테이지 세팅, 대기창 띄워줌
 void GameManager::StageSetting()
 {
-    if(game_flow.RenderStageClear(++curStage) == 0)
+    // 마지막 스테이지일 시 게임종료
+    /*
+    if (curStage == MAX_STAGE - 1)
     {
-        isValid = false;
+        curGame->isValid = false;
+        game_flow.RenderStageClear(MAX_STAGE);
+        return;
     }
-    isClear = false;
-    key = 0;
+    */
 
-    //cur_map = maps[curStage];
+    // 마지막 스테이지가 아니라면
+    if(++curStage < MAX_STAGE)
+    {
+        // 다음 스테이지 로드
+        curGame = games + curStage;
+    }
+    // 해당 스테이지 클리어 렌더링, 입력대기
+    if(game_flow.RenderStageClear(curStage) == 0)
+    {
+        // 대기중 백스페이스 눌렀을 경우
+        curGame->isValid = false;
+    }
 }
 
 // UI Manager 가 프레임마다 최종적으로 그려야 하는 데이터를 넘겨줌 (맵+뱀+게이트+아이템)
-vector<vector<int>> GameManager::GetCurMap()
+std::vector<std::vector<int>> GameManager::GetCurMap()
 {
-    return cur_map;
+    return curGame->map;
 }

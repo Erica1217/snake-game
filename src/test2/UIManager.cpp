@@ -4,15 +4,15 @@
 
 UIManager::UIManager(GameManager& game_info) : game_manager(game_info)
 {
-  window_game = newwin(21, 21, 1, 1);
-  window_score = newwin(11, 21, 1, 22);
-  window_mission = newwin(11, 21, 11, 22);
+  window_game = newwin(MAP_Y, MAP_X, 1, 1);
+  window_score = newwin((MAP_Y + 1) / 2, MAP_X, 1, 22);
+  window_mission = newwin((MAP_Y + 1) / 2, MAP_X, 11, 22);
 
   //wborder(window_score, '*', '*', '*', '*', '*', '*', '*', '*');
   //wborder(window_mission, '*', '*', '*', '*', '*', '*', '*', '*');
 }
 
-// 계속 검사
+// 0.05초 간격 검사
 // 입력받는 키값을 게임매니저에 넣어줌
 void UIManager::GameInput()
 {
@@ -36,13 +36,9 @@ void UIManager::GameEnd()
   EraseWindow(window_mission);
 }
 
-// 매 프레임 호출됨
+// 매 프레임마다 게임데이터 모두 업데이트 후에 호출됨
 void UIManager::Update()
 {
-  if(game_manager.isValid == false)
-  {
-    return;
-  }
   RenderGame();
   RenderScore();
   RenderMission();
@@ -83,4 +79,17 @@ void UIManager::EraseWindow(WINDOW* window)
   werase(window);
   wrefresh(window);
   delwin(window);
+}
+
+// 맵 숫자 -> 문자변환 , 인코딩 문제 해결 필요
+char UIManager::ChangeMap(int i)
+{
+  switch(i)
+  {
+    case 0 :
+      return 'x';
+    case 1 :
+      return 'o';
+  }
+  return i;
 }

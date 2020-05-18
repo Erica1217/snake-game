@@ -9,7 +9,7 @@ public :
     GameFlow();
 
     int RenderStartMenu();
-    void RenderAbout();
+    void RenderMakers();
     void RenderGameEnd();
 
     int RenderStageEnter(int stage); // 게임 진입 시
