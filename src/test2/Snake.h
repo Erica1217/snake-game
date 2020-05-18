@@ -20,7 +20,7 @@ public :
     Point NextHeadPosition();
     void UpdateMoves();
 
-    Point HeadPos(){ return head_pos; }; // 임시 사용 함수
+    std::vector<Point> HeadPos(){ return bodies; }; // 임시 사용 함수
 private :
     Point next_pos;
     Point head_pos;

@@ -42,14 +42,22 @@ int Game::IsValid()
 // 매 프레임 유효성 검사되면 모든 정보 추합해서 맵에 저장해야함
 void Game::Update()
 {
-    map = origin_map;
+    // 뱀 업데이트
     player->UpdateMoves();
+
+    // 맵 초기화
+    map = origin_map;
+
+    // 키값 인식여부 테스트용도
     map[0][0] = key % 10;
 
-    // 임시 사용 /////////
-    Point temp = player->HeadPos();
-    map[temp.x][temp.y] = 4;
-    /////////////////////
+    // 뱀 위치 맵에 저장
+    std::vector<Point> snake = player->HeadPos();
+    map[snake[0].x][snake[0].y] = 5; // 머리 부분
+    for(int i = 1 ; i < snake.size() ; i++) // 몸통 부분
+    {
+        map[snake[i].x][snake[i].y] = 4;
+    }
 
     // 업데이트 된 정보 기준으로 클리어검사
     if(CheckStageClear())
