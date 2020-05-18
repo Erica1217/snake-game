@@ -4,7 +4,7 @@ CFLAGS = -std=c++14
 LDFLAGS =
 LDLIBS = -lncursesw
 
-OBJS = SnakeGame.o UIManager.o GameManager.o GameFlow.o Game.o kbhit.o
+OBJS = SnakeGame.o UIManager.o GameManager.o GameFlow.o Game.o Snake.o kbhit.o
 
 TARGET = SnakeGame
 
@@ -16,7 +16,10 @@ $(TARGET) : $(OBJS)
 kbhit.o : kbhit.cpp kbhit.h
 	$(CC) -c kbhit.cpp
 
-Game.o : Game.cpp Game.h
+Snake.o : Snake.cpp Snake.h
+	$(CC) -c Snake.cpp
+
+Game.o : Game.cpp Game.h Snake.h
 	$(CC) -c Game.cpp
 
 GameFlow.o : GameFlow.cpp GameFlow.h kbhit.h
