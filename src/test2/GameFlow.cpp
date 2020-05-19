@@ -96,10 +96,10 @@ void GameFlow::RenderGameEnd()
 
 }
 
-// 게임매니저가 스테이지 시작 전 호출 (클리어 시 자동호출)
+// 게임매니저가 첫 스테이지 시작 전 호출 (각 스테이지 클리어 시 자동호출)
 int GameFlow::RenderStageEnter(int stage)
 { 
-  WINDOW* window_enter = newwin(21, 42, 1, 1);
+  WINDOW* window_enter = newwin(MAP_Y, MAP_X * 2, 1, 1);
 
   keypad(window_enter, TRUE);
   werase(window_enter);
@@ -123,7 +123,7 @@ int GameFlow::RenderStageEnter(int stage)
 // 게임매니저가 스테이지 클리어 시 호출
 int GameFlow::RenderStageClear(int stage)
 {
-  WINDOW* window_clear = newwin(21, 42, 1, 1);
+  WINDOW* window_clear = newwin(MAP_Y, MAP_X * 2, 1, 1);
 
   mvwprintw(window_clear, 5, 10, "");
   wprintw(window_clear, "%s %d %s", "stage", stage, "clear!");

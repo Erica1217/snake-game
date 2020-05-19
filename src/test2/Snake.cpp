@@ -4,6 +4,7 @@
 Snake::Snake()
 {
     curDir = 0;
+    length = 3;
 
     // 뱀 시작위치(정가운데)
     head_pos.x = MAP_X / 2;
@@ -18,17 +19,21 @@ void Snake::UpdateDirection(int key)
 {
     switch (key)
     {
-    case 119 : // w
-        curDir = 0;
+    case KB_W : // w
+    case KB_UP : // 위
+        curDir = DIR_UP;
         break;
-    case 115 : // s
-        curDir = 1;
+    case KB_S : // s
+    case KB_DOWN : // 아래
+        curDir = DIR_DOWN;
         break;
-    case 100 : // d
-        curDir = 2;
+    case KB_RIGHT : // d
+    case KB_D : // 오른
+        curDir = DIR_RIGTH;
         break;
-    case 97 :  // a
-        curDir = 3;
+    case KB_A :  // a
+    case KB_LEFT : // 왼
+        curDir = DIR_LEFT;
         break;
     default:
         break;
@@ -44,16 +49,16 @@ Point Snake::NextHeadPosition()
     // 현재 설정되어있는 방향 기준
     switch (curDir)
     {
-    case 0 : // 위쪽
+    case DIR_UP : // 위쪽
         x--;
         break;
-    case 1 : // 아래쪽
+    case DIR_DOWN : // 아래쪽
         x++;
         break;
-    case 2 : // 오른쪽
+    case DIR_RIGTH : // 오른쪽
         y++;
         break;
-    case 3 : // 왼쪽
+    case DIR_LEFT : // 왼쪽
         y--;
         break;
     }
@@ -63,10 +68,10 @@ Point Snake::NextHeadPosition()
     return temp;
 }
 
-// 
+// 게임데이터 업데이트 될 때 호출
 void Snake::UpdateMoves()
 {
-    head_pos = next_pos; // 유효성 검사에서 나온 다음 위치
+    head_pos = next_pos; // 유효성 검사에서 나온 다음 위치를 머리로
     
     bodies.insert(bodies.begin(), head_pos); // 머리를 앞에 넣고
     bodies.pop_back(); // 맨 뒤를 삭제

@@ -19,13 +19,13 @@ kbhit.o : kbhit.cpp kbhit.h
 Snake.o : Snake.cpp Snake.h
 	$(CC) -c Snake.cpp
 
-Game.o : Game.cpp Game.h Snake.h
+Game.o : Game.cpp Game.h Snake.h GameSettings.h
 	$(CC) -c Game.cpp
 
 GameFlow.o : GameFlow.cpp GameFlow.h kbhit.h
 	$(CC) -c GameFlow.cpp
 
-GameManager.o : GameManager.cpp GameManager.h Game.h MapInfo.h
+GameManager.o : GameManager.cpp GameManager.h Game.h GameSettings.h MapInfo.h
 	$(CC) -c GameManager.cpp
 
 UIManager.o : UIManager.cpp UIManager.h kbhit.h Game.h
