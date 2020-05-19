@@ -28,6 +28,7 @@ int main(void)
     }
     else
     {
+      game_flow.RenderMakers();
       endwin();
       return 0;
     }
@@ -65,7 +66,7 @@ int main(void)
   }
 
   game_flow.RenderGameEnd();  // 종료 시 보여줄 화면 // 아직안만듦
-  game_flow.RenderMakers();    // 크레딧
+  game_flow.RenderMakers();   // 크레딧
 
   endwin();
 

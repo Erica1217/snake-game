@@ -53,7 +53,7 @@ void UIManager::RenderGame()
   {
     for(int j = 0 ; j < canvas[i].size() ; j++)
     {
-      mvwprintw(window_game, i, j, "%d", canvas[i][j]);
+      mvwprintw(window_game, i, j, "%c", ChangeMap(canvas[i][j]));
     }
   }
   wrefresh(window_game);
@@ -84,12 +84,24 @@ void UIManager::EraseWindow(WINDOW* window)
 // 맵 숫자 -> 문자변환 , 인코딩 문제 해결 필요
 char UIManager::ChangeMap(int i)
 {
+  char temp;
   switch(i)
   {
     case 0 :
-      return 'x';
+      temp = ' ';
+      break;
     case 1 :
-      return 'o';
+      temp = '1';
+      break;
+    case 4 :
+      temp = 'x';
+      break;
+    case 5 :
+      temp = 'o';
+      break;
+    default :
+      temp = '?';
+      break;
   }
-  return i;
+  return temp;
 }
