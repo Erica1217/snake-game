@@ -9,7 +9,7 @@ GameManager::GameManager(GameFlow& gameflow) : game_flow(gameflow)
 
     for(int i = 0 ; i < MAX_STAGE ; i++)
     {
-        games[i].Init(maps[i]);
+        games[i].Init(maps[i], i);
     }
 }
 
@@ -45,6 +45,7 @@ void GameManager::Update()
 
     if(curGame->isClear)
     {
+        curGame->gameEnd();
         StageSetting();
     }
 }

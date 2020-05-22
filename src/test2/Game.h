@@ -13,13 +13,15 @@ public :
     int key;
 
     Game();
-    void Init(std::vector<std::vector<int>> map);
+    void Init(std::vector<std::vector<int>> map, int stage);
     void SetInput(int key);
 
     void gameStart();
     void Update();
     int IsValid();
+    void gameEnd();
 private :
+    int my_stage;
     Snake* player;
 
     std::vector<std::vector<int>> origin_map;

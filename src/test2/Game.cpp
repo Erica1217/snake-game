@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "GameSettings.h"
+#include <iostream>
 
 Game::Game()
 {
@@ -11,8 +12,9 @@ Game::Game()
 }
 
 // 게임별 맵 저장, 게임매니저 생성자에서 각각 호출
-void Game::Init(std::vector<std::vector<int>> map)
+void Game::Init(std::vector<std::vector<int>> map, int stage)
 {
+    my_stage = stage;
     origin_map = map;
     map[10][10] = SNAKE_HEAD;
     map[11][10] = SNAKE_BODY;
@@ -28,7 +30,15 @@ void Game::SetInput(int key)
 
 void Game::gameStart()
 {
-    
+    std::cout << my_stage << std::endl;
+    std::cout << my_stage << std::endl;
+    std::cout << my_stage << std::endl;
+    std::cout << my_stage << std::endl;
+}
+
+void Game::gameEnd()
+{
+    std::cout << "??????" << std::endl;
 }
 
 // 매프레임 게임 유효성 검사
