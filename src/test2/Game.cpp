@@ -1,10 +1,9 @@
 #include "Game.h"
 #include "GameSettings.h"
-#include <iostream>
 
 Game::Game()
 {
-    isClear = false;
+    is_clear = false;
     isValid = true;
     key = 0;
 
@@ -30,15 +29,7 @@ void Game::SetInput(int key)
 
 void Game::gameStart()
 {
-    std::cout << my_stage << std::endl;
-    std::cout << my_stage << std::endl;
-    std::cout << my_stage << std::endl;
-    std::cout << my_stage << std::endl;
-}
 
-void Game::gameEnd()
-{
-    std::cout << "??????" << std::endl;
 }
 
 // 매프레임 게임 유효성 검사
@@ -91,22 +82,20 @@ void Game::Update()
     {
         map[snake[i].x][snake[i].y] = SNAKE_BODY;
     }
-
-    // 업데이트 된 정보 기준으로 클리어검사
-    if(CheckStageClear())
-    {
-        isClear = true;
-        //delete player;
-    }
 }
 
-// 스테이지 클리어 검사
-int Game::CheckStageClear()
+// Update 끝마친 후 호출
+bool Game::isClear()
 {
-    if(key == 98) // 현재는 b 키 누르면 클리어
+    if(key == 98)
     {
-        return 1;
+        is_clear = true;
     }
 
-    return 0;
+    return is_clear;
+}
+
+void Game::gameEnd()
+{
+
 }

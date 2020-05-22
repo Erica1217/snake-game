@@ -265,14 +265,15 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
     - bool is_clear
     - bool is_valid
     - int key
+
 - 멤버 함수
     - public :
         - void Init(여기에 map, mission 등등 넣어줘야 함) : (game_manager)실질적 생성자
         - void setInput(int key) : (ui_manager)0.05초단위 입력키값 저장
-        - int isValid() : (game_manager)매 프레임 유효성 검사
+        
         - void gameStart() : 현재 게임(스테이지) 시작 시 한번 호출
+        - int isValid() : (game_manager)매 프레임 유효성 검사
         - void update() : (game_manager)매 프레임 게임정보 업데이트
-        - void gameEnd() : (game_manager)현재 게임(스테이지) 종료 시 한번 호출 // 아직
         - bool isClear() : (game_manager)is_clear 리턴
+        - void gameEnd() : (game_manager)현재 게임(스테이지) 종료 시 한번 호출
     - private : 
-        - int checkStageClear() : 업데이트에서 모두 업데이트 후 클리어 조건 검사

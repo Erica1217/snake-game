@@ -8,7 +8,7 @@ class Game
 {
 public :
     std::vector<std::vector<int>> map;
-    bool isClear;
+    bool is_clear;
     bool isValid;
     int key;
 
@@ -18,6 +18,7 @@ public :
 
     void gameStart();
     void Update();
+    bool isClear();
     int IsValid();
     void gameEnd();
 private :
@@ -25,8 +26,6 @@ private :
     Snake* player;
 
     std::vector<std::vector<int>> origin_map;
-
-    int CheckStageClear();
 };
 
 #endif

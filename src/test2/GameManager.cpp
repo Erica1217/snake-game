@@ -43,7 +43,7 @@ void GameManager::Update()
 {
     curGame->Update();
 
-    if(curGame->isClear)
+    if(curGame->isClear())
     {
         curGame->gameEnd();
         StageSetting();
@@ -53,7 +53,7 @@ void GameManager::Update()
 // 매 프레임. 게임 완료 검사 // 사실 필요 없음
 int GameManager::IsStageClear()
 {
-    return curGame->isClear;
+    //return curGame->isClear;
 }
 
 // 스테이지 클리어 시 다음 스테이지 세팅, 대기창 띄워줌
