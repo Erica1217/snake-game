@@ -16,6 +16,7 @@ public :
     void Init(std::vector<std::vector<int>> map);
     void SetInput(int key);
 
+    void gameStart();
     void Update();
     int IsValid();
 private :

@@ -18,7 +18,7 @@ void GameManager::Start()
 {
     // 첫스테이지 로드
     curGame = games;
-
+    curGame->gameStart();
     // 스테이지1 시작 프롬프트
     if(game_flow.RenderStageEnter(curStage + 1) == 0)
     {
@@ -43,13 +43,13 @@ void GameManager::Update()
 {
     curGame->Update();
 
-    if(IsStageClear())
+    if(curGame->isClear)
     {
         StageSetting();
     }
 }
 
-// 매 프레임. 게임 완료 검사
+// 매 프레임. 게임 완료 검사 // 사실 필요 없음
 int GameManager::IsStageClear()
 {
     return curGame->isClear;
@@ -63,7 +63,10 @@ void GameManager::StageSetting()
     {
         // 다음 스테이지 로드
         curGame = games + curStage;
+        // 다음 스테이지 세팅
+        curGame->gameStart();
     }
+    
     // 해당 스테이지 클리어 렌더링, 입력대기
     if(game_flow.RenderStageClear(curStage) == 0)
     {

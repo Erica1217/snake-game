@@ -26,6 +26,11 @@ void Game::SetInput(int key)
     player->UpdateDirection(key);
 }
 
+void Game::gameStart()
+{
+    
+}
+
 // 매프레임 게임 유효성 검사
 int Game::IsValid()
 {

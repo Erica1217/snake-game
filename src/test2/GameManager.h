@@ -10,7 +10,6 @@ using namespace std;
 class GameManager
 {
 public :
-    int curStage;
     
     GameManager(GameFlow& gameflow);
 
@@ -22,6 +21,7 @@ public :
 
     vector<vector<int>> GetCurMap();
 private :
+    int curStage;
     Game* games;
     Game* curGame;
 
