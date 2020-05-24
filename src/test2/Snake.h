@@ -2,12 +2,14 @@
 #define _SNAKE_
 
 #include <vector>
-
+#include "Point.h"
+/*
 struct Point
 {
     int x;
     int y;
 };
+*/
 
 class Snake
 {

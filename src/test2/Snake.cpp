@@ -9,9 +9,9 @@ Snake::Snake()
     // 뱀 시작위치(정가운데)
     head_pos.x = MAP_X / 2;
     head_pos.y = MAP_Y / 2;
-    bodies.emplace_back(Point{10, 10});
-    bodies.emplace_back(Point{11, 10});
-    bodies.emplace_back(Point{12, 10});
+    bodies.emplace_back(Point(10, 10));
+    bodies.emplace_back(Point(11, 10));
+    bodies.emplace_back(Point(12, 10));
 }
 
 // 키값 입력될때마다 방향 변경해줌
@@ -63,7 +63,7 @@ Point Snake::NextHeadPosition()
         break;
     }
 
-    Point temp{x, y};
+    Point temp(x,y);
     next_pos = temp;
     return temp;
 }
