@@ -1,0 +1,6 @@
+## Ignore File ##
+
+*.log
+*.bak
+
+*.o
