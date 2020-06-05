@@ -159,6 +159,10 @@ void GameData::updateSnakePosition(vector<Point> snake_body)
 void GameData::updateGatePosition(bool isExist, vector<Point> gates)
 {
     if(isExist) {
+        for(int i = 0; i < this->gates.size(); i++) {
+            snake_map->setPositionInfo(this->gates[i].x, this->gates[i].y, WALL);
+        }
+
         for(int i = 0; i < gates.size(); i++) 
         {
             snake_map->setPositionInfo(gates[i].x, gates[i].y, GATE);
@@ -166,6 +170,9 @@ void GameData::updateGatePosition(bool isExist, vector<Point> gates)
         this->gates = gates;
     }
     else {
+        for(int i = 0; i < this->gates.size(); i++) {
+            snake_map->setPositionInfo(this->gates[i].x, this->gates[i].y, WALL);
+        }
         this -> gates.clear();
     }
 }
