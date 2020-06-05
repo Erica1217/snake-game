@@ -11,7 +11,6 @@
 class Game
 {
 public :
-    std::vector<std::vector<int>> map;
     bool is_clear;
     bool isValid;
     int key;
@@ -33,8 +32,6 @@ private :
     GateManager* gate_manager;
 
     Renderable* panels[3];
-
-    std::vector<std::vector<int>> origin_map;
 };
 
 #endif

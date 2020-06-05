@@ -79,9 +79,3 @@ void GameManager::StageSetting()
         curGame->isValid = false;
     }
 }
-
-// UI Manager 가 프레임마다 최종적으로 그려야 하는 데이터를 넘겨줌 (맵+뱀+게이트+아이템)
-std::vector<std::vector<int>> GameManager::GetCurMap()
-{
-    return curGame->map;
-}
