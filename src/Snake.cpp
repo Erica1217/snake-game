@@ -3,9 +3,6 @@
 
 Snake::Snake()
 {
-    curDir = 0;
-    length = 3;
-
     // 뱀 시작위치(정가운데)
     head_pos.x = MAP_X / 2;
     head_pos.y = MAP_Y / 2;
@@ -18,11 +15,11 @@ Snake::Snake()
 // todo: point.moveTo()로 호출할 것
 Point Snake::getNextPoint(int curDir)
 {
-    
+    /*
     int x = head_pos.x;
     int y = head_pos.y;
-
     // 현재 설정되어있는 방향 기준
+    
     switch (curDir)
     {
     case DIR_UP : // 위쪽
@@ -38,13 +35,15 @@ Point Snake::getNextPoint(int curDir)
         y--;
         break;
     }
-
-    Point temp(x,y);
-    next_pos = temp;
-    return temp;
+    */
+    //Point temp(x,y);
+    
+    Point nextPos(head_pos.x, head_pos.y);
+    next_pos = nextPos.moveTo(curDir);
+    return next_pos;
 }
 
-void Snake::Update(GameData& game_data, UserData& user_data)
+void Snake::update(GameData& game_data, UserData& user_data)
 {
     head_pos = next_pos; // 유효성 검사에서 나온 다음 위치를 머리로
     

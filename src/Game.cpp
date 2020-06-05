@@ -7,19 +7,22 @@ Game::Game()
     is_clear = false;
     isValid = true;
     key = 0;
-    player = new Snake();
 }
 
 // 게임별 맵 저장, 게임매니저 생성자에서 각각 호출
 void Game::Init(int stage)
 {
+    player = new Snake();
     my_stage = stage;
     game_data = new GameData(stage);
     user_data = new UserData();
-    gate_manager = new GateManager(game_data -> getMap());
+    item_manager = new ItemManager();
+    mission = new Mission(stage);
+    //gate_manager = new GateManager(game_data -> getMap());
 
     panels[0] = game_data;
-
+    //panels[1] = user_data;
+    //panels[2] = mission;
 }
 
 void Game::SetInput()
@@ -38,12 +41,8 @@ void Game::gameStart()
 int Game::IsValid()
 {
     Point next = player -> getNextPoint(game_data -> getCurrrentDirection());
-    
-    //Point next = player->NextHeadPosition();
-    
-    // next_point
-    //next_head_point
-    // tick()
+    game_data -> setNextPoint(next);
+    game_data -> setNextHeadPoint(next);
 
     switch (game_data -> getPositionInfo(next.x, next.y))
     {
@@ -52,18 +51,15 @@ int Game::IsValid()
     case SNAKE_HEAD : // 헤드 // 닿을 일이 있나?
         isValid = false;
         break;
-
-    case 100 : // 감소 아이템
-        if(player->length <= 3)
+    case POSION_ITEM : // 감소 아이템
+        if(player->getSnakeLength() <= 3)
         {
             isValid = false;
         }
         break;
-
     default:
         break;
     }
-    
 
     if(key == KB_BACKSPACE)  // 백스페이스 누를 경우
     {
@@ -73,22 +69,20 @@ int Game::IsValid()
     return isValid;   
 }
 
-
 // 매 프레임 유효성 검사되면 모든 정보 추합해서 맵에 저장해야함
 void Game::update(int tick)
 {
-    game_data -> mapReset();
-    //game_data -> setNextPoint(next);
-    //game_data -> setNextHeadPoint(next);
+    game_data -> mapReset();   
     game_data -> setCurrentTick(tick);
-
-    //game_data->Update();
     
-    player -> Update(*game_data, *user_data);
-    //item_manager.Update(game_data, user_data);
-    gate_manager -> update(*game_data, *user_data);
+    player -> update(*game_data, *user_data);
+    item_manager -> update(*game_data, *user_data);
+    //gate_manager -> update(*game_data, *user_data);
 
-    panels[0] -> Render();
+    for(int i = 0 ; i < 1 ; i++)
+    {
+        panels[i] -> Render();
+    }
 }
 
 
@@ -99,15 +93,21 @@ bool Game::isClear()
     {
         is_clear = true;
     }
+
     // 여기에서 mission 클리어 판단
+    if(mission -> isComplete(*user_data))
+    {
+        is_clear = true;
+    }
 
     return is_clear;
 }
 
 void Game::gameEnd()
 {
-    delete player;
-    delete game_data;
-    delete user_data;
+    //delete player;
+    //delete game_data;
+    //delete user_data;
     //delete gate_manager;
+    //delete mission;
 }

@@ -9,10 +9,11 @@
 class ItemManager{
 
 public:
-    void makeItem();
-    int eatItem();
-    void deleteItem();
-    void update();
+    ItemManager();
+    void makeItem(int current_tick, vector<vector<int>> map);
+    int eatItem(Point next_head_point);
+    void deleteItem(int current_tick);
+    void update(GameData &game_data, UserData &user_data);
 
 private:
     int current_tick;

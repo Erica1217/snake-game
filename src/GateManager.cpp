@@ -99,11 +99,10 @@ void GateManager::makeNewGate()
         y = (gate2.y - gate1.y);
 
     }
-  //  cout<<"**1 : "<<gate1.x<<" "<<gate1.y<<endl;
-  //  cout<<"**2 : "<<gate2.x<<" "<<gate2.y<<endl;
-
     
     gates = make_pair(gate1, gate2);
+    std::cout<<"**1 "<<gate1.x<<" "<<gate1.y<<endl;
+    std::cout<<"**2 "<<gate2.x<<" "<<gate2.y<<endl;
     gate_directions = make_pair(makeGateDirection(gate1), makeGateDirection(gate2));
 }
 
