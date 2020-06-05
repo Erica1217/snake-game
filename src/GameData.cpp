@@ -1,9 +1,12 @@
 #include "GameData.h"
 #include "GameSettings.h"
+#include "kbhit.h"
 
 GameData::GameData(int stage) 
 {
     snake_map = new SnakeMap(stage);
+    window = newwin(MAP_Y, MAP_X, 1, 1);
+    keypad(window, TRUE);
 }
 
 void GameData::update(int current_tick)
@@ -55,29 +58,77 @@ int GameData::getCurrentTick()
 
 // 키값 입력될때마다 방향 변경해줌
 
-void GameData::updateDirection(int key)
+void GameData::updateDirection()
 {
-    switch (key)
+    if(kbhit())
     {
-    case KB_W : // w
-    case KB_UP : // 위
-        current_direction = DIR_UP;
-        break;
-    case KB_S : // s
-    case KB_DOWN : // 아래
-        current_direction = DIR_DOWN;
-        break;
-    case KB_RIGHT : // d
-    case KB_D : // 오른
-        current_direction = DIR_RIGHT;
-        break;
-    case KB_A :  // a
-    case KB_LEFT : // 왼
-        current_direction = DIR_LEFT;
-        break;
-    default:
-        break;
+        key = wgetch(window);
+        switch (key)
+        {
+        case KB_W : // w
+        case KB_UP : // 위
+            current_direction = DIR_UP;
+            break;
+        case KB_S : // s
+        case KB_DOWN : // 아래
+            current_direction = DIR_DOWN;
+            break;
+        case KB_RIGHT : // d
+        case KB_D : // 오른
+            current_direction = DIR_RIGHT;
+            break;
+        case KB_A :  // a
+        case KB_LEFT : // 왼
+            current_direction = DIR_LEFT;
+            break;
+        default:
+            break;
+        }
+    }  
+}
+
+void GameData::Render()
+{
+    std::vector<std::vector<int>> canvas = snake_map -> getCurrentMap();
+  
+  for(int i = 0 ; i < canvas.size() ; i++)
+  {
+    for(int j = 0 ; j < canvas[i].size() ; j++)
+    {
+      mvwprintw(window, i, j, "%c", changeMap(canvas[i][j]));
     }
+  }
+  wrefresh(window);
+}
+
+char GameData::changeMap(int i)
+{
+    char temp;
+  switch(i)
+  {
+    case 0 :
+      temp = ' ';
+      break;
+    case 1 :
+      temp = 'o';
+      break;
+    case 2 :
+      temp = 'x';
+      break;
+    case 3 :
+      temp = '1';
+      break;
+    case 4:
+      temp = '1';
+      break;
+    case 5:
+      temp = '%';
+      break;
+    default :
+      temp = '?';
+      break;
+  }
+  return temp;
 }
 
 

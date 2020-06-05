@@ -25,10 +25,15 @@ void GameManager::Start()
     }
 }
 
-// ui_manager 가 키 입력받고 게임에 세팅해줌
-void GameManager::SetInput(int input_key)
+void GameManager::End()
 {
-    curGame->SetInput(input_key);
+    curGame->gameEnd();
+}
+
+// ui_manager 가 키 입력받고 게임에 세팅해줌
+void GameManager::SetInput()
+{
+    curGame->SetInput();
 }
 
 // 매 프레임, 유효성 검사만

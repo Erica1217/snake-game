@@ -6,12 +6,14 @@
 #include "NcursesSetting.h"
 #include "GameFlow.h"
 
+
 int main(void)
 {
-  //NcursesSetting();
+  NcursesSetting();
   GameFlow game_flow;
   GameManager game_manager(game_flow);
   UIManager ui_manager(game_manager);
+
   // 시작메뉴
   while(1)
   {
@@ -34,7 +36,7 @@ int main(void)
 
   // 게임 실행
   game_manager.Start();
-  ui_manager.Start();
+  //ui_manager.Start();
 
   int tick = 1;
   int timer = 100;
@@ -42,7 +44,7 @@ int main(void)
   {
     timer++;
     // 키보드 입력검사는 0.05초마다
-    ui_manager.GameInput();
+    game_manager.SetInput();
 
     // 게임업데이트는 0.5초
     if(timer > 100)
@@ -51,11 +53,12 @@ int main(void)
       if(game_manager.IsValid())
       {
         game_manager.Update(tick++);  // 각종 게임 정보들 업데이트
-        ui_manager.Update();    // 게임정보 반영 후 화면에 렌더링
+        //ui_manager.Update();    // 게임정보 반영 후 화면에 렌더링
       }
       else
       {
-        ui_manager.GameEnd();
+        game_manager.End();
+        //ui_manager.GameEnd();
         break;
       }
       timer = 0;
