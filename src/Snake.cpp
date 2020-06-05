@@ -1,5 +1,6 @@
 #include "Snake.h"
 #include "GameSettings.h"
+#include <iostream>
 
 Snake::Snake()
 {
@@ -66,14 +67,15 @@ void Snake::update(GameData& game_data, UserData& user_data)
     // 최종 결과물
     bodies.insert(bodies.begin(), head_pos); // 머리를 앞에 넣고
     bodies.pop_back(); // 맨 뒤를 삭제
-
+    
     // 게이트를 통과했을 경우
     for(int i=0 ; i<2 ; i++)
     {
-        if(game_data.getGatePositions().size()==2 &&  head_pos == game_data.getGatePositions()[i])
+        if(game_data.getGatePositions().size()==2 &&  bodies[0] == game_data.getGatePositions()[i])
         {
-            int nextDir = game_data.getGateDirections()[1-i][game_data.getCurrrentDirection()];
-            head_pos = game_data.getGatePositions()[1-i].moveTo(nextDir);
+            int nextDir = game_data.getGateDirections()[game_data.getCurrrentDirection()][1-i];
+            bodies[0] = game_data.getGatePositions()[1-i].moveTo(nextDir);
+            head_pos = bodies[0];
             break;
         }
     }

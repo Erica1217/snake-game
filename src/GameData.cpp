@@ -164,12 +164,18 @@ void GameData::updateGatePosition(bool isExist, vector<Point> gates)
         }
         this->gates = gates;
     }
+    else {
+        this -> gates.clear();
+    }
 }
 
 void GameData::updateGateDirection(bool isExist, vector<vector<int>> &gate_directions)
 {
     if(isExist){
         this->gate_directions = gate_directions;
+    }
+    else {
+        this->gate_directions.clear();
     }
 }
 
@@ -197,7 +203,7 @@ void GameData::setCurrentDirection(int current_direction)
 void GameData::mapReset() {
     for(int i = 0; i <21; i++) {
         for(int j = 0; j < 21; j ++) {
-            if(snake_map -> getPositionInfo(i,j) == 1 || snake_map -> getPositionInfo(i,j) == 2) {
+            if(snake_map -> getPositionInfo(i,j) == 1 || snake_map -> getPositionInfo(i,j) == 2 ) {
                 snake_map -> setPositionInfo(i, j , 0);
             }
         }
