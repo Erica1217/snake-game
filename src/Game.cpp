@@ -21,12 +21,14 @@ void Game::Init(int stage)
     gate_manager = new GateManager(game_data -> getMap());
 
     panels[0] = game_data;
-    //panels[1] = user_data;
-    //panels[2] = mission;
+    panels[1] = user_data;
+    panels[2] = mission;
 }
 
 void Game::SetInput()
 {
+    if(!isValid) return;
+
     game_data -> updateDirection();
     key = game_data -> getKey();
 }
@@ -40,6 +42,8 @@ void Game::gameStart()
 // 매프레임 게임 유효성 검사
 int Game::IsValid()
 {
+    if(!isValid) return isValid;
+
     Point next = player -> getNextPoint(game_data -> getCurrrentDirection());
     game_data -> setNextPoint(next);
     game_data -> setNextHeadPoint(next);
@@ -79,7 +83,7 @@ void Game::update(int tick)
     item_manager -> update(*game_data, *user_data);
     gate_manager -> update(*game_data, *user_data);
 
-    for(int i = 0 ; i < 1 ; i++)
+    for(int i = 0 ; i < 3 ; i++)
     {
         panels[i] -> Render();
     }
@@ -107,7 +111,7 @@ void Game::gameEnd()
 {
     delete player;
     delete game_data;
-    //delete user_data;
-    //delete gate_manager;
-    //delete mission;
+    delete user_data;
+    delete gate_manager;
+    delete mission;
 }

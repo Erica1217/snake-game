@@ -1,4 +1,5 @@
 #include "UserData.h"
+#include "GameSettings.h"
 
 UserData::UserData()
 {
@@ -7,6 +8,8 @@ UserData::UserData()
     growth_item_count = 0;
     poison_item_count = 0;
     used_gate_count = 0;
+
+    window = newwin((MAP_Y + 1) / 2, MAP_X, 1, 22);
 }
 
 int UserData::getCurrentLength() {//현재 길이 반환
@@ -66,5 +69,6 @@ void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
 }
 
 void UserData::Render() {
-    
+    mvwprintw(window, 1, 1, "ScoreBoard");
+    wrefresh(window);
 }

@@ -1,4 +1,5 @@
 #include "Mission.h"
+#include "GameSettings.h"
 
 Mission::Mission(int stage){
     total_mission_list = {
@@ -8,6 +9,8 @@ Mission::Mission(int stage){
         {5,1,2,1}
     };
     current_mission_list = total_mission_list[stage];
+
+    window = newwin((MAP_Y + 1) / 2, MAP_X / 2, 11, 22);
 }
 
 bool Mission::isComplete(UserData &user_data){
@@ -22,5 +25,6 @@ bool Mission::isComplete(UserData &user_data){
 
 void Mission::Render()
 {
-
+    mvwprintw(window, 1, 1, "mission");
+    wrefresh(window);
 }
