@@ -10,7 +10,7 @@ private:
 	int created_tick; //아이템 생성 시기
 public:
 	Item();
-    Item(Point pos, int kinds; int tick);
+    Item(Point pos, int kinds, int tick);
     Point getPos();
     int getKinds();
     int getCreatedTick();
