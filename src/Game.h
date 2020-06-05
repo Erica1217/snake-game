@@ -7,6 +7,8 @@
 #include "UserData.h"
 #include "GateManager.h"
 #include "Renderable.h"
+#include "Mission.h"
+#include "ItemManager.h"
 
 class Game
 {
@@ -29,6 +31,8 @@ private :
     Snake* player;
     GameData* game_data;
     UserData* user_data;
+    ItemManager* item_manager;
+    Mission* mission;
     GateManager* gate_manager;
 
     Renderable* panels[3];
