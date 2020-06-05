@@ -58,7 +58,7 @@ GateManager::GateManager(vector<vector<int>> snake_map)
     int num=1;
     for(int i=0 ; i<snake_map.size() ; i++)
     {
-        for(int j=0 ; j<snake_map[0].size() ; j++)
+        for(int j=0 ; j<snake_map[i].size(); j++)
         {
             if(wall_map[i][j]==-1)
             {
@@ -74,11 +74,11 @@ GateManager::GateManager(vector<vector<int>> snake_map)
 void GateManager::makeNewGate()
 {
     // 랜덤한 게이트 2개 만듬
-    int x=0 , y=0;
+    int d_x=0 , d_y=0;
     int gateNum1=0, gateNum2=0;
     Point gate1, gate2;
     int rand1,rand2;
-    while(x*x + y*y < (3*3))
+    while(d_x*d_x + d_y*d_y < (3*3))
     {
         // num 게이트 번호 선택
         srand((unsigned int)time(NULL));
@@ -88,15 +88,15 @@ void GateManager::makeNewGate()
             gateNum2 =(rand() % (wall_count))+1;
         }
         
-        rand1 = rand() % (wall_list[gateNum1].size()+1);
-        rand2 = rand() % (wall_list[gateNum2].size()+1);
+        rand1 = rand() % (wall_list[gateNum1].size());
+        rand2 = rand() % (wall_list[gateNum2].size());
         
 
         gate1 = wall_list[gateNum1][rand1];
         gate2 = wall_list[gateNum2][rand2];
 
-        x = (gate2.x - gate1.x);
-        y = (gate2.y - gate1.y);
+        d_x = (gate2.x - gate1.x);
+        d_y = (gate2.y - gate1.y);
 
     }
     
