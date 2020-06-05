@@ -1,14 +1,17 @@
 #ifndef _MISSION_
 #define _MISSION_
 #include "UserData.h"
+#include "Renderable.h"
 #include <vector>
 
 using namespace std;
 
-class Mission{
+class Mission : public Renderable
+{
 public:
     Mission(int stage);
     bool isComplete(UserData &user_data);
+    void Render();
 
 private:
     int snake_length;
