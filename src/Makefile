@@ -4,7 +4,7 @@ CFLAGS = -std=c++14
 LDFLAGS =
 LDLIBS = -lncursesw
 
-OBJS = Point.o kbhit.o Snake.o SnakeMap.o UserData.o GameData.o Game.o GameFlow.o GameManager.o UIManager.o SnakeGame.o GateManager.o
+OBJS = Point.o kbhit.o Snake.o SnakeMap.o UserData.o GameData.o Game.o GameFlow.o GameManager.o SnakeGame.o GateManager.o Renderable.o
 
 TARGET = SnakeGame
 
@@ -12,6 +12,9 @@ all : $(TARGET)
 
 $(TARGET) : $(OBJS)
 	$(CC) -o $@ $^ $(LDLIBS) $(CFLAGS)
+
+Renderable.o : Renderable.cpp Renderable.h
+	$(CC) -c Renderable.cpp
 
 Point.o : Point.cpp Point.h
 	$(CC) -c Point.cpp
@@ -28,7 +31,7 @@ UserData.o: UserData.cpp UserData.h
 SnakeMap.o: SnakeMap.h SnakeMap.cpp Point.h
 	$(CC) -c SnakeMap.cpp
 
-GameData.o: GameData.cpp GameData.h Point.h SnakeMap.h GameSettings.h
+GameData.o: GameData.cpp GameData.h Point.h SnakeMap.h GameSettings.h Renderable.h kbhit.h
 	$(CC) -c GameData.cpp
 
 Game.o : Game.cpp Game.h Snake.h GameSettings.h GameData.h UserData.h GateManager.h
@@ -40,10 +43,7 @@ GameFlow.o : GameFlow.cpp GameFlow.h kbhit.h
 GameManager.o : GameManager.cpp GameManager.h Game.h GameSettings.h
 	$(CC) -c GameManager.cpp
 
-UIManager.o : UIManager.cpp UIManager.h kbhit.h Game.h
-	$(CC) -c UIManager.cpp
-
-SnakeGame.o : SnakeGame.cpp UIManager.h GameManager.h NcursesSetting.h GameFlow.h
+SnakeGame.o : SnakeGame.cpp GameManager.h NcursesSetting.h GameFlow.h
 	$(CC) -c SnakeGame.cpp
 
 GateManager.o : GateManager.cpp GateManager.h Point.h GameData.h GameSettings.h UserData.h

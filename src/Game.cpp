@@ -23,13 +23,17 @@ void Game::Init(int stage)
     //map[12][10] = SNAKE_BODY;
     this->map = game_data -> getMap();
     
-    gate_manager = new GateManager(this -> map);
+    //gate_manager = new GateManager(this -> map);
+
+    panels[0] = game_data;
+
 }
 
-void Game::SetInput(int key)
+void Game::SetInput()
 {
-    this->key = key;
-    game_data -> updateDirection(key);
+    //this->key = key;
+    game_data -> updateDirection();
+    key = game_data -> getKey();
 }
 
 void Game::gameStart()
@@ -94,7 +98,7 @@ void Game::update(int tick)
     
     player -> Update(*game_data, *user_data);
     //item_manager.Update(game_data, user_data);
-    gate_manager -> update(*game_data, *user_data);
+    //gate_manager.Update(game_data, user_data);
 
     // 뱀 위치 맵에 저장
     //std::vector<Point> snake = player->HeadPos();
@@ -103,8 +107,9 @@ void Game::update(int tick)
     //{
     //    map[snake[i].x][snake[i].y] = SNAKE_BODY;
     //}
-
-    map = game_data -> getMap();
+    panels[0] -> Render();
+    
+    //map = game_data -> getMap();
 }
 
 
@@ -122,5 +127,8 @@ bool Game::isClear()
 
 void Game::gameEnd()
 {
-
+    delete player;
+    delete game_data;
+    delete user_data;
+    //delete gate_manager;
 }

@@ -3,8 +3,9 @@
 
 #include "Point.h"
 #include "SnakeMap.h"
+#include "Renderable.h"
 
-class GameData 
+class GameData : public Renderable
 {
 
 public:
@@ -28,7 +29,7 @@ public:
 
     int getCurrentTick();
     
-    void updateDirection(int key);
+    void updateDirection();
 
     void updateSnakePosition(vector<Point> snake_body);
 
@@ -44,12 +45,20 @@ public:
 
     int getPositionInfo(int x, int y);
 
+    // 추가
+    int getKey() { return key; };
+    void Render();
+
 private:
     Point next_point;
     Point next_head_point;
     SnakeMap* snake_map;
     int current_tick;
     int current_direction;
+
+    // 추가
+    int key;
+    char changeMap(int i);
 };
 
 

@@ -6,6 +6,7 @@
 #include "GameData.h"
 #include "UserData.h"
 #include "GateManager.h"
+#include "Renderable.h"
 
 class Game
 {
@@ -17,7 +18,7 @@ public :
 
     Game();
     void Init(int stage);
-    void SetInput(int key);
+    void SetInput();
 
     void gameStart();
     void update(int tick);
@@ -30,6 +31,8 @@ private :
     GameData* game_data;
     UserData* user_data;
     GateManager* gate_manager;
+
+    Renderable* panels[3];
 
     std::vector<std::vector<int>> origin_map;
 };

@@ -14,7 +14,8 @@ public :
     GameManager(GameFlow& gameflow);
 
     void Start();
-    void SetInput(int input_key);
+    void End();
+    void SetInput();
     int IsStageClear();
     int IsValid();
     void Update(int tick);
