@@ -40,7 +40,7 @@ SnakeMap.o: SnakeMap.h SnakeMap.cpp Point.h
 GameData.o: GameData.cpp GameData.h Point.h SnakeMap.h GameSettings.h Renderable.h kbhit.h
 	$(CC) -c GameData.cpp
 
-Game.o : Game.cpp Game.h Snake.h GameSettings.h GameData.h UserData.h GateManager.h
+Game.o : Game.cpp Game.h Snake.h GameSettings.h GameData.h UserData.h GateManager.h ItemManager.h Mission.h
 	$(CC) -c Game.cpp
 
 GameFlow.o : GameFlow.cpp GameFlow.h kbhit.h
