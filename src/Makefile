@@ -13,11 +13,11 @@ all : $(TARGET)
 $(TARGET) : $(OBJS)
 	$(CC) -o $@ $^ $(LDLIBS) $(CFLAGS)
 
-Mission.o : Mission.cpp Mission.h UserData.h
-	$(CC) -c Mission.cpp
-
 UserData.o : UserData.cpp UserData.h
 	$(CC) -c UserData.cpp
+
+Mission.o : Mission.cpp Mission.h UserData.h
+	$(CC) -c Mission.cpp
 
 Renderable.o : Renderable.cpp Renderable.h
 	$(CC) -c Renderable.cpp
@@ -30,9 +30,6 @@ kbhit.o : kbhit.cpp kbhit.h
 
 Snake.o : Snake.cpp Snake.h Point.h GameSettings.h
 	$(CC) -c Snake.cpp
-
-UserData.o: UserData.cpp UserData.h
-	$(CC) -c UserData.cpp
 
 SnakeMap.o: SnakeMap.h SnakeMap.cpp Point.h
 	$(CC) -c SnakeMap.cpp
