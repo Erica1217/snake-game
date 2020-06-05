@@ -1,4 +1,5 @@
 #include "GateManager.h"
+#include <iostream>
 
 using namespace std;
 
@@ -65,7 +66,14 @@ GateManager::GateManager(vector<vector<int>> snake_map)
             }
         }
     }
+
     wall_count = num-1;
+
+    for(int i=1 ; i<=wall_count; i++)
+    {
+        cout<<wall_list[i].size()<< endl;
+    }
+    cout<<"\n\n\n";
 }
 
 void GateManager::makeNewGate()
@@ -79,7 +87,7 @@ void GateManager::makeNewGate()
     {
         // num 게이트 번호 선택
         srand((unsigned int)time(NULL));
-        while(gate1 == gate2)
+        while(gateNum1 == gateNum2)
         {
             gateNum1 =(rand() % (wall_count+1))+1; // 범위 : 1부터 wall_count까지
             gateNum2 =(rand() % (wall_count+1))+1;
@@ -88,11 +96,15 @@ void GateManager::makeNewGate()
         rand1 = rand() % (wall_list[gateNum1].size()+1);
         rand2 = rand() % (wall_list[gateNum2].size()+1);
         
+        gate1 = wall_list[gateNum1][rand1];
+        gate2 = wall_list[gateNum2][rand2];
+
         x = (gate2.x - gate1.x);
         y = (gate2.y - gate2.y);
+
+        cout<<(x*x) + (y*y)<<endl;
     }
-    gate1 = wall_list[gateNum1][rand1];
-    gate2 = wall_list[gateNum2][rand2];
+    cout<<"gate 나왔따 "<<endl;
     
     gates = make_pair(gate1, gate2);
     gate_directions = make_pair(makeGateDirection(gate1), makeGateDirection(gate2));
