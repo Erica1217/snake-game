@@ -1,7 +1,6 @@
 #include <ncurses.h>
 #include <unistd.h>
 
-#include "UIManager.h"
 #include "GameManager.h"
 #include "NcursesSetting.h"
 #include "GameFlow.h"
@@ -12,7 +11,6 @@ int main(void)
   NcursesSetting();
   GameFlow game_flow;
   GameManager game_manager(game_flow);
-  UIManager ui_manager(game_manager);
 
   // 시작메뉴
   while(1)
