@@ -57,10 +57,12 @@ int ItemManager::eatItem(Point next_head_point){
     }
     return 0;
 }
-void ItemManager::deleteItem(int current_tick){
+void ItemManager::deleteItem(int current_tick, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
         if(this->items[i].getCreatedTick() + disappear_tick <= current_tick ){
+            game_data.setPositionInfo(this->items[i].getPos().x, this->items[i].getPos().y, 0);
             this->items.erase(this->items.begin()+i);
+
         }
     }
 }
@@ -72,7 +74,7 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
     vector<vector<int>> map = game_data.getMap();
 
     makeItem(current_tick, map);
-    deleteItem(current_tick);
+    deleteItem(current_tick, game_data);
     switch(eatItem(next_head_point))
     {
         case 0:
