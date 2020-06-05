@@ -59,9 +59,8 @@ int ItemManager::eatItem(Point next_head_point){
 }
 void ItemManager::deleteItem(int current_tick){
     for(int i = 0; i<items.size(); i++){
-        if(this->items[i].getCreatedTick() == current_tick - disappear_tick){
+        if(this->items[i].getCreatedTick() + disappear_tick <= current_tick ){
             this->items.erase(this->items.begin()+i);
-            break;
         }
     }
 }

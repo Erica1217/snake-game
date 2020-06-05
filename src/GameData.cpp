@@ -197,7 +197,7 @@ void GameData::setCurrentDirection(int current_direction)
 void GameData::mapReset() {
     for(int i = 0; i <21; i++) {
         for(int j = 0; j < 21; j ++) {
-            if(snake_map -> getPositionInfo(i,j) == 1 || snake_map -> getPositionInfo(i,j) == 2 ) {
+            if(snake_map -> getPositionInfo(i,j) == 1 || snake_map -> getPositionInfo(i,j) == 2 || snake_map -> getPositionInfo(i,j) == 6 || snake_map -> getPositionInfo(i,j) == 7) {
                 snake_map -> setPositionInfo(i, j , 0);
             }
         }
