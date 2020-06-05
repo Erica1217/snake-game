@@ -6,7 +6,7 @@ LDLIBS = -lncursesw
 
 OBJS = Point.o kbhit.o Snake.o SnakeMap.o UserData.o GameData.o Game.o GameFlow.o GameManager.o SnakeGame.o GateManager.o Renderable.o UserData.o Mission.o Item.o ItemManager.o
 
-TARGET = SnakeGame
+TARGET = SnakeGameExe
 
 all : $(TARGET)
 
