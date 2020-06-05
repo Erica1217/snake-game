@@ -14,19 +14,13 @@ public:
     int eatItem(Point next_head_point);
     void deleteItem(int current_tick);
     void update(GameData &game_data, UserData &user_data);
+    vector<Item> items;
 
 private:
-    int current_tick;
     int last_made_tick;
     int delay;
-    int rand_x;
-    int rand_y;
-    int temp;
     int growth_odd;
     int disappear_tick;
-    int kind;
-    Point create_location;
-    vector<Item> items;
 };
 
 #endif
