@@ -27,6 +27,8 @@ void Game::Init(int stage)
 
 void Game::SetInput()
 {
+    if(!isValid) return;
+
     game_data -> updateDirection();
     key = game_data -> getKey();
 }
@@ -40,6 +42,8 @@ void Game::gameStart()
 // 매프레임 게임 유효성 검사
 int Game::IsValid()
 {
+    if(!isValid) return isValid;
+
     Point next = player -> getNextPoint(game_data -> getCurrrentDirection());
     game_data -> setNextPoint(next);
     game_data -> setNextHeadPoint(next);
