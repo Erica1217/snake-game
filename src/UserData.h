@@ -1,7 +1,7 @@
 #ifndef _USERDATA_
 #define _USERDATA_
 
-class UserData{
+class UserData {
 private:
     int current_length;
     int max_length;
@@ -11,7 +11,7 @@ private:
 
 public:
     UserData();
-    UserData(int current_length, int max_length, int growth_item_count, int posion_item_count, int used_gate_count){}
+    UserData(int current_length, int max_length, int growth_item_count, int posion_item_count, int used_gate_count) {}
     int getCurrentLength();
     void setCurrentLength(int current_length);
     int getMaxLength();
