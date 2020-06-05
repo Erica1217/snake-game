@@ -51,12 +51,10 @@ int main(void)
       if(game_manager.IsValid())
       {
         game_manager.Update(tick++);  // 각종 게임 정보들 업데이트
-        //ui_manager.Update();    // 게임정보 반영 후 화면에 렌더링
       }
       else
       {
         game_manager.End();
-        //ui_manager.GameEnd();
         break;
       }
       timer = 0;
