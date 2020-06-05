@@ -44,7 +44,7 @@ int main(void)
     game_manager.SetInput();
 
     // 게임업데이트는 0.5초
-    if(timer > 100)
+    if(timer > 66)
     {
       // 유효성 검사 - 지금은 아무 키나 입력하면 종료됨
       if(game_manager.IsValid())
