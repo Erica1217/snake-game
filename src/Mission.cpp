@@ -8,7 +8,6 @@ Mission::Mission(int stage){
         {5,1,2,1}
     };
     current_mission_list = total_mission_list[stage];
-    vector<int> a = {1,2,3,4};
 }
 
 bool Mission::isComplete(UserData &user_data){
