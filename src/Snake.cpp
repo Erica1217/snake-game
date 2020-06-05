@@ -75,6 +75,7 @@ void Snake::update(GameData& game_data, UserData& user_data)
         {
             int nextDir = game_data.getGateDirections()[game_data.getCurrrentDirection()][1-i];
             bodies[0] = game_data.getGatePositions()[1-i].moveTo(nextDir);
+            game_data.setCurrentDirection(nextDir);
             head_pos = bodies[0];
             break;
         }

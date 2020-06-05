@@ -81,7 +81,7 @@ void Game::update(int tick)
     game_data -> setCurrentTick(tick - my_start_tick);
     
     player -> update(*game_data, *user_data);
-    item_manager -> update(*game_data, *user_data);
+    // item_manager -> update(*game_data, *user_data);
     gate_manager -> update(*game_data, *user_data);
 
     for(int i = 0 ; i < 3 ; i++)
