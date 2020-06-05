@@ -131,13 +131,13 @@ void GateManager::update(GameData &game_data, UserData &user_data)
     {
         makeNewGate();
         isExist = true;
-        game_data.updateGatePosition(isExist, {gates.first, gates.second});
-        vector<vector<int>> d = {};
-        for(int x =0; x<gate_directions.first.size(); x++) {
-            d.push_back({gate_directions.first[x], gate_directions.second[x]});
-        }
-        game_data.updateGateDirection(isExist, d);
     }
+    game_data.updateGatePosition(isExist, {gates.first, gates.second});
+    vector<vector<int>> d = {};
+    for(int x =0; x<gate_directions.first.size(); x++) {
+        d.push_back({gate_directions.first[x], gate_directions.second[x]});
+    }
+    game_data.updateGateDirection(isExist, d);
 }
 
 pair<Point, Point> GateManager::getGates()
