@@ -16,10 +16,10 @@ public:
     void setCurrentLength(int current_length);
     int getMaxLength();
     void setMaxLength(int current_length);
-    int setGrowthItemCount(int growth_item_count);
-    void getGrowthItemCount();
-    int setPoisonItemCount(int poison_item_count);
-    void getPoisonItemCount();
+    int getGrowthItemCount();
+    void setGrowthItemCount(int growth_item_count);
+    int getPoisonItemCount();
+    void setPoisonItemCount(int poison_item_count);
     void GrowthItemIncrease();
     void PoisonItemIncrease();
     void UsedGateCountIncrease();
