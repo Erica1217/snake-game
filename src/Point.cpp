@@ -11,6 +11,7 @@ bool Point::isValid()
     return (*this).x>=0 && (*this).y>=0 && (*this).x < MAP_X && (*this).y < MAP_Y;
 }
 
+
 // todo: point.moveTo()로 호출할 것
 Point Point::moveTo(int curDir)
 {
