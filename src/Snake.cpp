@@ -13,32 +13,8 @@ Snake::Snake()
 }
 
 // 유효성검사할 때 호출, 다음 머리 위치 리턴
-// todo: point.moveTo()로 호출할 것
 Point Snake::getNextPoint(int curDir)
-{
-    /*
-    int x = head_pos.x;
-    int y = head_pos.y;
-    // 현재 설정되어있는 방향 기준
-    
-    switch (curDir)
-    {
-    case DIR_UP : // 위쪽
-        x--;
-        break;
-    case DIR_DOWN : // 아래쪽
-        x++;
-        break;
-    case DIR_RIGHT : // 오른쪽
-        y++;
-        break;
-    case DIR_LEFT : // 왼쪽
-        y--;
-        break;
-    }
-    */
-    //Point temp(x,y);
-    
+{   
     Point nextPos(head_pos.x, head_pos.y);
     next_pos = nextPos.moveTo(curDir);
     return next_pos;
