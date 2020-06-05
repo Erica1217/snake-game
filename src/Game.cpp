@@ -7,12 +7,12 @@ Game::Game()
     is_clear = false;
     isValid = true;
     key = 0;
-    player = new Snake();
 }
 
 // 게임별 맵 저장, 게임매니저 생성자에서 각각 호출
 void Game::Init(int stage)
 {
+    player = new Snake();
     my_stage = stage;
     game_data = new GameData(stage);
     user_data = new UserData();
@@ -105,9 +105,9 @@ bool Game::isClear()
 
 void Game::gameEnd()
 {
-    delete player;
-    delete game_data;
-    delete user_data;
+    //delete player;
+    //delete game_data;
+    //delete user_data;
     //delete gate_manager;
-    delete mission;
+    //delete mission;
 }

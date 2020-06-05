@@ -66,5 +66,5 @@ void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
 }
 
 void UserData::Render() {
-    ;
+    
 }
