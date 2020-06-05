@@ -64,3 +64,7 @@ void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
     this->used_gate_count = used_gate_count;
     used_gate_count++;
 }
+
+void UserData::Render() {
+    ;
+}
