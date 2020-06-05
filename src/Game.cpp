@@ -18,7 +18,7 @@ void Game::Init(int stage)
     user_data = new UserData();
     item_manager = new ItemManager();
     mission = new Mission(stage);
-    gate_manager = new GateManager(game_data -> getMap());
+    //gate_manager = new GateManager(game_data -> getMap());
 
     panels[0] = game_data;
     //panels[1] = user_data;
@@ -77,7 +77,7 @@ void Game::update(int tick)
     
     player -> update(*game_data, *user_data);
     item_manager -> update(*game_data, *user_data);
-    gate_manager -> update(*game_data, *user_data);
+    //gate_manager -> update(*game_data, *user_data);
 
     for(int i = 0 ; i < 1 ; i++)
     {
@@ -108,6 +108,6 @@ void Game::gameEnd()
     delete player;
     delete game_data;
     delete user_data;
-    delete gate_manager;
+    //delete gate_manager;
     delete mission;
 }
