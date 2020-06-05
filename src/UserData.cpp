@@ -24,18 +24,18 @@ void UserData::setMaxLength(int current_length) { //최대 길이 설정
     if (current_length > max_length) max_length = current_length;
 }
 
-int UserData::setGrowthItemCount(int growth_item_count) { //성장아이템 먹은 횟수 반환
+int UserData::getGrowthItemCount() { //성장아이템 먹은 횟수 반환
     return growth_item_count;
 }
-void UserData::getGrowthItemCount() { //성장아이템 먹은 횟수 설정
+void UserData::setGrowthItemCount(int growth_item_count) { //성장아이템 먹은 횟수 설정
     this->growth_item_count = growth_item_count;
 }
 
 
-int UserData::setPoisonItemCount(int poison_item_count) { //감소아이템 먹은 횟수 반환
+int UserData::getPoisonItemCount() { //감소아이템 먹은 횟수 반환
     return poison_item_count;
 }
-void UserData::getPoisonItemCount() { //감소아이템 먹은 횟수 설정
+void UserData::setPoisonItemCount(int poison_item_count) { //감소아이템 먹은 횟수 설정
     this->poison_item_count = poison_item_count;
 
 }
