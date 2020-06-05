@@ -16,6 +16,7 @@ void Game::Init(int stage)
     my_stage = stage;
     game_data = new GameData(stage);
     user_data = new UserData();
+    item_manager = new ItemManager();
     mission = new Mission(stage);
     gate_manager = new GateManager(game_data -> getMap());
 
@@ -59,7 +60,7 @@ int Game::IsValid()
     default:
         break;
     }
-    
+
     if(key == KB_BACKSPACE)  // 백스페이스 누를 경우
     {
         isValid = false;
@@ -75,7 +76,7 @@ void Game::update(int tick)
     game_data -> setCurrentTick(tick);
     
     player -> update(*game_data, *user_data);
-    //item_manager.Update(game_data, user_data);
+    item_manager -> update(*game_data, *user_data);
     gate_manager -> update(*game_data, *user_data);
 
     for(int i = 0 ; i < 1 ; i++)
