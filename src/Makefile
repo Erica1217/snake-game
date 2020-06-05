@@ -58,7 +58,7 @@ GateManager.o : GateManager.cpp GateManager.h Point.h GameData.h GameSettings.h 
 Item.o: Item.cpp Item.h Point.h 
 	$(CC) -c Item.cpp
 
-ItemManager: ItemManager.cpp ItemManager.h Item.h Point.h UserData.h GameData.h
+ItemManager.o: ItemManager.cpp ItemManager.h Item.h Point.h UserData.h GameData.h
 	$(CC) -c ItemManager.cpp
 
 clean :
