@@ -52,13 +52,14 @@ void Snake::update(GameData& game_data, UserData& user_data)
     switch(item)
     {
         case -1 :
+            if(bodies.size() > 0) bodies.pop_back();
             // poision item
             break;
         case 0 :
             // 아무 것도 안 먹음
             break;
         case 1 :
-            // growth item
+            if(bodies.size() > 0) bodies.push_back(bodies.back());
             break;
     }
     // 게이트를 통과했을 경우 처리 필요

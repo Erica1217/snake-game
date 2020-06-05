@@ -37,11 +37,11 @@ public:
 
     void updateGatePosition(bool isExist, vector<Point> gates);
 
-    void updateGateDirection(bool isExist, vector<vector<int>, vector<int>> &gate_directions);
+    void updateGateDirection(bool isExist, vector<vector<int>> &gate_directions);
 
     vector<Point> getGatePositions();
 
-    vector<vector<int>, vector<int>> getGateDirections();
+    vector<vector<int>> getGateDirections();
 
     int getCurrrentDirection();
 
@@ -63,7 +63,7 @@ private:
     int current_direction;
 
     vector<Point> gates;
-    vector<vector<int>, vector<int>> gate_directions;
+    vector<vector<int>> gate_directions;
 
     // 추가
     int key;
