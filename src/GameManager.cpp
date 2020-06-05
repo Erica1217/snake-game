@@ -3,6 +3,7 @@
 GameManager::GameManager(GameFlow &gameflow) : game_flow(gameflow)
 {
     curStage = 0;
+    tick = 1;
 
     games = new Game[MAX_STAGE];
 
@@ -17,7 +18,7 @@ void GameManager::Start()
 {
     // 첫스테이지 로드
     curGame = games;
-    curGame->gameStart();
+    curGame->gameStart(tick);
     // 스테이지1 시작 프롬프트
     if (game_flow.RenderStageEnter(curStage + 1) == 0)
     {
@@ -45,6 +46,7 @@ int GameManager::IsValid()
 // 매 프레임, 게임데이터 업데이트
 void GameManager::Update(int tick)
 {
+    this -> tick = tick;
     curGame->update(tick);
 
     if (curGame->isClear())
@@ -63,7 +65,7 @@ void GameManager::StageSetting()
         // 다음 스테이지 로드
         curGame = games + curStage;
         // 다음 스테이지 세팅
-        curGame->gameStart();
+        curGame->gameStart(tick);
     }
 
     // 해당 스테이지 클리어 렌더링, 입력대기

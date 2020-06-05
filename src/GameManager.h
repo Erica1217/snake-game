@@ -21,6 +21,7 @@ public :
 
     vector<vector<int>> GetCurMap();
 private :
+    int tick;
     int curStage;
     Game* games;
     Game* curGame;
