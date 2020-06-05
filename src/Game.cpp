@@ -69,7 +69,8 @@ int Game::IsValid()
     {
         isValid = false;
     }
-
+    
+    if(isValid == false) gameEnd();
     return isValid;   
 }
 
