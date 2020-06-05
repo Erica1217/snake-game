@@ -125,19 +125,18 @@ void GateManager::update(GameData &game_data, UserData &user_data)
         is_passing=false;
         last_gate_deleted_tick = game_data.getCurrentTick();
     }
-
     // 게이트 생성
     int gate_make_tick = last_gate_deleted_tick + live_time;
     if(!is_passing && !isExist && gate_make_tick == game_data.getCurrentTick())
     {
         makeNewGate();
+        isExist = true;
         game_data.updateGatePosition(isExist, {gates.first, gates.second});
         vector<vector<int>> d = {};
         for(int x =0; x<gate_directions.first.size(); x++) {
             d.push_back({gate_directions.first[x], gate_directions.second[x]});
         }
         game_data.updateGateDirection(isExist, d);
-        isExist = true;
     }
 }
 
