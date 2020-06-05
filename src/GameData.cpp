@@ -106,28 +106,28 @@ char GameData::changeMap(int i)
     char temp;
   switch(i)
   {
-    case 0 :
+    case EMPTY:
       temp = ' ';
       break;
-    case 1 :
+    case SNAKE_HEAD:
       temp = 'o';
       break;
-    case 2 :
+    case SNAKE_BODY:
       temp = 'x';
       break;
-    case 3 :
+    case WALL:
       temp = '1';
       break;
-    case 4:
+    case IMMUNE_WALL:
       temp = '1';
       break;
-    case 5:
+    case GATE:
       temp = '%';
       break;
-    case 6:
+    case GROWTH_ITEM:
       temp = '+';
       break;
-    case 7:
+    case POSION_ITEM:
       temp = '-';
       break;
     default :
@@ -160,7 +160,7 @@ void GameData::updateGatePosition(bool isExist, vector<Point> gates)
     if(isExist) {
         for(int i = 0; i < gates.size(); i++) 
         {
-            snake_map->setPositionInfo(gates[i].x, gates[i].y,5);
+            snake_map->setPositionInfo(gates[i].x, gates[i].y, GATE);
         }
         this->gates = gates;
     }
