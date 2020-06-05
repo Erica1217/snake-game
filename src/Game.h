@@ -20,7 +20,7 @@ public :
     void Init(int stage);
     void SetInput();
 
-    void gameStart();
+    void gameStart(int tick);
     void update(int tick);
     bool isClear();
     int IsValid();
@@ -33,6 +33,8 @@ private :
     ItemManager* item_manager;
     Mission* mission;
     GateManager* gate_manager;
+
+    int my_start_tick;
 
     Renderable* panels[3];
 };

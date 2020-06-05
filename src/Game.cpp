@@ -33,9 +33,9 @@ void Game::SetInput()
     key = game_data -> getKey();
 }
 
-void Game::gameStart()
+void Game::gameStart(int tick)
 {
-
+    my_start_tick = tick - 1;
 }
 
 
@@ -77,7 +77,7 @@ int Game::IsValid()
 void Game::update(int tick)
 {
     game_data -> mapReset();   
-    game_data -> setCurrentTick(tick);
+    game_data -> setCurrentTick(tick - my_start_tick);
     
     player -> update(*game_data, *user_data);
     item_manager -> update(*game_data, *user_data);
