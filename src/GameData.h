@@ -51,6 +51,7 @@ public:
 
     int getPositionInfo(int x, int y);
 
+    void setPositionInfo(int x, int y, int info);
     // 추가
     int getKey() { return key; };
     void Render();
