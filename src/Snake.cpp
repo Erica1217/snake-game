@@ -62,13 +62,21 @@ void Snake::update(GameData& game_data, UserData& user_data)
             if(bodies.size() > 0) bodies.push_back(bodies.back());
             break;
     }
-    // 게이트를 통과했을 경우 처리 필요
-
-
 
     // 최종 결과물
     bodies.insert(bodies.begin(), head_pos); // 머리를 앞에 넣고
     bodies.pop_back(); // 맨 뒤를 삭제
+
+    // 게이트를 통과했을 경우
+    for(int i=0 ; i<2 ; i++)
+    {
+        if(game_data.getGatePositions().size()==2 &&  head_pos == game_data.getGatePositions()[i])
+        {
+            int nextDir = game_data.getGateDirections()[1-i][game_data.getCurrrentDirection()];
+            head_pos = game_data.getGatePositions()[1-i].moveTo(nextDir);
+            break;
+        }
+    }
 
     game_data.updateSnakePosition(bodies); // 게임데이터에 스네이크 위치 넣어줌
 
