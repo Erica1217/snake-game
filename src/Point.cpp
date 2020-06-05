@@ -35,3 +35,9 @@ Point Point::moveTo(int curDir)
     }
     return Point(x,y);
 }
+
+std::ostream& operator<<(std::ostream& outStream, const Point& point)
+{
+    outStream << "(" << point.x << "," << point.y << ")" << '\n';
+    return outStream;
+}
