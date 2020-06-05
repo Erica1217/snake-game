@@ -16,7 +16,6 @@ public :
     void Start();
     void End();
     void SetInput();
-    int IsStageClear();
     int IsValid();
     void Update(int tick);
 

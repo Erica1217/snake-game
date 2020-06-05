@@ -16,7 +16,7 @@ void Game::Init(int stage)
     my_stage = stage;
     game_data = new GameData(stage);
     user_data = new UserData();
-    //gate_manager = new GateManager(this -> map);
+    gate_manager = new GateManager(game_data -> getMap());
 
     panels[0] = game_data;
 
@@ -24,7 +24,6 @@ void Game::Init(int stage)
 
 void Game::SetInput()
 {
-    //this->key = key;
     game_data -> updateDirection();
     key = game_data -> getKey();
 }
@@ -87,7 +86,7 @@ void Game::update(int tick)
     
     player -> Update(*game_data, *user_data);
     //item_manager.Update(game_data, user_data);
-    //gate_manager.Update(game_data, user_data);
+    gate_manager -> update(*game_data, *user_data);
 
     panels[0] -> Render();
 }

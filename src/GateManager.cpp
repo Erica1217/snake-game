@@ -69,11 +69,11 @@ GateManager::GateManager(vector<vector<int>> snake_map)
 
     wall_count = num-1;
 
-    for(int i=1 ; i<=wall_count; i++)
-    {
-        cout<<wall_list[i].size()<< endl;
-    }
-    cout<<"\n\n\n";
+    // for(int i=1 ; i<=wall_count; i++)
+    // {
+    //     cout<<wall_list[i].size()<< endl;
+    // }
+    // cout<<"\n\n\n";
 }
 
 void GateManager::makeNewGate()
@@ -83,6 +83,7 @@ void GateManager::makeNewGate()
     int gateNum1=0, gateNum2=0;
     Point gate1, gate2;
     int rand1,rand2;
+    cout<<"gate 들어감 "<<endl;
     while(x*x + y*y < (3*3))
     {
         // num 게이트 번호 선택
@@ -96,13 +97,16 @@ void GateManager::makeNewGate()
         rand1 = rand() % (wall_list[gateNum1].size()+1);
         rand2 = rand() % (wall_list[gateNum2].size()+1);
         
+
+        cout<<gateNum1<< " "<<rand1<<endl;
+        cout<<gateNum2<< " "<<rand2<<endl;
         gate1 = wall_list[gateNum1][rand1];
         gate2 = wall_list[gateNum2][rand2];
 
         x = (gate2.x - gate1.x);
         y = (gate2.y - gate2.y);
 
-        cout<<(x*x) + (y*y)<<endl;
+        cout<<(x*x) <<" + "<< (y*y)<<endl;
     }
     cout<<"gate 나왔따 "<<endl;
     
