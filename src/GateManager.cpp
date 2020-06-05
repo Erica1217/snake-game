@@ -115,7 +115,7 @@ void GateManager::update(GameData &game_data, UserData &user_data)
     {
         is_passing=true;
         snake_entered_tick = game_data.getCurrentTick();
-        user_data.setUsedGateCount(user_data.getUsedGateCount());
+        user_data.setUsedGateCount(user_data.getUsedGateCount() + 1);
     }
     else if(exit_gate_tick == game_data.getCurrentTick())
     {

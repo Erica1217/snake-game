@@ -14,7 +14,7 @@ ItemManager::ItemManager(){
     disappear_tick = 20;
     items = {};
 }
-void ItemManager::makeItem(int current_tick, vector<vector<int>> map){
+void ItemManager::makeItem(int current_tick, vector<vector<int>>& map){
     if(this->items.size() < 3 && current_tick >= this->last_made_tick + this->delay)
     {
         int temp;

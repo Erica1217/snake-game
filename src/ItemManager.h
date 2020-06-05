@@ -10,7 +10,7 @@ class ItemManager{
 
 public:
     ItemManager();
-    void makeItem(int current_tick, vector<vector<int>> map);
+    void makeItem(int current_tick, vector<vector<int>>& map);
     int eatItem(Point next_head_point);
     void deleteItem(int current_tick, GameData &game_data);
     void update(GameData &game_data, UserData &user_data);
