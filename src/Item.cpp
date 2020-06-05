@@ -4,6 +4,11 @@ Item::Item()
 { 
     ;
 }
+Item::Item(Point pos, int kinds, int tick){
+    this -> pos = pos;
+    this -> kinds = kinds;
+    this -> created_tick = tick;
+}
 int Item::getKinds(){ //아이템의 종류반환
     return kinds;
 }
