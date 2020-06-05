@@ -6,7 +6,6 @@
 #include "GameData.h"
 #include "UserData.h"
 #include "GateManager.h"
-#include "Renderable.h"
 #include "Mission.h"
 #include "ItemManager.h"
 
