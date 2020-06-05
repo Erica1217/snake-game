@@ -69,6 +69,9 @@ void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
 }
 
 void UserData::Render() {
-    mvwprintw(window, 1, 1, "ScoreBoard");
+    mvwprintw(window, 1, 1, "%d", max_length);
+    mvwprintw(window, 2, 1, "%d", current_length);
+    mvwprintw(window, 3, 1, "%d", growth_item_count);
+    mvwprintw(window, 4, 1, "%d", poison_item_count);
     wrefresh(window);
 }
