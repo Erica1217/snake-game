@@ -37,6 +37,12 @@ public:
 
     void updateGatePosition(bool isExist, vector<Point> gates);
 
+    void updateGateDirection(bool isExist, vector<vector<int>, vector<int>> &gate_directions);
+
+    vector<Point> getGatePositions();
+
+    vector<vector<int>, vector<int>> getGateDirections();
+
     int getCurrrentDirection();
 
     void setCurrentDirection(int current_direction);
@@ -55,6 +61,9 @@ private:
     SnakeMap* snake_map;
     int current_tick;
     int current_direction;
+
+    vector<Point> gates;
+    vector<vector<int>, vector<int>> gate_directions;
 
     // 추가
     int key;
