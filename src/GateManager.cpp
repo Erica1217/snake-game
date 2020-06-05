@@ -101,8 +101,6 @@ void GateManager::makeNewGate()
     }
     
     gates = make_pair(gate1, gate2);
-   // std::cout<<"**1 "<<gate1.x<<" "<<gate1.y<<endl;
-   // std::cout<<"**2 "<<gate2.x<<" "<<gate2.y<<endl;
     gate_directions = make_pair(makeGateDirection(gate1), makeGateDirection(gate2));
 }
 
@@ -133,10 +131,13 @@ void GateManager::update(GameData &game_data, UserData &user_data)
     if(!is_passing && !isExist && gate_make_tick == game_data.getCurrentTick())
     {
         makeNewGate();
+        game_data.updateGatePosition(isExist, {gates.first, gates.second});
+        vector<vector<int>,vector<int>> d;
+        d.push_back(gate_directions.first);
+        d.push_back(gate_directions.second);
+        game_data.updateGateDirection(isExist, d);
         isExist = true;
     }
-
-    game_data.updateGatePosition(isExist, {gates.first, gates.second});
 }
 
 pair<Point, Point> GateManager::getGates()

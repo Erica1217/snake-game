@@ -5,6 +5,9 @@
 GameData::GameData(int stage) 
 {
     snake_map = new SnakeMap(stage);
+
+    current_tick = 0;
+
     window = newwin(MAP_Y, MAP_X, 1, 1);
     keypad(window, TRUE);
 }
@@ -162,7 +165,25 @@ void GameData::updateGatePosition(bool isExist, vector<Point> gates)
         {
             snake_map->setPositionInfo(gates[i].x, gates[i].y,5);
         }
+        this->gates = gates;
     }
+}
+
+void GameData::updateGateDirection(bool isExist, vector<vector<int>, vector<int>> &gate_directions)
+{
+    if(isExist){
+        this->gate_directions = gate_directions;
+    }
+}
+
+vector<Point> GameData::getGatePositions()
+{
+    return gates;
+}
+
+vector<vector<int>, vector<int>> GameData::getGateDirections()
+{
+    return gate_directions;
 }
 
 int GameData::getCurrrentDirection() 

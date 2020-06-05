@@ -27,7 +27,7 @@ void GameManager::Start()
 
 void GameManager::End()
 {
-    curGame->gameEnd();
+    //curGame->gameEnd();
 }
 
 // ui_manager 가 키 입력받고 게임에 세팅해줌

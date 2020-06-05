@@ -34,7 +34,6 @@ int main(void)
 
   // 게임 실행
   game_manager.Start();
-  //ui_manager.Start();
 
   int tick = 1;
   int timer = 100;
