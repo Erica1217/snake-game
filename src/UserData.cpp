@@ -23,8 +23,7 @@ int UserData::getMaxLength() { //최대 길이 반환
     return max_length;
 }
 void UserData::setMaxLength(int current_length) { //최대 길이 설정
-    this->max_length = (this->max_length, current_length);
-    if (current_length > max_length) max_length = current_length;
+    if (current_length > this->max_length) this->max_length = current_length;
 }
 
 int UserData::getGrowthItemCount() { //성장아이템 먹은 횟수 반환
