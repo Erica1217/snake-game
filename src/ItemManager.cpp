@@ -16,7 +16,8 @@ ItemManager::ItemManager(){
     items = {};
 }
 void ItemManager::makeItem(int current_tick, vector<vector<int>> map){
-    if(items.size()<3 && current_tick == last_made_tick + delay){
+    if(items.size()<3 && current_tick == last_made_tick + delay)
+    {
         last_made_tick = current_tick;
         do{
             srand((unsigned int)time(NULL));
@@ -37,6 +38,7 @@ void ItemManager::makeItem(int current_tick, vector<vector<int>> map){
         items.push_back(add_item);
     }
 }
+
 int ItemManager::eatItem(Point next_head_point){
     for(int i = 0; i<items.size(); i++){
         
@@ -59,6 +61,7 @@ void ItemManager::deleteItem(int current_tick){
         }
     }
 }
+
 void ItemManager::update(GameData &game_data, UserData &user_data){
     int current_tick = game_data.getCurrentTick();
     Point next_head_point = game_data.getNextHeadPoint();
@@ -82,5 +85,6 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
         items_pos.push_back(items[i].getPos());
         items_type.push_back(items[i].getKinds());
     }
+
     game_data.updateItemPosition(items_pos, items_type);
 }
