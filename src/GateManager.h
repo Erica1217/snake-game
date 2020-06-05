@@ -30,8 +30,8 @@ private:
     const int DIR_PRIORITY_TABLE[5][5]={
         {DIR_UP,DIR_RIGHT,DIR_LEFT,DIR_DOWN},
         {DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_UP},
+        {DIR_RIGHT, DIR_DOWN, DIR_UP, DIR_LEFT},
         {DIR_LEFT, DIR_UP, DIR_DOWN, DIR_RIGHT},
-        {DIR_RIGHT, DIR_DOWN, DIR_UP, DIR_LEFT}
     };
     
     int dx[4] = {-1,1,0,0};
