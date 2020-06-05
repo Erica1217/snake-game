@@ -26,7 +26,7 @@ void ItemManager::makeItem(int current_tick, vector<vector<int>> map){
             temp = rand();
             rand_y = temp%21;
         }
-        while(map[rand_x][rand_y]==0);
+        while(map[rand_x][rand_y]!=0);
         Point create_location = Point(rand_x,rand_y);
         temp = rand()%10;
         if(temp<=growth_odd){
