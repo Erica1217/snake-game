@@ -35,11 +35,4 @@
 #define GROWTH_ITEM 6 
 #define POSION_ITEM 7
 
-// #define EMPTY 0
-// #define WALL 1
-// #define A_WALL 2
-// #define GATE 3
-// #define SNAKE_HEAD 5
-// #define SNAKE_BODY 4
-
 #endif

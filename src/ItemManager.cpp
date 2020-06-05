@@ -9,6 +9,7 @@ using namespace std;
 
 ItemManager::ItemManager(){
     current_tick = 0;
+    last_made_tick = 0;
     delay = 3;
     growth_odd = 6;
     disappear_tick = 20;

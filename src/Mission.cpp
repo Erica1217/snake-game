@@ -19,3 +19,8 @@ bool Mission::isComplete(UserData &user_data){
     }
     return true;
 }
+
+void Mission::Render()
+{
+
+}
