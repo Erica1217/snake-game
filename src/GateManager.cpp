@@ -69,11 +69,6 @@ GateManager::GateManager(vector<vector<int>> snake_map)
 
     wall_count = num-1;
 
-    // for(int i=1 ; i<=wall_count; i++)
-    // {
-    //     cout<<wall_list[i].size()<< endl;
-    // }
-    // cout<<"\n\n\n";
 }
 
 void GateManager::makeNewGate()
@@ -97,17 +92,13 @@ void GateManager::makeNewGate()
         rand2 = rand() % (wall_list[gateNum2].size()+1);
         
 
-        // cout<<gateNum1<< " "<<rand1<<" "<<wall_count<<" "<<wall_list[gateNum1].size()<<endl;
-        // cout<<gateNum2<< " "<<rand2<<" "<<wall_count<<" "<<wall_list[gateNum2].size()<<endl;
         gate1 = wall_list[gateNum1][rand1];
         gate2 = wall_list[gateNum2][rand2];
 
         x = (gate2.x - gate1.x);
-        y = (gate2.y - gate2.y);
+        y = (gate2.y - gate1.y);
 
-        // cout<<(x*x) <<" + "<< (y*y)<<endl;
     }
-    // cout<<"gate 나왔따 "<<endl;
     
     gates = make_pair(gate1, gate2);
     std::cout<<"**1 "<<gate1.x<<" "<<gate1.y<<endl;

@@ -124,6 +124,12 @@ char GameData::changeMap(int i)
     case 5:
       temp = '%';
       break;
+    case 6:
+      temp = '+';
+      break;
+    case 7:
+      temp = '-';
+      break;
     default :
       temp = '?';
       break;
