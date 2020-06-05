@@ -4,6 +4,7 @@
 
 GameData::GameData(int stage) 
 {
+    current_direction = 0;
     snake_map = new SnakeMap(stage);
     window = newwin(MAP_Y, MAP_X, 1, 1);
     keypad(window, TRUE);
