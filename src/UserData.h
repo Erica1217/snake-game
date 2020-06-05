@@ -1,7 +1,9 @@
 #ifndef _USERDATA_
 #define _USERDATA_
+#include "Renderable.h"
 
-class UserData {
+class UserData : public Renderable
+{
 private:
     int current_length;
     int max_length;
@@ -25,6 +27,7 @@ public:
     void UsedGateCountIncrease();
     void setUsedGateCount(int used_gate_count);
     int getUsedGateCount();
+    void Render();
 
 };
 
