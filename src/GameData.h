@@ -4,6 +4,8 @@
 #include "Point.h"
 #include "SnakeMap.h"
 #include "Renderable.h"
+#include <ncurses.h>
+
 
 class GameData : public Renderable
 {
@@ -68,7 +70,7 @@ private:
 
     // 추가
     int key;
-    char changeMap(int i);
+    wchar_t changeMap(int i);
 };
 
 
