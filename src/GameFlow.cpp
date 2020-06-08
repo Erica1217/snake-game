@@ -34,7 +34,8 @@ int GameFlow::RenderStartMenu()
 {
   WINDOW* window_start = newwin(12, 15, 5, 3);
   keypad(window_start, TRUE);
-  wborder(window_start, '*', '*', '*', '*', '*', '*', '*', '*');
+  wborder(window_start, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+  // wborder(window_start, '*', '*', '*', '*', '*', '*', '*', '*');
 
   // start/exit 중 선택된것
   int choice = 0;
@@ -47,25 +48,25 @@ int GameFlow::RenderStartMenu()
     if(choice == 0)
     {
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 2, 2, "start");
+      mvwprintw(window_start, 2, 2, "> start  ");
       wattroff(window_start, A_REVERSE);
-      mvwprintw(window_start, 4, 2, "about");
-      mvwprintw(window_start, 6, 2, "exit");
+      mvwprintw(window_start, 4, 2, "about    ");
+      mvwprintw(window_start, 6, 2, "exit     ");
     }
     else if(choice == 1)
     {
-      mvwprintw(window_start, 2, 2, "start");
+      mvwprintw(window_start, 2, 2, "start    ");
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 4, 2, "about");
+      mvwprintw(window_start, 4, 2, "> about  ");
       wattroff(window_start, A_REVERSE);
-      mvwprintw(window_start, 6, 2, "exit");
+      mvwprintw(window_start, 6, 2, "exit     ");
     }
     else
     {
-      mvwprintw(window_start, 2, 2, "start");
-      mvwprintw(window_start, 4, 2, "about");
+      mvwprintw(window_start, 2, 2, "start    ");
+      mvwprintw(window_start, 4, 2, "about    ");
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 6 , 2, "exit");
+      mvwprintw(window_start, 6 , 2, "> exit  ");
       wattroff(window_start, A_REVERSE);
     }
     
