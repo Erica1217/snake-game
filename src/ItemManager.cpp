@@ -14,11 +14,11 @@ ItemManager::ItemManager(){
     disappear_tick = 20;
     items = {};
 }
-void ItemManager::makeItem(int current_tick, vector<vector<int>>& map){
-    if(this->items.size() < 3 && current_tick >= this->last_made_tick + this->delay)
+void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map){
+    if(items.size() < 3 && current_tick >= last_made_tick + delay)
     {
         int temp;
-        this->last_made_tick = current_tick;
+        last_made_tick = current_tick;
         int rand_x;
         int rand_y;
         do{
@@ -37,12 +37,12 @@ void ItemManager::makeItem(int current_tick, vector<vector<int>>& map){
         }else{
             kind = 2;
         }
-        Item add_item = Item(create_location, kind, current_tick);
-        this->items.push_back(add_item);
+        //Item add_item = Item(create_location, kind, current_tick);
+        items.emplace_back(Item(create_location, kind, current_tick));
     }
 }
 
-int ItemManager::eatItem(Point next_head_point){
+int ItemManager::eatItem(const Point& next_head_point){
     for(int i = 0; i<items.size(); i++){
         if(items[i].getPos() == next_head_point) {
             if(items[i].getKinds() == 1){
@@ -57,11 +57,11 @@ int ItemManager::eatItem(Point next_head_point){
     }
     return 0;
 }
-void ItemManager::deleteItem(int current_tick, GameData &game_data){
+void ItemManager::deleteItem(const int current_tick, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
-        if(this->items[i].getCreatedTick() + disappear_tick <= current_tick ){
-            game_data.setPositionInfo(this->items[i].getPos().x, this->items[i].getPos().y, 0);
-            this->items.erase(this->items.begin()+i);
+        if(items[i].getCreatedTick() + disappear_tick <= current_tick ){
+            game_data.setPositionInfo(items[i].getPos().x, items[i].getPos().y, 0);
+            items.erase(items.begin()+i);
 
         }
     }
