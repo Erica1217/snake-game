@@ -1,7 +1,7 @@
 #include "Mission.h"
 #include "GameSettings.h"
 
-Mission::Mission(int stage){
+Mission::Mission(const int stage){
     total_mission_list = {
         {9,3,5,2},
         {7,5,9,3},

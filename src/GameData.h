@@ -11,23 +11,23 @@ class GameData : public Renderable
 {
 
 public:
-    GameData(int stage);
+    GameData(const int stage);
 
-    void update(int current_tick);
+    void update(const int current_tick);
 
-    int checkItem(Point head);
+    int checkItem(const Point head);
     
     vector<vector<int>> getMap();
 
-    void setNextPoint(Point next_point);
+    void setNextPoint(const Point next_point);
 
-    void setNextHeadPoint(Point next_head_point);
+    void setNextHeadPoint(const Point next_head_point);
 
     Point getNextPoint();
     
     Point getNextHeadPoint();
 
-    void setCurrentTick(int current_tick);
+    void setCurrentTick(const int current_tick);
 
     int getCurrentTick();
     
@@ -47,13 +47,13 @@ public:
 
     int getCurrrentDirection();
 
-    void setCurrentDirection(int current_direction);
+    void setCurrentDirection(const int current_direction);
 
     void mapReset();
 
-    int getPositionInfo(int x, int y);
+    int getPositionInfo(const int x, const int y);
 
-    void setPositionInfo(int x, int y, int info);
+    void setPositionInfo(const int x, const int y, const int info);
     // 추가
     int getKey() { return key; };
     void Render();

@@ -17,11 +17,11 @@ public :
     int key;
 
     Game();
-    void Init(int stage);
+    void Init(const int stage);
     void SetInput();
 
-    void gameStart(int tick);
-    void update(int tick);
+    void gameStart(const int tick);
+    void update(const int tick);
     bool isClear();
     int IsValid();
     void gameEnd();

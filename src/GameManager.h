@@ -17,7 +17,7 @@ public :
     void End();
     void SetInput();
     int IsValid();
-    void Update(int tick);
+    void Update(const int tick);
 
     vector<vector<int>> GetCurMap();
 private :

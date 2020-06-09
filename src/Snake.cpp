@@ -13,7 +13,7 @@ Snake::Snake()
 }
 
 // 유효성검사할 때 호출, 다음 머리 위치 리턴
-Point Snake::getNextPoint(int curDir)
+Point Snake::getNextPoint(const int curDir)
 {   
     Point nextPos(head_pos.x, head_pos.y);
     next_pos = nextPos.moveTo(curDir);

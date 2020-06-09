@@ -1,7 +1,7 @@
 #include "SnakeMap.h"
 #include "Point.h"
 
-SnakeMap::SnakeMap(int stage) {
+SnakeMap::SnakeMap(const int stage) {
     total_map = {
             {
                 {4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4},
@@ -105,16 +105,17 @@ int SnakeMap::getTotalStageCount() {
 }
 
 vector<vector<int>> SnakeMap::getCurrentMap() {
-    return this -> current_map;
+    return current_map;
 }
-int SnakeMap::getPositionInfo(int x, int y) {
-    return this -> current_map[x][y];
+int SnakeMap::getPositionInfo(const int x, const int y) {
+    return current_map[x][y];
 }
 
-void SnakeMap::setCurrentMap(int stage) {
+void SnakeMap::setCurrentMap(const int stage) {
     current_map = total_map[stage];
 }
-void SnakeMap::setPositionInfo(int x,int y, int info) {
+
+void SnakeMap::setPositionInfo(const int x, const int y, const int info) {
     current_map[x][y] = info;
 }
 void SnakeMap::update(vector<Point> snake, vector<Point> gates, vector<Point> items) {

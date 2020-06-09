@@ -10,7 +10,7 @@ Game::Game()
 }
 
 // 게임별 맵 저장, 게임매니저 생성자에서 각각 호출
-void Game::Init(int stage)
+void Game::Init(const int stage)
 {
     player = new Snake();
     my_stage = stage;
@@ -33,7 +33,7 @@ void Game::SetInput()
     key = game_data -> getKey();
 }
 
-void Game::gameStart(int tick)
+void Game::gameStart(const int tick)
 {
     my_start_tick = tick - 1;
 }
@@ -75,7 +75,7 @@ int Game::IsValid()
 }
 
 // 매 프레임 유효성 검사되면 모든 정보 추합해서 맵에 저장해야함
-void Game::update(int tick)
+void Game::update(const int tick)
 {
     game_data -> mapReset();   
     game_data -> setCurrentTick(tick - my_start_tick);

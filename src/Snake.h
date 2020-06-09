@@ -14,7 +14,7 @@ public :
     Snake();
 
     void update(GameData& game_data, UserData& user_data);
-    Point getNextPoint(int curDir);
+    Point getNextPoint(const int curDir);
     int getSnakeLength() { return bodies.size(); }
 
 private :

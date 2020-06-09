@@ -37,11 +37,11 @@ private:
     int dx[4] = {-1,1,0,0};
     int dy[4] = {0,0,-1,1};
     
-    void makeWallMap(int num, int x, int y);
+    void makeWallMap(const int num, const int x, const int y);
     vector<int> makeGateDirection(Point gate);
 
 public:
-    GateManager(vector<vector<int>> snake_map);
+    GateManager(const vector<vector<int>> snake_map);
     void makeNewGate();
     void update(GameData &game_data, UserData &user_data);
     pair<Point, Point> getGates();

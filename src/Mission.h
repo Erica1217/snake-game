@@ -9,7 +9,7 @@ using namespace std;
 class Mission : public Renderable
 {
 public:
-    Mission(int stage);
+    Mission(const int stage);
     bool isComplete(UserData &user_data);
     void Render();
 

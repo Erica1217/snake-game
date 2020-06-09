@@ -13,7 +13,7 @@ bool Point::isValid()
 
 
 // todo: point.moveTo()로 호출할 것
-Point Point::moveTo(int curDir)
+Point Point::moveTo(const int curDir)
 {
     int x = (*this).x;
     int y = (*this).y;

@@ -2,7 +2,7 @@
 #include "GameSettings.h"
 #include "kbhit.h"
 
-GameData::GameData(int stage)
+GameData::GameData(const int stage)
 {
     current_direction = 0;
     snake_map = new SnakeMap(stage);
@@ -10,12 +10,12 @@ GameData::GameData(int stage)
     keypad(window, TRUE);
 }
 
-void GameData::update(int current_tick)
+void GameData::update(const int current_tick)
 {
     this->current_tick = current_tick;
 }
 
-int GameData::checkItem(Point head)
+int GameData::checkItem(const Point head)
 {
     int info = snake_map->getPositionInfo(head.x, head.y);
     if (info == 6)
@@ -30,12 +30,12 @@ vector<vector<int>> GameData::getMap()
     return snake_map->getCurrentMap();
 }
 
-void GameData::setNextPoint(Point next_point)
+void GameData::setNextPoint(const Point next_point)
 {
     this->next_point = next_point;
 }
 
-void GameData::setNextHeadPoint(Point next_head_point)
+void GameData::setNextHeadPoint(const Point next_head_point)
 {
     this->next_head_point = next_head_point;
 }
@@ -50,14 +50,14 @@ Point GameData::getNextHeadPoint()
     return next_head_point;
 }
 
-void GameData::setCurrentTick(int current_tick)
+void GameData::setCurrentTick(const int current_tick)
 {
     this->current_tick = current_tick;
 }
 
 int GameData::getCurrentTick()
 {
-    return this->current_tick;
+    return current_tick;
 }
 
 // 키값 입력될때마다 방향 변경해줌
@@ -105,7 +105,7 @@ void GameData::Render()
     wrefresh(window);
 }
 
-wchar_t GameData::changeMap(int i)
+wchar_t GameData::changeMap(const int i)
 {
     wchar_t temp;
     switch (i)
@@ -207,10 +207,10 @@ vector<vector<int>> GameData::getGateDirections()
 
 int GameData::getCurrrentDirection()
 {
-    return this->current_direction;
+    return current_direction;
 }
 
-void GameData::setCurrentDirection(int current_direction)
+void GameData::setCurrentDirection(const int current_direction)
 {
     this->current_direction = current_direction;
 }
@@ -229,12 +229,12 @@ void GameData::mapReset()
     }
 }
 
-int GameData::getPositionInfo(int x, int y)
+int GameData::getPositionInfo(const int x, const int y)
 {
     return snake_map->getPositionInfo(x, y);
 }
 
-void GameData::setPositionInfo(int x, int y, int info)
+void GameData::setPositionInfo(const int x, const int y, const int info)
 {
     return snake_map->setPositionInfo(x, y, info);
 }

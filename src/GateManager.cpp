@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void GateManager::makeWallMap(int num, int x, int y)
+void GateManager::makeWallMap(const int num, const int x, const int y)
 {
     for(int i=0 ; i<4 ; i++)
     {
@@ -38,7 +38,7 @@ vector<int> GateManager::makeGateDirection(Point gate)
     return result;
 }
 
-GateManager::GateManager(vector<vector<int>> snake_map)
+GateManager::GateManager(const vector<vector<int>> snake_map)
 {
     for(int i=0 ; i<MAP_X ; i++)
     {

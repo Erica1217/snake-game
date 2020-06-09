@@ -44,7 +44,7 @@ int GameManager::IsValid()
 }
 
 // 매 프레임, 게임데이터 업데이트
-void GameManager::Update(int tick)
+void GameManager::Update(const int tick)
 {
     this -> tick = tick;
     curGame->update(tick);
