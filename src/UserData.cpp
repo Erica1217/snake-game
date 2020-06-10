@@ -9,7 +9,7 @@ UserData::UserData()
     poison_item_count = 0;
     used_gate_count = 0;
 
-    window = newwin((MAP_Y + 1) / 2, MAP_X, 1, 22);
+    window = newwin((MAP_Y + 1) / 2 - 1, MAP_X, 1, 23);
 }
 
 int UserData::getCurrentLength() {//현재 길이 반환
@@ -68,10 +68,12 @@ void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
 }
 
 void UserData::Render() {
-    mvwprintw(window, 1, 1, "%d", max_length);
-    mvwprintw(window, 2, 1, "%d", current_length);
-    mvwprintw(window, 3, 1, "%d", growth_item_count);
-    mvwprintw(window, 4, 1, "%d", poison_item_count);
-    mvwprintw(window, 5, 1, "%d", used_gate_count);
+    wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+    mvwprintw(window, 1, 1, "----SCORE BOARD----");
+    mvwprintw(window, 2, 1, "max length : %d", max_length);
+    mvwprintw(window, 3, 1, "current length : %d", current_length);
+    mvwprintw(window, 4, 1, "growth : %d", growth_item_count);
+    mvwprintw(window, 5, 1, "poison : %d", poison_item_count);
+    mvwprintw(window, 6, 1, "gate use : %d", used_gate_count);
     wrefresh(window);
 }

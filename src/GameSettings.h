@@ -12,6 +12,7 @@
 #define KB_LEFT 260
 
 #define KB_BACKSPACE 263
+#define KB_ENTER 10
 
 #define KB_W 119
 #define KB_S 115

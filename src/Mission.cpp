@@ -9,8 +9,9 @@ Mission::Mission(const int stage){
         {5,1,2,1}
     };
     current_mission_list = total_mission_list[stage];
+    current_state = {0, 0, 0, 0};
 
-    window = newwin((MAP_Y + 1) / 2, MAP_X / 2, 11, 22);
+    window = newwin((MAP_Y + 1) / 2, MAP_X, 11, 23);
 }
 
 bool Mission::isComplete(UserData &user_data){
@@ -25,6 +26,11 @@ bool Mission::isComplete(UserData &user_data){
 
 void Mission::Render()
 {
-    mvwprintw(window, 1, 1, "mission");
+    wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+    mvwprintw(window, 1, 1, "----MISSION----");
+    mvwprintw(window, 2, 1, "max length :\t%d/%d", current_state[0], current_mission_list[0]);
+    mvwprintw(window, 3, 1, "poison :\t%d/%d", current_state[1], current_mission_list[1]);
+    mvwprintw(window, 4, 1, "growth :\t%d/%d", current_state[2], current_mission_list[2]);
+    mvwprintw(window, 5, 1, "gate use :\t%d/%d", current_state[3], current_mission_list[3]);
     wrefresh(window);
 }

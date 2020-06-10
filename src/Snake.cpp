@@ -5,11 +5,11 @@
 Snake::Snake()
 {
     // 뱀 시작위치(정가운데)
-    head_pos.x = MAP_X / 2;
-    head_pos.y = MAP_Y / 2;
-    bodies.emplace_back(Point(10, 10));
-    bodies.emplace_back(Point(11, 10));
-    bodies.emplace_back(Point(12, 10));
+    head_pos.x = 17;
+    head_pos.y = 10;
+    bodies.emplace_back(Point(17, 10));
+    bodies.emplace_back(Point(18, 10));
+    bodies.emplace_back(Point(19, 10));
 }
 
 // 유효성검사할 때 호출, 다음 머리 위치 리턴

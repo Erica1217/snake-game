@@ -43,30 +43,31 @@ int GameFlow::RenderStartMenu()
   
   while(1)
   {
+    if(choice < 0) choice += 3;
     choice = choice % 3;
     // choice 기준으로 start / about / exit 하이라이트 표시
     if(choice == 0)
     {
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 2, 2, "> start  ");
+      mvwprintw(window_start, 3, 2, "> start  ");
       wattroff(window_start, A_REVERSE);
-      mvwprintw(window_start, 4, 2, "about    ");
-      mvwprintw(window_start, 6, 2, "exit     ");
+      mvwprintw(window_start, 5, 2, "about    ");
+      mvwprintw(window_start, 7, 2, "exit     ");
     }
     else if(choice == 1)
     {
-      mvwprintw(window_start, 2, 2, "start    ");
+      mvwprintw(window_start, 3, 2, "start    ");
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 4, 2, "> about  ");
+      mvwprintw(window_start, 5, 2, "> about  ");
       wattroff(window_start, A_REVERSE);
-      mvwprintw(window_start, 6, 2, "exit     ");
+      mvwprintw(window_start, 7, 2, "exit     ");
     }
     else
     {
-      mvwprintw(window_start, 2, 2, "start    ");
-      mvwprintw(window_start, 4, 2, "about    ");
+      mvwprintw(window_start, 3, 2, "start    ");
+      mvwprintw(window_start, 5, 2, "about    ");
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 6 , 2, "> exit  ");
+      mvwprintw(window_start, 7 , 2, "> exit  ");
       wattroff(window_start, A_REVERSE);
     }
     
@@ -76,13 +77,23 @@ int GameFlow::RenderStartMenu()
     key = wgetch(window_start);
     switch(key)
     {
-      case KEY_UP:
+      //case KEY_UP:
+      //case KB_UP:
+      case KB_W:
+      case KB_A:
         choice--;
         break;
-      case KEY_DOWN:
+      //case KEY_DOWN:
+      //case KB_DOWN:
+      case KB_S:
+      case KB_D:
         choice++;
         break;
-      case 10:
+      case KB_BACKSPACE:
+        EraseWindow(window_start);
+        return 2;
+        break;
+      case KB_ENTER:
         EraseWindow(window_start);
         return choice;
         break;
@@ -104,8 +115,9 @@ int GameFlow::RenderStageEnter(const int stage)
 
   keypad(window_enter, TRUE);
   werase(window_enter);
-  mvwprintw(window_enter, 10, 20, "");
-  wprintw(window_enter, "%s %d\n%25s", "Stage", stage, "Press Key to Start");
+  mvwprintw(window_enter, 8, 18, "Stage %d", stage);
+  mvwprintw(window_enter, 11, 12, "Press Key to Start!");
+  //wprintw(window_enter, "%s %d\n%25s", "Stage", stage, "Press Key to Start");
   wrefresh(window_enter);
 
   int key = wgetch(window_enter);
@@ -126,8 +138,8 @@ int GameFlow::RenderStageClear(const int stage)
 {
   WINDOW* window_clear = newwin(MAP_Y, MAP_X * 2, 1, 1);
 
-  mvwprintw(window_clear, 5, 10, "");
-  wprintw(window_clear, "%s %d %s", "stage", stage, "clear!");
+  mvwprintw(window_clear, 9, 13, "Stage %d Clear!", stage);
+  //wprintw(window_clear, "%s %d %s", "stage", stage, "clear!");
   wrefresh(window_clear);
 
   usleep(1500000);
