@@ -22,7 +22,7 @@ int main(void)
     }
     else if(game_status == 1) 
     {
-      game_flow.RenderMakers(); // 제작자들 말고 게임설명 들어가는것도 좋을듯
+      game_flow.RenderAbout(); // 제작자들 말고 게임설명 들어가는것도 좋을듯
     }
     else
     {
