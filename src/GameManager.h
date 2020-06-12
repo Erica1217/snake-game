@@ -31,4 +31,4 @@ private :
     void StageSetting();
 };
 
-#endife
+#endif

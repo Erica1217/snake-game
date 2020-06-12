@@ -114,5 +114,6 @@ void Game::gameEnd()
     delete game_data;
     delete user_data;
     delete gate_manager;
+    delete item_manager;
     delete mission;
 }

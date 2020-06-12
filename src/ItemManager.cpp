@@ -11,9 +11,9 @@ using namespace std;
 
 ItemManager::ItemManager(){
     last_made_tick = 0;
-    delay = 5;
+    delay = 8;
     growth_odd = 6;
-    disappear_tick = 30;
+    disappear_tick = 40;
     items = {};
 }
 

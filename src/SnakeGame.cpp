@@ -44,7 +44,7 @@ int main(void)
     game_manager.SetInput();
 
     // 게임업데이트는 0.25초
-    if(timer > 5)
+    if(timer > 40)
     {
       // 유효성 검사 - 지금은 아무 키나 입력하면 종료됨
       if(game_manager.IsValid())
@@ -59,7 +59,7 @@ int main(void)
       timer = 0;
     }
 
-    usleep(50000); // 시간 간격 정확히 확인 필요
+    usleep(5000); // 시간 간격 정확히 확인 필요
   }
 
   game_flow.RenderGameEnd();  // 종료 시 보여줄 화면 // 아직안만듦
