@@ -12,7 +12,7 @@ void NcursesSetting()
     initscr();
     noecho();
     curs_set(0);
-    resize_term(MAP_Y + 2, MAP_X * 2 + 3);
+    resize_term(MAP_Y + 2, MAP_X * 3 + 3);
     start_color();
 
     // init_pair(1, COLOR_WHITE, COLOR_RED);
