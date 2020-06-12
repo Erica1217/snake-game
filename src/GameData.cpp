@@ -18,7 +18,7 @@ GameData::GameData(const int stage)
 
     for(int x=0; x<MAP_X; x++) {
         for(int y=0; y<MAP_Y; y++) {
-            if(snake_map->getPositionInfo(x,y) == 0) {
+            if(snake_map->getPositionInfo(x,y) == EMPTY) {
                 mo_count[x/sq][y/sq]++;
                 mo_points[(x/sq)*sq + (y/sq)].push_back(Point(x, y));
             }
