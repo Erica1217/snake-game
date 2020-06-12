@@ -21,12 +21,12 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
     if(items.size() < 3 && current_tick >= last_made_tick + delay)
     {   
         Point mo_create_location = Point(1,1);
-        int mx_zero = 111;
+        int mx_zero = 0;
         int create_x, create_y;
-        
+
         for(int x=0; x<game_data.sq; x++) {
             for(int y=0; y<game_data.sq; y++) {
-                if(game_data.mo_count[x][y] < mx_zero) {
+                if(game_data.mo_count[x][y] > mx_zero && game_data.mo_count[x][y] > 0) {
                     mo_create_location = Point(x,y);
                     mx_zero = game_data.mo_count[x][y];
                 }
@@ -38,14 +38,16 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
         int temp;
 
         do {
-            rand_x = (rand() % game_data.sq) + mo_create_location.x;
-            rand_y = (rand() % game_data.sq) + mo_create_location.y;
+            int rand_number = (rand() % (game_data.mo_points[mo_create_location.x * game_data.sq + mo_create_location.y].size()));
+            rand_x = game_data.mo_points[mo_create_location.x * game_data.sq + mo_create_location.y][rand_number].x;
+            rand_y = game_data.mo_points[mo_create_location.x * game_data.sq + mo_create_location.y][rand_number].y;
         }
-        while( rand_x < MAP_X && rand_y < MAP_Y &&map[rand_x][rand_y] != 0 && mx_zero > 0);
+        while(rand_x > 0 && rand_y > 0 && rand_x < MAP_X && rand_y < MAP_Y && map[rand_x][rand_y] != 0 && mx_zero > 0);
 
         Point create_location = Point(rand_x, rand_y);
 
         last_made_tick = current_tick;
+
         temp = rand()%10;
         int kind;
         if(temp<=growth_odd){
@@ -54,11 +56,11 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
             kind = 2;
         }
 
-        game_data.mo_count[rand_x][rand_y] -=1;
+        game_data.mo_count[rand_x/game_data.sq][rand_y/game_data.sq] -=1;
 
-        //Item add_item = Item(create_location, kind, current_tick);
-        items.emplace_back(Item(create_location, kind, current_tick));
-    }
+    //     // Item add_item = Item(create_location, kind, current_tick);
+        items.push_back(Item(create_location, kind, current_tick));
+    }    
 }
 
 int ItemManager::eatItem(const Point& next_head_point, GameData &game_data){
