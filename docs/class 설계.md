@@ -1,22 +1,38 @@
 # class 설계
+
+|View|
+|--|--|
+|[Renderable](##Renderable)|
+
+|게임 흐름|
+|--|
+|[SnakeGame(메인)](##SnakeGame)|
+|[kbhit](##kbhit)|
+|[NCursesSettings](##NCursesSettings)|
+|[GameFlow](##GameFlow)|
+|[Game](##Game) |
+
+|데이터 저장|
+|--|
+|[GameData](##GameData)||
+|[SnakeMap](##SnakeMap)||
+|[GameSetting](##GameSetting)||
+|[Mission](##Mission)|
+|[UserData](##UserData) |
+
+|Model|
+|--|
+|[Point](##Point)|
+|[Item](##Item) |
+
+|Logic|
+|--|
+|[Snake](##Snake)|| 
+|[ItemManager](##ItemManager)||
+|[GateManager](##GateManager)||
+|[GameManager](##GameManager)||
+
 - [참고사항](##참고)
-- [SnakeMap](##SnakeMap) 김유진
-- [Snake](##Snake) 김신건
-- [Mission](##Mission) 최영락
-- [ScoreBoardInfo](##ScoreBoardInfo) 이하영
-
-- [Item](##Item) 
-- [Gate](##Gate)
-- [ItemManager](##ItemManager)
-- [GateManager](##GateManager)
-
-
-- [GameManager](##GameManager)
-- [Game](##Game) 
-- [UIManager](##UIManager)
-- [GameFlow](##GameFlow)
-- [Point](##Point)
-
 
 ## 참고
 
@@ -102,7 +118,7 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
 
 ## Mission
 - 생성자
-    - Mission()
+    - Mission(const int stage)
 - 멤버변수
     - 뱀의 길이
     - poison_item_count
@@ -111,20 +127,29 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
 
 
 - 멤버함수
-    - setMission()
-    - isComplete(stage, userData) : bool
+    - bool isComplete(stage, userData)
+        - 현재 상태와 미션을 비교하여 전부 달성했다면 true 리턴, 아니라면 false 리턴
+    - void Render()
+        - 현재 미션의 상태를 화면에 표시함
     
 
 ## Item
 - 생성자
-    - Item()모두
+    - Item() 모두
 - 멤버변수
     - Point pos: 아이템의 위치(positon)
-
     - int kinds : 아이템의 종류
         - 1: growth item
         - 2: posion item
     - int created_tick : 아이템 생성 시기 
+- 멤버함수
+    - int getKinds(): 아이템의 종류반환
+    - int getCreatedTic(): 아이템 생성 시기 반환
+    - void setPos(const Point pos): 아이템의 위치 설정
+    - void setKinds(const int kinds):아이템의 종류 설정
+    - void setCreatedTic(const int tick): 아이템 생성 시기 설정
+    - Point getPos():아이템의 위치 반환
+
 
 ## ItemManager
 - 생성자
@@ -134,9 +159,11 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
     - vector<Item> items
 - 멤버 함수
   - void makeItem()
+    - 일정한 틱이 지날 때마다 아이템의 갯수가 2개 이하면 아이템 생성
   - Point eatItem()
-  - void deleteItem()
-    - 생성자에서 랜덤으로! 맵과 비교하며 적당한 난수 생성
+    - Snake의 다음 머리 위치가 아이템의 위치와 같다면 그 아이템의 정보를 GameData에 보내고 아이템을 지움
+   - void deleteItem()
+    - 생성자에서 랜덤으로 맵과 비교하며 적당한 난수 생성
 
 
 ## GateManager
@@ -159,6 +186,7 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
         - void makeNewGate(): 맵에서 일반 wall 위치 중 새로운 게이트 생성
     - private :
     
+
 ## UserData
  - 생성자
     - UserData(){
@@ -167,6 +195,8 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
         int growth_item_count = 0;
         int posion_item_count = 0;
         int used_gate_length = 0;
+
+        window;
     }
     - UserData(int current_length, int max_length, int growth_item_count, int posion_item_count, int used_gate_count)
  - 멤버 변수
@@ -182,15 +212,14 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
      - void setMaxLength(int max_length): 최대 길이 설정
      - int getGrouthItemCount(): 성장 아이템 먹은 횟수 반환
      - void setGrowhItemCount(int grouth_item_count): 성장 아이템 먹은 횟수 설정
-   
-
-     - int getPosionItemCount(): 
-     - void setPosionCount(int posion_item_count): 
-     - int getUsedGateCount(): 
-     - void setUsedGateCount(int used_gate_count):
-      -  void GrowthItemIncrease() :성장아이템 먹은 횟수+1
-    -  void PoisonItemIncrease() :감소아이템 먹은 횟수+1
-    -  void UsedGateCountIncrease(); 게이트를 사용한 횟수+1
+     - int getPosionItemCount(): 감소 아이템 먹은 횟수 반환
+     - void setPosionCount(int posion_item_count): 감소 아이템 먹은 횟수 설정
+     - int getUsedGateCount(): 게이트 사용 횟수 반환
+     - void setUsedGateCount(int used_gate_count):게이트 사용 횟수 설정
+     - void GrowthItemIncrease() :성장아이템 먹은 횟수+1
+     - void PoisonItemIncrease() :감소아이템 먹은 횟수+1
+     - void UsedGateCountIncrease(); 게이트를 사용한 횟수+1
+     - void Render() : Userdata를 window에 렌더링
 
 ## Point
     - 멤버 변수

@@ -11,13 +11,14 @@ GameFlow::GameFlow()
 // 크레딧 출력하는 창
 void GameFlow::RenderMakers()
 {
-    WINDOW* window_about = newwin(8, 20, 5, 3);
+    WINDOW* window_about = newwin(12, 19, 5, 24);
     keypad(window_about, TRUE);
 
     mvwprintw(window_about, 1, 1, "");
     for(int i = 0 ; i < 400 ; i++)
     {
         wprintw(window_about, "%c", text[i]);
+        wborder(window_about, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
         wrefresh(window_about);
         usleep(50000);
         if(kbhit()) break;
@@ -31,7 +32,7 @@ void GameFlow::RenderMakers()
 // 첫화면 시작메뉴 (처음 한번만 호출)
 int GameFlow::RenderStartMenu()
 {
-  WINDOW* window_start = newwin(12, 15, 5, 3);
+  WINDOW* window_start = newwin(12, 16, 5, 25);
   keypad(window_start, TRUE);
   wborder(window_start, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 
@@ -47,25 +48,25 @@ int GameFlow::RenderStartMenu()
     if(choice == 0)
     {
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 3, 2, "> start  ");
+      mvwprintw(window_start, 3, 3, " > start  ");
       wattroff(window_start, A_REVERSE);
-      mvwprintw(window_start, 5, 2, "about    ");
-      mvwprintw(window_start, 7, 2, "exit     ");
+      mvwprintw(window_start, 5, 3, " about    ");
+      mvwprintw(window_start, 7, 3, " exit     ");
     }
     else if(choice == 1)
     {
-      mvwprintw(window_start, 3, 2, "start    ");
+      mvwprintw(window_start, 3, 3, " start    ");
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 5, 2, "> about  ");
+      mvwprintw(window_start, 5, 3, " > about  ");
       wattroff(window_start, A_REVERSE);
-      mvwprintw(window_start, 7, 2, "exit     ");
+      mvwprintw(window_start, 7, 3, " exit     ");
     }
     else
     {
-      mvwprintw(window_start, 3, 2, "start    ");
-      mvwprintw(window_start, 5, 2, "about    ");
+      mvwprintw(window_start, 3, 3, " start    ");
+      mvwprintw(window_start, 5, 3, " about    ");
       wattron(window_start, A_REVERSE);
-      mvwprintw(window_start, 7 , 2, "> exit  ");
+      mvwprintw(window_start, 7, 3, " > exit  ");
       wattroff(window_start, A_REVERSE);
     }
     
@@ -103,7 +104,22 @@ int GameFlow::RenderStartMenu()
 // 게임 종료 시 한번 호출
 void GameFlow::RenderGameEnd()
 {
+  WINDOW* window_end = newwin(MAP_Y, MAP_X * 3, 1, 1);
 
+  werase(window_end);
+  wborder(window_end, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+  for(int i = 1 ; i < MAP_Y - 1 ; i++)
+  {
+    for(int j = 1 ; j < MAP_X * 3 - 1 ; j++)
+    {
+      mvwprintw(window_end, i, j, " ");
+    }
+  }
+  //mvwprintw(window_end, 1, 1, "dkajfkdsajf");
+  wrefresh(window_end);
+
+  //usleep(1000000);
+  EraseWindow(window_end);
 }
 
 // 게임매니저가 첫 스테이지 시작 전 호출 (각 스테이지 클리어 시 자동호출)

@@ -29,7 +29,7 @@ GameData::GameData(const int stage)
     mo_count[18/sq][10/sq]-=1;
     mo_count[19/sq][10/sq]-=1;
 
-    window = newwin(MAP_Y, MAP_X, 1, 1);
+    window = newwin(MAP_Y, MAP_X * 2, 1, 1);
     keypad(window, TRUE);
 }
 
@@ -122,7 +122,11 @@ void GameData::Render()
     {
         for (int j = 0; j < canvas[i].size(); j++)
         {
+<<<<<<< HEAD
             mvwprintw(window, i, 2*j+1, " ");
+=======
+            wprintw(window, " ");
+>>>>>>> e491c43932291a91698f9a7f53cca695ee94123e
             mvwprintw(window, i, 2*j, "%lc", changeMap(canvas[i][j]));
         }
     }
@@ -138,14 +142,26 @@ wchar_t GameData::changeMap(const int i)
         temp = L'\u200b';
         break;
     case SNAKE_HEAD:
-        temp = L'●';
+        switch(current_direction)
+        {
+            case DIR_UP:
+                temp = L'▲';
+                break;
+            case DIR_DOWN:
+                temp = L'▼';
+                break;
+            case DIR_RIGHT:
+                temp = L'▶';
+                break;
+            case DIR_LEFT:
+                temp = L'◀';
+                break;
+        }
         break;
     case SNAKE_BODY:
-        temp = L'○';
+        temp = L'⊙';
         break;
     case WALL:
-        temp = L'■';
-        break;
     case IMMUNE_WALL:
         temp = L'■';
         break;
@@ -156,7 +172,7 @@ wchar_t GameData::changeMap(const int i)
         temp = L'♥';
         break;
     case POSION_ITEM:
-        temp = L'♣';
+        temp = L'♡';
         break;
     default:
         temp = L'?';

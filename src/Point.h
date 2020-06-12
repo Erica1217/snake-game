@@ -14,6 +14,7 @@ public:
     bool isValid();
     Point moveTo(const int curDir);
 
+    Point& operator=(const Point& a);
     friend std::ostream& operator<<(std::ostream& outStream, const Point& point);
 };
 
