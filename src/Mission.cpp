@@ -3,7 +3,7 @@
 
 Mission::Mission(const int stage){
     total_mission_list = {
-        {3,1,0,0},
+        {5,5,3,3},
         {7,5,9,3},
         {10,4,7,4},
         {5,1,2,1}

@@ -8,25 +8,43 @@ GameFlow::GameFlow()
     
 }
 
+void GameFlow::RenderAbout()
+{
+    WINDOW* window_about = newwin(MAP_Y - 2, MAP_X * 3 - 3, 2, 3);
+    keypad(window_about, TRUE);
+
+    wborder(window_about, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+    mvwprintw(window_about, 0, 22, "  How  To  Play  ");
+    for(int i = 0 ; i < 17 ; i++)
+    {
+      mvwprintw(window_about, i+1, 2, "%s", explain[i].c_str());
+    }
+
+    wrefresh(window_about);
+    wgetch(window_about);
+
+    EraseWindow(window_about);
+}
+
 // 크레딧 출력하는 창
 void GameFlow::RenderMakers()
 {
-    WINDOW* window_about = newwin(12, 19, 5, 24);
-    keypad(window_about, TRUE);
+    WINDOW* window_makers = newwin(18, 19, 3, 24);
+    keypad(window_makers, TRUE);
 
-    mvwprintw(window_about, 1, 1, "");
+    mvwprintw(window_makers, 1, 1, "");
     for(int i = 0 ; i < 400 ; i++)
     {
-        wprintw(window_about, "%c", text[i]);
-        wborder(window_about, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-        wrefresh(window_about);
-        usleep(50000);
+        wprintw(window_makers, "%c", text[i]);
+        wborder(window_makers, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+        wrefresh(window_makers);
+        usleep(40000);
         if(kbhit()) break;
     }
     // 버퍼비워주기
     getchar();
 
-    EraseWindow(window_about);
+    EraseWindow(window_makers);
 }
 
 // 첫화면 시작메뉴 (처음 한번만 호출)
@@ -76,14 +94,14 @@ int GameFlow::RenderStartMenu()
     key = wgetch(window_start);
     switch(key)
     {
-      //case KEY_UP:
-      //case KB_UP:
+      case KB_UP:
+      case KB_LEFT:
       case KB_W:
       case KB_A:
         choice--;
         break;
-      //case KEY_DOWN:
-      //case KB_DOWN:
+      case KB_DOWN:
+      case KB_RIGHT:
       case KB_S:
       case KB_D:
         choice++;
