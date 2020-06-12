@@ -122,11 +122,7 @@ void GameData::Render()
     {
         for (int j = 0; j < canvas[i].size(); j++)
         {
-<<<<<<< HEAD
-            mvwprintw(window, i, 2*j+1, " ");
-=======
             wprintw(window, " ");
->>>>>>> e491c43932291a91698f9a7f53cca695ee94123e
             mvwprintw(window, i, 2*j, "%lc", changeMap(canvas[i][j]));
         }
     }
