@@ -12,8 +12,8 @@ Game::Game()
 // 게임별 맵 저장, 게임매니저 생성자에서 각각 호출
 void Game::Init(const int stage)
 {
-    player = new Snake();
     my_stage = stage;
+    player = new Snake();
     game_data = new GameData(stage);
     user_data = new UserData();
     item_manager = new ItemManager();
