@@ -112,7 +112,9 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
 
 - 멤버함수
     - bool isComplete(stage, userData)
+        - 현재 상태와 미션을 비교하여 전부 달성했다면 true 리턴, 아니라면 false 리턴
     - void Render()
+        - 현재 미션의 상태를 화면에 표시함
     
 
 ## Item
