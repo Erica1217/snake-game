@@ -10,6 +10,7 @@ public:
     int y;
     Point() : x(0),y(0) { };
     Point(int x, int y) : x(x), y(y) { };
+
     friend bool operator==(const Point& x, const Point& y);
     bool isValid();
     Point moveTo(const int curDir);

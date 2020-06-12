@@ -4,21 +4,21 @@
 |--|--|
 |[Renderable](##Renderable)|
 
-|게임 흐름|
-|--|
-|[SnakeGame(메인)](##SnakeGame)|
-|[kbhit](##kbhit)|
-|[NCursesSettings](##NCursesSettings)|
+|게임 흐름|비고|
+|--|--|
+|[SnakeGame(메인)]|메인|(##SnakeGame)|
+|[kbhit](##kbhit)|키보드 입력
+|[NCursesSetting](##NCursesSetting)|
 |[GameFlow](##GameFlow)|
-|[Game](##Game) |
+|[Game](##Game)|
 
-|데이터 저장|
-|--|
+|데이터 저장|비고|
+|--|--|
 |[GameData](##GameData)||
 |[SnakeMap](##SnakeMap)||
-|[GameSetting](##GameSetting)||
+|GameSettings|상수 선언|
 |[Mission](##Mission)|
-|[UserData](##UserData) |
+|[UserData](##UserData)|
 
 |Model|
 |--|
@@ -34,158 +34,292 @@
 
 - [참고사항](##참고)
 
-## 참고
+## Renderable
 
-### SnakeMap 요소 번호 목록
-- 움직여도 되는 곳 : 0 
-- SNAKE_HEAD : 1
-- SNAKE: 2
-- WALL : 3
-- IMMUNE_WALL: 4
-- GATE: 5
-- GROWTH_ITEM: 6 
-- POSION_ITEM: 7
+### attribute
+
+|access modifier|type|name||
+|--|--|--|--|
+|protected|Window*|window|화면에 표시되는 윈도우
+
+### method
+
+|access modifier|return|name||
+|--|--|--|--|
+|public|void|Render()|윈도우에 정보를 표시하게 하는 가상함수
+|private|void|EraseWindow(Window* window)|윈도우를 지우는 함수
+|public||~Renderable()|소멸자
+
+## SnakeGame
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|int|main()|게임 실행
+
+## Kbhit
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|int|kbhit()|
+
+## NCursesSetting
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|void|NcursesSeting()|Ncurses를 사용하기 위한 설정
+
+## GameFlow
+### attribute
+|access modifier|type|name||
+|--|--|--|--|
+|private|char|text[400]|
+
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|GameFlow()
+|public|int|RenderStartMenu()
+|public|void|RenderMakers()
+|public|void|RenderGameEnd()
+|public|int|RenderStageEnter(const int stage)|게임 진입 시
+|public|int|RenderStageClear(const int stage)|클리어 시
+|private|void|EraseWindow(WINDOW* window)
+
+## Game
+
+### attribute
+|access modifier|type|name||
+|--|--|--|--|
+|public|bool|is_clear|mission 클리어 판단|
+|public|bool|isValid|유효성검사|
+|public|int|key||
+|private|int|my_stage||
+|private|Snake*|player||
+|private|GameData*|game_data||
+|private|userData*|user_data||
+|private|ItemManager*|item_manager||
+|private|Mission*|mission||
+|private|GateManager*|gate_manager||
+|private|int|my_start_tick||
+|private|Renderable*|panels[3]||
+
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|Game|Game|Game| 생성자
+|public|void|Init(const int stage)| 게임별 맵 저장, 게임매니저 생성자에서 각각 호출|
+|public|void|setInput()|입력받은 키보드의 값 설정|
+|public|void|gameStart(const int tick)||
+|public|void|update(const int tick)| 매 프레임 유효성 검사되면 모든 정보를 추합해서 맵에 저장|
+|public|bool|isClear()| update 마친 후 호출 (mission 클리어 판단)|
+|public|int|IsValid()| 매프레임 게임 유효성 검사|
+|public|void|gameEnd()| 게임 끝나면 모든 정보 초기화 |
+
+## GameData
+
+### attribute
+|access modifier|type|name||
+|--|--|--|--|
+|public|vector<vector<int>>|mo_count|평방 분할 알고리즘을 활용하면서 item을 만들수 있는 칸의 개수를 저장하는 벡터|
+|public|vector<vector<Point>>|mo_points|평방 분할 알고리즘으로 나누어진 구간마다 담긴 점들의 모음을 나열한 벡터|
+|public|int|sq|평방 분할 알고리즘에 사용되는 구간의 길이 및 구간의 개수|
+|public|Point|next_point|뱀의 머리의 가상 다음 위치|
+|public|Point|next_head_point|뱀의 머리의 실제 다음 위치|
+|public|SnakeMap*|snake_map|스네이크 맵 포인터|
+|public|int|current_tick|현재 틱|
+|public|int|current_direction|뱀의 현재 방향|
+|private|vector<Point>|gates|gate의 좌표를 담아두는 벡터|
+|private|vector<vector<int>>|gate_directions|gate에 진입/진출 방향에 대해 담아두는 벡터|
+|private|int|key|현재 저장된 키보드 입력 방향|
+
+
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|GameData|GameData|GameData(const int stage)|생성자|
+|public|void|update(const int current_tick)|현재 틱을 업데이트한다.|
+|public|int|checkItem(const Point& head)|들어오는 위치가 growth_item, poison_item, 빈칸인지에 따라 1, -1, 0을 return 한다.|
+|public|vector<vector<int>>|getMap()|snakeMap의 현재 스테이지의 맵을 return한다.|
+|public|void|setNextPoint(const Point& next_point)| next_point를 들어오는 점으로 변경한다.|
+|public|void|setNextHeadPoint(const Point& next_head_point)|next_head_point를 들어오는 점으로 변경한다.|
+|public|Point|getNextPoint()|next_point를 return한다.|
+|public|Point|getNextHeadPoint()|next_head_point를 return한다.|
+|public|void|setCurrentTick(const int current_tick)|현재 틱을 업데이트한다.|
+|public|int|getCurrentTick()|현재 틱을 반환한다.|
+|public|void|updateDirection()|키보드 입력 방향을 반영한다.|
+|public|void|updateSnakePosition(const vector<Point>& snake_body)|현재 뱀의 위치를 맵에 새로 반영한다.|
+|public|void|updateItemPosition(const vector<Point>& item_positions, const vector<int>& item_infos)|현재 아이템의 위치와 정보를 맵에 새로 반영한다.|
+|public|void|updateGateDirection(bool isExist, const vector<vector<int>>& gate_directions)|현재 게이트의 위치를 맵에 새로 반영한다.|
+|public|vector<Point>|getGatePositions()|gate의 위치 벡터를 반환한다.|
+|public|int|getCurrrentDirection()|현재 뱀의 방향을 반환한다.|
+|public|void|setCurrentDirection(const int current_direction)|현재 뱀의 방향을 반영한다.|
+|public|int|mapReset()|맵을 초기화한다.|
+|public|int|getPositionInfo(const int x, const int y)|맵에서 들어오는 위치에 해당하는 셀의 정보를 return한다.|
+|public|void|setPositionInfo(const int x, const int y, const int info)|맵에서 들어오는 위치에 해당하는 셀의 정보를 수정한다.|
+|public|int|getKey()|key를 반환한다.|
+|private|wchar_t|changeMap(int i)|셀의 정보를 랜더링 문자로 변경하여 반환한다.|
+|public|void|Render()|화면에 render한다.|
+
+
+## GameManager
+
+### attribute
+|access modifier|type|name||
+|--|--|--|--|
+|private|int|tick
+|private|int|curStage
+|private|Game*|games
+|private|Game*|curGame
+|private|GameFlow|game_flow
+|public|vector<vector<int>>|GetCurMap()
+
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|GameManager|GameManager(GameFlow& gameflow)|
+|public|void|start()|
+|public|void|end()|
+|public|void|setInput()|
+|public|int|isValid()|
+|public|void|update(const int tick)|
+|private|void|stageSetting()|
 
 ## SnakeMap
-- 생성자
-    - SnakeMap(): 
-- 멤버 변수
-    - int total_stage_count: 전체 게임 stage의  개수 
-    - vector<vector<vector<int>>> total_map: Snake game 전체 맵의 초기상태를 담고 있는 3차원 벡터. 인덱스 형식은 [stage][X][Y] 이다.
-    - int current_stage: 현재 stage 번호, 0부터 시작한다.
-    - vector<vector<int>> current_map: 현재 stage의 맵을 담고 있는 2차원 백터
+    
+### attribute
 
-- 멤버 함수
-    - public
-        - int getTotalMapCount(): 전체 게임 stage의 개수를 반환한다.
-        - vector<vector<int>> getCurrentMap(): currnet_map을 반환한다.
-        - int getPositionInfo(int x, int y): current_map[x][y]를 반환한다.
-        - void setCurrentMap(int next_stage): currnet_stage를 next_stage로 set하고, current_map을 totalmap[next_stage]로 변경한다.
-        - void setPositionInfo(int x, int y, int Info): current_map[x][y]를 info로 변경한다. info로 들어오는 숫자는 [참고사항의 SnakeMap 요소 번호 목록](##참고) 확인
+|access modifier|type|name||
+|--|--|--|--|
+|private|int|total_stage_count|전체 게임 스테이지의 갯수
+|private|vector<vector<vector\<int>>>|total_map|Snake game 전체 맵의 초기상태를 담고 있는 3차원 벡터
+|private|int|current_stage|현재 stage 번호, 0부터 시작
+|private|vector<vector\<int>>|current_map|현재 stage의 맵을 담고 있는 2차원 백터
 
-        - void update (vector<Point> snake, vector<Point> gates, vector<Point> items) : 뱀, 게이트, 아이템 정보를 맵에 반영한다. 
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|SnakeMap|SnakeMap()|생성자
+|public|int|getTotalMapCount()|전체 게임 stage의 개수를 반환한다.
+|public|vector<vector<int>>|getCurrentMap()|currnet_map을 반환한다.
+|public|int|getPositionInfo(int x, int y)|current_map[x][y]를 반환한다.
+|public|void|setCurrentMap(int next_stage)|currnet_stage를 next_stage로 set하고, current_map을 totalmap[next_stage]로 변경한다.
+|public|void|setPositionInfo(int x, int y, int Info)|current_map[x][y]를 info로 변경한다. info로 들어오는 숫자는 [참고사항의 SnakeMap 요소 번호 목록](##참고) 확인
+|public|void|update(vector<Point> snake, vector<Point> gates, vector<Point> items)|뱀, 게이트, 아이템 정보를 맵에 반영한다. 
 
 
-## Snake 싱글톤
-- 생성자
+## Snake
 
-- 멤버 변수
-    - final INIT_HEAD
-    - final vector<point> INIT_BODY
-    - final int INIT_DIRECTION
-    - final int INIT_BODYSIZE
- 
-    - body_positions: vector<Point>
-    - int current_direction: 
+### attribute
+|access modifier|type|name||
+|--|--|--|--|
+|private|Point|next_pos
+|private|Point|head_pos
+|private|vector<Point>|bodies
 
-- 멤버 함수
-    - void clear(): 
-    - void move(): 
-    - int getSnakeSize(): 
-    - Point getHeadPosition(): body_positions[0]을 return한다.
-    - bool isValidSize(): 
-    - void setDirction(int d): 
-
-### 구현 사항
-- Snake 는 진행방향의 반대방향으로 이동할 수 없다
-- Head 가 진행방향이다
-- Head 방향 이동은 무시한다
-- Tail 방향으로 이동할 수 없다
-- Tail 방향으로 이동시 실패 (Game)
-- 다른 실패 조건
-    - Snake 는 자신의 Body 를 통과할 수 없다
-    - Snake 는 벽 (Wall) 을 통과할 수 없다
-- Head 방향 이동은 일정시간 틱 에 의해 이동한다
-    - 예 ) 틱은 0.5 초
-- 진행방향과 같은 방향키 입력은 무시한다.
-    - 방향키
-        - 위 : w 
-        - 아래: s 
-        - 왼쪽 : a
-        - 오른쪽 : d
-Snake 의 이동 방향에 Item 이 놓여 있는 경우
-    - Snake 가 Item 을 획득한다
-    - Growth Item 의 경우
-        - 몸의 길이가 1 증가한다
-    - Poison Item 의 경우
-        - 몸의 길이가 1 감소한다
-        - 몸의 길이가 3 보다 작아지면 실패
-    - Growth Item 과 Poison Item 의 출현
-        - Snake Body 가 있지 않은 임의의 위치에 출현
-    - 출현 후 일정시간(10틱)이 지나면 사라지고 다른 위치에 나타나야 한다
-    - 동시에 출현할 수 있는 Item 의 수는 3 개로 제한한다
-    - 3개는 언제 만듬?
+### 멤버 함수
+|access modifier|return|name||
+|--|--|--|--|
+|public|Snake|Snake()|생성자
+|public|void|update(GameData& game_data, UserData& user_data)|
+|public|Point|getNextPoint(const int curDir)|
+|public|int|getSnakeLength()|
 
 ## Mission
-- 생성자
-    - Mission(const int stage)
-- 멤버변수
-    - 뱀의 길이
-    - poison_item_count
-    - grows_item_count
-    - Gate 사용횟수
 
+### attribute
 
-- 멤버함수
-    - bool isComplete(stage, userData)
-        - 현재 상태와 미션을 비교하여 전부 달성했다면 true 리턴, 아니라면 false 리턴
-    - void Render()
-        - 현재 미션의 상태를 화면에 표시함
+|access modifier|type|name||
+|--|--|--|--|
+|private|vertor\<bool>|current_mission_state|현재 미션 하나하나의 클리어 상태
+|private|vector\<int>|current_mission_list|현재 라운드의 미션 목록
+|private|vector\<int>|total_mission_list|모든 라운드의 미션 목록
+|private|vector\<int>|current_state|현재 게임의 상태
+
+### method
+
+|access modifier|return|name||
+|--|--|--|--|
+|public|void|isComplete|미션이 클리어되었는지 확인한다.
+|public|int|Render|미션을 화면에 표시한다.
+|public|Mission|Mission|Mission(const int stage)|생성자
+
     
 
 ## Item
-- 생성자
-    - Item() 모두
-- 멤버변수
-    - Point pos: 아이템의 위치(positon)
-    - int kinds : 아이템의 종류
-        - 1: growth item
-        - 2: posion item
-    - int created_tick : 아이템 생성 시기 
-- 멤버함수
-    - int getKinds(): 아이템의 종류반환
-    - int getCreatedTic(): 아이템 생성 시기 반환
-    - void setPos(const Point pos): 아이템의 위치 설정
-    - void setKinds(const int kinds):아이템의 종류 설정
-    - void setCreatedTic(const int tick): 아이템 생성 시기 설정
-    - Point getPos():아이템의 위치 반환
+### attribute
+|access modifier|type|name||
+|--|--|--|--|
+|private|Point|pos|아이템의 위치(positon)
+|private|int|kinds|아이템의 종류|1: growth item/2: posion item
+|private|int|created_tick|아이템 생성 시기 
+
+### method
+|access modifier|return|name||
+|--|--|--|--|
+|public|Item|Item|생성자
+|public|int|getKinds()|아이템의 종류반환
+|public|int|getCreatedTic()|아이템 생성 시기 반환
+|public|void|setPos(const Point pos)|아이템의 위치 설정
+|public|void|setKinds(const int kinds)|아이템의 종류 설정
+|public|void|setCreatedTic(const int tick)|아이템 생성 시기 설정
+|public|Point|getPos()|아이템의 위치 반환
 
 
 ## ItemManager
-- 생성자
-    - ItemManager()
 
-- 멤버변수
-    - vector<Item> items
-- 멤버 함수
-  - void makeItem()
-    - 일정한 틱이 지날 때마다 아이템의 갯수가 2개 이하면 아이템 생성
-  - Point eatItem()
-    - Snake의 다음 머리 위치가 아이템의 위치와 같다면 그 아이템의 정보를 GameData에 보내고 아이템을 지움
-   - void deleteItem()
-    - 생성자에서 랜덤으로 맵과 비교하며 적당한 난수 생성
+### attribute
+
+|access modifier|type|name||
+|--|--|--|--|
+|private|int|last_made_tick|가장 최근 아이템을 만든 틱
+|private|int|delay|아이템을 만든 후 다음 아이템을 만들 때 까지의 틱
+|private|int|growth_odd|아이템을 만들 때 성장 아이템이 나올 확률
+|private|int|disappear_tick|아이템이 사라지는 틱
+|public|vector\<Item>|items|현재 존재하는 아이템 목록
+
+### method
+
+|access modifier|return|name||
+|--|--|--|--|
+|public|ItemManager|ItemManager|생성
+|public|void|makeItem(int current_tick, const vector<vector<int>>& map, GameData &game_data)|아이템을 만들 조건이 되면 아이템을 만든다.
+|public|int|eatItem(const Point& next_head_point, GameData &game_data)|Snake의 다음 머리 위치가 아이템이라면 아이템의 정보를 리턴하고 그 아이템을 삭제한다.
+|public|void|deleteItem(const int current_tick, GameData game_data|어떠한 아이템이 너무 오래 생성되어있으면 그 아이템을 삭제한다.
+|public|void|update(GameData &game_data, Userdata &user_data)|아이템의 정보를 업데이트한다.
 
 
 ## GateManager
-- 생성자 :
-    - GateManager(vector<vector<int>> snake_map)
 
-- 멤버 변수 :
-    - vector<Point> gate
-    - bool is_passing: 뱀이 통과중인지 확인용
-    - int life_time: 게이트 생존 시간 처리용
+### attribute
 
-- 멤버 함수
-    - public :
-        - bool isPassing(): 매 프레임 호출되어서 게이트 유효성 체크 // 만들어진지 일정시간 지났거나 뱀이 다 통과했을 시 makeNewGate
-        
-        - Point isSnakeInGate(Point head): 스네이크 머리가 게이트인지? -> 반대편 게이트로 나올 위치 반환 // 뱀의 현재 dir 도 받아야 함
+||type|name||
+|--|--|--|--|
+|private|const int|GATE_MANAGER_IMMUNE_WALL|
+|private|pair<Point, Point>|gates|생성된 gates를 가지고 있음
+|private|pair<vector<int>, vector<int>>|gate_directions|gate로 나갈 방향
+|private|bool|is_passing|뱀이 통과중이면 true, 아니면 false
+|private|int|live_time|게이트 생존시간
+|private|int|snake_entered_tick| 뱀이 게이트에 처음 들어간 틱
+|private|int|last_gate_deleted_tick|게이트가 삭제된 틱
+|private|int|wall_map[MAP_X][MAP_Y]|벽이 있는 곳 표시
+|private|vector<Point>|wall_list[100]|벽의 좌표
+|private|int|check_wall[MAP_X * MAP_Y]|
+|private|int|wall_count|벽 뭉텅이의 개수
+|private|bool|isExist|게이트가 존재 여부
+|private|const int|DIR_PRIORITY_TABLE[5][5]|방향 우선순위 테이블
 
-        - vector<Point> getGates();
 
-        - void makeNewGate(): 맵에서 일반 wall 위치 중 새로운 게이트 생성
-    - private :
-    
+### method
+
+||return|name||
+|--|--|--|--| 
+|private|void makeWallMap(const int num, const int x, const int y)|맵으로부터 벽을 체크하는 메서드
+|private|vector\<int>|makeGateDirection(Point gate)|게이트 나가는 방향을 구하는 메서드
+|public|GateManager|GateManager(vector<vector<int>> snake_map)|생성자
+bool|isPassing()| 매 프레임 호출되어서 게이트 유효성 체크
+|public|void|makeNewGate()|새로운 게이트 생성
+|public|void|update(GameData &game_data, UserData &user_data)|매 틱마다 업데이트
+|public|pair<Point, Point>|getGates()|게이트 반환
 
 ## UserData
  - 생성자
@@ -199,31 +333,72 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
         window;
     }
     - UserData(int current_length, int max_length, int growth_item_count, int posion_item_count, int used_gate_count)
- - 멤버 변수
-     - int current_length: 현재 뱀의 길이
-     - int max_length: 현 라운드의 뱀의 최대 길이
-     - int growth_item_count: 성장 아이템을 먹은 횟수
-     - int posion_item_count: 독 아이템을 먹은 횟수
-     - int used_gate_count: 게이트를 사용한 횟수
- - 멤버 함수
-     - int getCurrentLength(): 현재 길이 반환
-     - void setCurrentLength(int current_length): 현재 길이 설정
-     - int getMaxLength(): 최대 길이 반환
-     - void setMaxLength(int max_length): 최대 길이 설정
-     - int getGrouthItemCount(): 성장 아이템 먹은 횟수 반환
-     - void setGrowhItemCount(int grouth_item_count): 성장 아이템 먹은 횟수 설정
-     - int getPosionItemCount(): 감소 아이템 먹은 횟수 반환
-     - void setPosionCount(int posion_item_count): 감소 아이템 먹은 횟수 설정
-     - int getUsedGateCount(): 게이트 사용 횟수 반환
-     - void setUsedGateCount(int used_gate_count):게이트 사용 횟수 설정
-     - void GrowthItemIncrease() :성장아이템 먹은 횟수+1
-     - void PoisonItemIncrease() :감소아이템 먹은 횟수+1
-     - void UsedGateCountIncrease(); 게이트를 사용한 횟수+1
-     - void Render() : Userdata를 window에 렌더링
+
+### attribute
+||type|name||
+|--|--|--|--|
+|private|int|current_length|현재 뱀의 길이
+|private|int|max_length|현 라운드의 뱀의 최대 길이
+|private|int|growth_item_count|성장 아이템을 먹은 횟수
+|private|int|posion_item_count|독 아이템을 먹은 횟수
+|private|int|used_gate_count|게이트를 사용한 횟수
+
+### method
+||return|name||
+|--|--|--|--|
+|public|int|getCurrentLength()|현재 길이 반환
+|public|void|setCurrentLength(int current_length)|현재 길이 설정
+|public|int|getMaxLength()|최대 길이 반환
+|public|void|setMaxLength(int max_length)|최대 길이 설정
+|public|int|getGrouthItemCount()|성장 아이템 먹은 횟수 반환
+|public|void|setGrowhItemCount(int grouth_item_count)|성장 아이템 먹은 횟수 설정
+|public|int|getPosionItemCount()|감소 아이템 먹은 횟수 반환
+|public|void|setPosionCount(int posion_item_count)|감소 아이템 먹은 횟수 설정
+|public|int|getUsedGateCount()|게이트 사용 횟수 반환
+|public|void|setUsedGateCount(int used_gate_count)|게이트 사용 횟수 설정
+|public|void|GrowthItemIncrease()|성장아이템 먹은 횟수+1
+|public|void|PoisonItemIncrease()|감소아이템 먹은 횟수+1
+|public|void|UsedGateCountIncrease()|게이트를 사용한 횟수+1
+|public|void|Render()|Userdata를 window에 렌더링
 
 ## Point
-    - 멤버 변수
 
-    - 멤버 함수
-        - Point moveTo(Point origin);
-        - bool isValid();
+### attribute
+||type|name||
+|--|--|--|--|
+|public|int|x|x 좌표
+|public|int|y|y 좌표
+
+### method
+||return|name||
+|--|--|--|--| 
+|public|Point|Point()|생성자
+|public|Point|Point(int x, int y)|생성자
+|public|bool|isValid()|유효한 좌표 여부
+|public|Point|moveTo(const int curDir)|그 좌표에서 이동했을 때 좌표 
+|--|--|--|--|
+|public|int|x|x 좌표
+|public|int|y|y 좌표
+
+### method
+||return|name||
+|--|--|--|--| 
+|public|Point|Point()|생성자
+|public|Point|Point(int x, int y)|생성자
+|public|bool|isValid()|유효한 좌표 여부
+|public|Point|moveTo(const int curDir)|그 좌표에서 이동했을 때 좌표 
+|public|friend bool|operator==(const Point& x, const Point& y)
+|public|Point&|operator=(const Point& a)
+|public|friend ostream&|operator<<(std::ostream& outStream, const Point& point)
+
+## 참고
+
+### SnakeMap 요소 번호 목록
+- 움직여도 되는 곳 : 0 
+- SNAKE_HEAD : 1
+- SNAKE: 2
+- WALL : 3
+- IMMUNE_WALL: 4
+- GATE: 5
+- GROWTH_ITEM: 6 
+- POSION_ITEM: 7
