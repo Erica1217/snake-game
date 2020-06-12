@@ -7,7 +7,7 @@
 
 - [Item](##Item) 
 - [Gate](##Gate)
-- [ItemManager](##ItemManager)
+- [ItemManager](##ItemManager) 최영락
 - [GateManager](##GateManager)
 
 
@@ -102,7 +102,7 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
 
 ## Mission
 - 생성자
-    - Mission()
+    - Mission(const int stage)
 - 멤버변수
     - 뱀의 길이
     - poison_item_count
@@ -111,8 +111,8 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
 
 
 - 멤버함수
-    - setMission()
-    - isComplete(stage, userData) : bool
+    - bool isComplete(stage, userData)
+    - void Render()
     
 
 ## Item
@@ -141,9 +141,11 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
     - vector<Item> items
 - 멤버 함수
   - void makeItem()
+    - 일정한 틱이 지날 때마다 아이템의 갯수가 2개 이하면 아이템 생성
   - Point eatItem()
-  - void deleteItem()
-    - 생성자에서 랜덤으로! 맵과 비교하며 적당한 난수 생성
+    - Snake의 다음 머리 위치가 아이템의 위치와 같다면 그 아이템의 정보를 GameData에 보내고 아이템을 지움
+   - void deleteItem()
+    - 생성자에서 랜덤으로 맵과 비교하며 적당한 난수 생성
 
 
 ## GateManager

@@ -115,7 +115,6 @@ void GateManager::update(GameData &game_data, UserData &user_data)
     {
         is_passing=true;
         snake_entered_tick = game_data.getCurrentTick();
-        user_data.setUsedGateCount(user_data.getUsedGateCount() + 1);
     }
     else if(exit_gate_tick == game_data.getCurrentTick())
     {
@@ -123,6 +122,7 @@ void GateManager::update(GameData &game_data, UserData &user_data)
         check_wall[wall_map[gates.second.x][gates.second.y]]=0;
         isExist = false;
         is_passing=false;
+        user_data.setUsedGateCount(user_data.getUsedGateCount() + 1);
         last_gate_deleted_tick = game_data.getCurrentTick();
     }
     // 게이트 생성

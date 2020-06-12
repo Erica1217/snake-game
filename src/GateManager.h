@@ -19,7 +19,7 @@ private:
     pair<vector<int>, vector<int>> gate_directions;
     bool is_passing = false; // 뱀이 통과중인가?
     int live_time=5;  // 게이트 생존시간 처리용
-    int snake_entered_tick = -1; // 뱀이 게이트에 처음 들어간 틱
+    int snake_entered_tick = -2100000000; // 뱀이 게이트에 처음 들어간 틱
     int last_gate_deleted_tick = 1; // 게이트가 삭제된 틱
     int wall_map[MAP_X][MAP_Y]={0,};
     vector<Point> wall_list[100];
