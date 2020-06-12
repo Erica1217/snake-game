@@ -7,8 +7,8 @@
 
 void NcursesSetting()
 {
-    setlocale(LC_ALL, "");
-    // setlocale(LC_ALL, "ko_KR.utf8");
+    //setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "ko_KR.utf8");
     initscr();
     noecho();
     curs_set(0);

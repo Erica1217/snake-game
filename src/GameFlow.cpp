@@ -13,7 +13,6 @@ void GameFlow::RenderMakers()
 {
     WINDOW* window_about = newwin(8, 20, 5, 3);
     keypad(window_about, TRUE);
-    //wborder(window_about, '*', '*', '*', '*', '*', '*', '*', '*');
 
     mvwprintw(window_about, 1, 1, "");
     for(int i = 0 ; i < 400 ; i++)
@@ -35,7 +34,6 @@ int GameFlow::RenderStartMenu()
   WINDOW* window_start = newwin(12, 15, 5, 3);
   keypad(window_start, TRUE);
   wborder(window_start, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-  // wborder(window_start, '*', '*', '*', '*', '*', '*', '*', '*');
 
   // start/exit 중 선택된것
   int choice = 0;
