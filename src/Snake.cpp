@@ -15,27 +15,29 @@ Snake::Snake()
 // 유효성검사할 때 호출, 다음 머리 위치 리턴
 Point Snake::getNextPoint(const int curDir)
 {   
-    Point nextPos(head_pos.x, head_pos.y);
-    next_pos = nextPos.moveTo(curDir);
+    //Point nextPos(head_pos.x, head_pos.y);
+    next_pos = head_pos.moveTo(curDir);
     return next_pos;
+    //return head_pos.moveTo(curDir);
 }
 
 void Snake::update(GameData& game_data, UserData& user_data)
 {
     head_pos = next_pos; // 유효성 검사에서 나온 다음 위치를 머리로
     
-    // 뱀이 아이템 먹었을 경우의 처리와
-    int item = game_data.checkItem(head_pos);
-    switch(item)
+    // 아이템 처리
+    //int item = game_data.checkItem(head_pos);
+    switch(game_data.checkItem(head_pos))
     {
         case -1 :
+            // poison item
             if(bodies.size() > 0) bodies.pop_back();
-            // poision item
             break;
         case 0 :
             // 아무 것도 안 먹음
             break;
         case 1 :
+            // growth item
             if(bodies.size() > 0) bodies.push_back(bodies.back());
             break;
     }

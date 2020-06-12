@@ -15,7 +15,7 @@ void GameData::update(const int current_tick)
     this->current_tick = current_tick;
 }
 
-int GameData::checkItem(const Point head)
+int GameData::checkItem(const Point& head)
 {
     int info = snake_map->getPositionInfo(head.x, head.y);
     if (info == 6)
@@ -30,12 +30,12 @@ vector<vector<int>> GameData::getMap()
     return snake_map->getCurrentMap();
 }
 
-void GameData::setNextPoint(const Point next_point)
+void GameData::setNextPoint(const Point& next_point)
 {
     this->next_point = next_point;
 }
 
-void GameData::setNextHeadPoint(const Point next_head_point)
+void GameData::setNextHeadPoint(const Point& next_head_point)
 {
     this->next_head_point = next_head_point;
 }
@@ -141,7 +141,7 @@ wchar_t GameData::changeMap(const int i)
     return temp;
 }
 
-void GameData::updateItemPosition(vector<Point> item_positions, vector<int> item_infos)
+void GameData::updateItemPosition(const vector<Point>& item_positions, const vector<int>& item_infos)
 {
     for (int i = 0; i < item_positions.size(); i++)
     {
@@ -149,7 +149,7 @@ void GameData::updateItemPosition(vector<Point> item_positions, vector<int> item
     }
 }
 
-void GameData::updateSnakePosition(vector<Point> snake_body)
+void GameData::updateSnakePosition(const vector<Point>& snake_body)
 {
     snake_map->setPositionInfo(snake_body[0].x, snake_body[0].y, 1);
     for (int i = 1; i < snake_body.size(); i++)
@@ -158,7 +158,7 @@ void GameData::updateSnakePosition(vector<Point> snake_body)
     }
 }
 
-void GameData::updateGatePosition(bool isExist, vector<Point> gates)
+void GameData::updateGatePosition(bool isExist, const vector<Point>& gates)
 {
     if (isExist)
     {
@@ -183,7 +183,7 @@ void GameData::updateGatePosition(bool isExist, vector<Point> gates)
     }
 }
 
-void GameData::updateGateDirection(bool isExist, vector<vector<int>> &gate_directions)
+void GameData::updateGateDirection(bool isExist, const vector<vector<int>>& gate_directions)
 {
     if (isExist)
     {
