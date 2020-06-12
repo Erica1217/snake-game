@@ -1,22 +1,38 @@
 # class 설계
+
+|View|
+|--|--|
+|[Renderable](##Renderable)|
+
+|게임 흐름|
+|--|
+|[SnakeGame(메인)](##SnakeGame)|
+|[kbhit](##kbhit)|
+|[NCursesSettings](##NCursesSettings)|
+|[GameFlow](##GameFlow)|
+|[Game](##Game) |
+
+|데이터 저장|
+|--|
+|[GameData](##GameData)||
+|[SnakeMap](##SnakeMap)||
+|[GameSetting](##GameSetting)||
+|[Mission](##Mission)|
+|[UserData](##UserData) |
+
+|Model|
+|--|
+|[Point](##Point)|
+|[Item](##Item) |
+
+|Logic|
+|--|
+|[Snake](##Snake)|| 
+|[ItemManager](##ItemManager)||
+|[GateManager](##GateManager)||
+|[GameManager](##GameManager)||
+
 - [참고사항](##참고)
-- [SnakeMap](##SnakeMap) 김유진
-- [Snake](##Snake) 김신건
-- [Mission](##Mission) 최영락
-- [ScoreBoardInfo](##ScoreBoardInfo) 이하영
-
-- [Item](##Item) 
-- [Gate](##Gate)
-- [ItemManager](##ItemManager) 최영락
-- [GateManager](##GateManager)
-
-
-- [GameManager](##GameManager)
-- [Game](##Game) 
-- [UIManager](##UIManager)
-- [GameFlow](##GameFlow)
-- [Point](##Point)
-
 
 ## 참고
 
