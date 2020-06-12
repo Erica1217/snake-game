@@ -61,9 +61,9 @@
 ||학번 |이름|github username|
 |--|--|--|--|
 |조장|20191564|김신건|[shinkeonkim](https://github.com/shinkeonkim)|
-|조원|20185290|이하영|[hayeong-lee](https://github.com/hayeong-lee)|
-|조원|20191567|김유진|[Erica1217](https://github.com/Erica1217)|
 |조원|20152635|김상홍|[bconfiden2](https://github.com/bconfiden2)|
+|조원|20191567|김유진|[Erica1217](https://github.com/Erica1217)|
+|조원|20185290|이하영|[hayeong-lee](https://github.com/hayeong-lee)|
 |조원|20191678|최영락|[guahama](https://github.com/guahama)|
 
 > 역할 분담은 [클래스 설계](https://github.com/shinkeonkim/snake-game/blob/master/docs/class%20%EC%84%A4%EA%B3%84.md)를 참조해주세요.
