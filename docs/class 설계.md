@@ -1,7 +1,7 @@
 # class 설계
 
 |View|
-|--|--|
+|--|
 |[Renderable](##Renderable)|
 
 |게임 흐름|비고|
@@ -16,7 +16,7 @@
 |--|--|
 |[GameData](##GameData)||
 |[SnakeMap](##SnakeMap)||
-|GameSettings|상수 선언|
+|<a href = "https://github.com/shinkeonkim/snake-game/blob/master/src/GameSettings.h"> GameSettings </a>|상수 선언|
 |[Mission](##Mission)|
 |[UserData](##UserData)|
 
