@@ -24,6 +24,6 @@ void Item::setKinds(const int kinds){//아이템의 종류 설정
 void Item::setCreatedTick(const int tick){//아이템 생성 시기 설정
     created_tick = tick;
 } 
-Point Item::getPos() {
+Point Item::getPos() { //아이템의 위치 반환
     return pos;
 }
