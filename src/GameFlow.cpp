@@ -133,7 +133,6 @@ void GameFlow::RenderGameEnd()
       mvwprintw(window_end, i, j, " ");
     }
   }
-  //mvwprintw(window_end, 1, 1, "dkajfkdsajf");
   wrefresh(window_end);
 
   //usleep(1000000);
@@ -149,7 +148,6 @@ int GameFlow::RenderStageEnter(const int stage)
   werase(window_enter);
   mvwprintw(window_enter, 8, 18, "Stage %d", stage);
   mvwprintw(window_enter, 11, 12, "Press Key to Start!");
-  //wprintw(window_enter, "%s %d\n%25s", "Stage", stage, "Press Key to Start");
   wrefresh(window_enter);
 
   int key = wgetch(window_enter);
@@ -171,7 +169,6 @@ int GameFlow::RenderStageClear(const int stage)
   WINDOW* window_clear = newwin(MAP_Y, MAP_X * 2, 1, 1);
 
   mvwprintw(window_clear, 9, 13, "Stage %d Clear!", stage);
-  //wprintw(window_clear, "%s %d %s", "stage", stage, "clear!");
   wrefresh(window_clear);
 
   usleep(1500000);
