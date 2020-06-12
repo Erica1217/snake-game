@@ -22,8 +22,6 @@ private:
     vector<vector<vector<int>>> total_map;
     int current_stage = 0;
     vector<vector<int>> current_map;
-
-    bool isValidMap();
 };
 
 #endif
