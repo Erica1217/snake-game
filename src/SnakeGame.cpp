@@ -43,8 +43,8 @@ int main(void)
     // 키보드 입력검사는 0.05초마다
     game_manager.SetInput();
 
-    // 게임업데이트는 0.5초
-    if(timer > 7)
+    // 게임업데이트는 0.25초
+    if(timer > 5)
     {
       // 유효성 검사 - 지금은 아무 키나 입력하면 종료됨
       if(game_manager.IsValid())
