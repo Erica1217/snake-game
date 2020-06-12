@@ -11,9 +11,9 @@ using namespace std;
 
 ItemManager::ItemManager(){
     last_made_tick = 0;
-    delay = 3;
+    delay = 5;
     growth_odd = 6;
-    disappear_tick = 20;
+    disappear_tick = 30;
     items = {};
 }
 
@@ -45,7 +45,6 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
         while(rand_x > 0 && rand_y > 0 && rand_x < MAP_X && rand_y < MAP_Y && map[rand_x][rand_y] != 0 && mx_zero > 0);
 
         Point create_location = Point(rand_x, rand_y);
-
         last_made_tick = current_tick;
 
         temp = rand()%10;
