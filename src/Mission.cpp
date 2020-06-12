@@ -10,6 +10,7 @@ Mission::Mission(const int stage){
     };
     current_mission_list = total_mission_list[stage];
     current_state = {0, 0, 0, 0};
+    current_mission_state = {false, false, false, false};
 
     window = newwin((MAP_Y + 1) / 2, MAP_X, 11, 23);
 }
@@ -18,7 +19,9 @@ bool Mission::isComplete(UserData &user_data){
     current_state = {user_data.getMaxLength(), user_data.getPoisonItemCount(), user_data.getGrowthItemCount(), user_data.getUsedGateCount()};
     for(int i = 0; i<4; i++){
         if(current_mission_list[i]>current_state[i]){
-            return false;
+            current_mission_state[i] = false;
+        }else{
+            current_mission_state[i] = true;
         }
     }
     return true;
