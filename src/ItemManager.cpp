@@ -23,9 +23,10 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
         Point mo_create_location = Point(1,1);
         int mx_zero = 111;
         int create_x, create_y;
+        
         for(int x=0; x<game_data.sq; x++) {
             for(int y=0; y<game_data.sq; y++) {
-                if(game_data.mo_count[x][y] > mx_zero) {
+                if(game_data.mo_count[x][y] < mx_zero) {
                     mo_create_location = Point(x,y);
                     mx_zero = game_data.mo_count[x][y];
                 }
