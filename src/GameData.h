@@ -15,13 +15,13 @@ public:
 
     void update(const int current_tick);
 
-    int checkItem(const Point head);
+    int checkItem(const Point& head);
     
     vector<vector<int>> getMap();
 
-    void setNextPoint(const Point next_point);
+    void setNextPoint(const Point& next_point);
 
-    void setNextHeadPoint(const Point next_head_point);
+    void setNextHeadPoint(const Point& next_head_point);
 
     Point getNextPoint();
     
@@ -33,13 +33,13 @@ public:
     
     void updateDirection();
 
-    void updateSnakePosition(vector<Point> snake_body);
+    void updateSnakePosition(const vector<Point>& snake_body);
 
-    void updateItemPosition(vector<Point> item_positions, vector<int> item_infos);
+    void updateItemPosition(const vector<Point>& item_positions, const vector<int>& item_infos);
 
-    void updateGatePosition(bool isExist, vector<Point> gates);
+    void updateGatePosition(bool isExist, const vector<Point>& gates);
 
-    void updateGateDirection(bool isExist, vector<vector<int>> &gate_directions);
+    void updateGateDirection(bool isExist, const vector<vector<int>>& gate_directions);
 
     vector<Point> getGatePositions();
 

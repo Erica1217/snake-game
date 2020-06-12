@@ -118,6 +118,7 @@ void SnakeMap::setCurrentMap(const int stage) {
 void SnakeMap::setPositionInfo(const int x, const int y, const int info) {
     current_map[x][y] = info;
 }
-void SnakeMap::update(vector<Point> snake, vector<Point> gates, vector<Point> items) {
-    return;
-}
+
+// void SnakeMap::update(vector<Point> snake, vector<Point> gates, vector<Point> items) {
+//     return;
+// }
