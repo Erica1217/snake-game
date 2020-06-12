@@ -119,14 +119,21 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
 
 ## Item
 - 생성자
-    - Item()모두
+    - Item() 모두
 - 멤버변수
     - Point pos: 아이템의 위치(positon)
-
     - int kinds : 아이템의 종류
         - 1: growth item
         - 2: posion item
     - int created_tick : 아이템 생성 시기 
+- 멤버함수
+    - int getKinds(): 아이템의 종류반환
+    - int getCreatedTic(): 아이템 생성 시기 반환
+    - void setPos(const Point pos): 아이템의 위치 설정
+    - void setKinds(const int kinds):아이템의 종류 설정
+    - void setCreatedTic(const int tick): 아이템 생성 시기 설정
+    - Point getPos():아이템의 위치 반환
+
 
 ## ItemManager
 - 생성자
@@ -163,6 +170,7 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
         - void makeNewGate(): 맵에서 일반 wall 위치 중 새로운 게이트 생성
     - private :
     
+
 ## UserData
  - 생성자
     - UserData(){
@@ -171,6 +179,8 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
         int growth_item_count = 0;
         int posion_item_count = 0;
         int used_gate_length = 0;
+
+        window;
     }
     - UserData(int current_length, int max_length, int growth_item_count, int posion_item_count, int used_gate_count)
  - 멤버 변수
@@ -186,15 +196,14 @@ Snake 의 이동 방향에 Item 이 놓여 있는 경우
      - void setMaxLength(int max_length): 최대 길이 설정
      - int getGrouthItemCount(): 성장 아이템 먹은 횟수 반환
      - void setGrowhItemCount(int grouth_item_count): 성장 아이템 먹은 횟수 설정
-   
-
-     - int getPosionItemCount(): 
-     - void setPosionCount(int posion_item_count): 
-     - int getUsedGateCount(): 
-     - void setUsedGateCount(int used_gate_count):
-      -  void GrowthItemIncrease() :성장아이템 먹은 횟수+1
-    -  void PoisonItemIncrease() :감소아이템 먹은 횟수+1
-    -  void UsedGateCountIncrease(); 게이트를 사용한 횟수+1
+     - int getPosionItemCount(): 감소 아이템 먹은 횟수 반환
+     - void setPosionCount(int posion_item_count): 감소 아이템 먹은 횟수 설정
+     - int getUsedGateCount(): 게이트 사용 횟수 반환
+     - void setUsedGateCount(int used_gate_count):게이트 사용 횟수 설정
+     - void GrowthItemIncrease() :성장아이템 먹은 횟수+1
+     - void PoisonItemIncrease() :감소아이템 먹은 횟수+1
+     - void UsedGateCountIncrease(); 게이트를 사용한 횟수+1
+     - void Render() : Userdata를 window에 렌더링
 
 ## Point
     - 멤버 변수

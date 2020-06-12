@@ -6,7 +6,7 @@ GameData::GameData(const int stage)
 {
     current_direction = 0;
     snake_map = new SnakeMap(stage);
-    window = newwin(MAP_Y, MAP_X, 1, 1);
+    window = newwin(MAP_Y, MAP_X * 2, 1, 1);
     keypad(window, TRUE);
 }
 
@@ -99,7 +99,8 @@ void GameData::Render()
     {
         for (int j = 0; j < canvas[i].size(); j++)
         {
-            mvwprintw(window, i, j, "%lc", changeMap(canvas[i][j]));
+            wprintw(window, " ");
+            mvwprintw(window, i, 2*j, "%lc", changeMap(canvas[i][j]));
         }
     }
     wrefresh(window);
@@ -114,14 +115,26 @@ wchar_t GameData::changeMap(const int i)
         temp = L'\u200b';
         break;
     case SNAKE_HEAD:
-        temp = L'●';
+        switch(current_direction)
+        {
+            case DIR_UP:
+                temp = L'▲';
+                break;
+            case DIR_DOWN:
+                temp = L'▼';
+                break;
+            case DIR_RIGHT:
+                temp = L'▶';
+                break;
+            case DIR_LEFT:
+                temp = L'◀';
+                break;
+        }
         break;
     case SNAKE_BODY:
-        temp = L'○';
+        temp = L'⊙';
         break;
     case WALL:
-        temp = L'■';
-        break;
     case IMMUNE_WALL:
         temp = L'■';
         break;
@@ -132,7 +145,7 @@ wchar_t GameData::changeMap(const int i)
         temp = L'♥';
         break;
     case POSION_ITEM:
-        temp = L'♣';
+        temp = L'♡';
         break;
     default:
         temp = L'?';
