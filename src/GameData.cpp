@@ -6,6 +6,29 @@ GameData::GameData(const int stage)
 {
     current_direction = 0;
     snake_map = new SnakeMap(stage);
+    sq = 5;
+    mo_count.resize(sq+1);
+    mo_points.resize((sq+1)*(sq+1));
+
+    for(int x = 0; x < sq +1; x++) {
+        for(int y=0; y <sq +1; y++) {
+            mo_count[x].push_back(0);
+        }
+    }
+
+    for(int x=0; x<MAP_X; x++) {
+        for(int y=0; y<MAP_Y; y++) {
+            if(snake_map->getPositionInfo(x,y) == 0) {
+                mo_count[x/sq][y/sq]++;
+                mo_points[(x/sq)*sq + (y/sq)].push_back(Point(x, y));
+            }
+        }
+    }
+    
+    mo_count[17/sq][10/sq]-=1;
+    mo_count[18/sq][10/sq]-=1;
+    mo_count[19/sq][10/sq]-=1;
+
     window = newwin(MAP_Y, MAP_X, 1, 1);
     keypad(window, TRUE);
 }
@@ -99,7 +122,8 @@ void GameData::Render()
     {
         for (int j = 0; j < canvas[i].size(); j++)
         {
-            mvwprintw(window, i, j, "%lc", changeMap(canvas[i][j]));
+            mvwprintw(window, i, 2*j+1, " ");
+            mvwprintw(window, i, 2*j, "%lc", changeMap(canvas[i][j]));
         }
     }
     wrefresh(window);

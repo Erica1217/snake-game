@@ -5,6 +5,8 @@
 #include "Item.h"
 #include "Point.h"
 #include "ItemManager.h"
+#include "GameSettings.h"
+
 using namespace std;
 
 ItemManager::ItemManager(){
@@ -14,22 +16,35 @@ ItemManager::ItemManager(){
     disappear_tick = 20;
     items = {};
 }
-void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map){
+
+void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, GameData &game_data){
     if(items.size() < 3 && current_tick >= last_made_tick + delay)
-    {
-        int temp;
-        last_made_tick = current_tick;
+    {   
+        Point mo_create_location = Point(1,1);
+        int mx_zero = 111;
+        int create_x, create_y;
+        for(int x=0; x<game_data.sq; x++) {
+            for(int y=0; y<game_data.sq; y++) {
+                if(game_data.mo_count[x][y] > mx_zero) {
+                    mo_create_location = Point(x,y);
+                    mx_zero = game_data.mo_count[x][y];
+                }
+            }
+        }
+
         int rand_x;
         int rand_y;
-        do{
-            srand((unsigned int)time(NULL));
-            temp = rand();
-            rand_x = temp%18 + 1;
-            temp = rand();
-            rand_y = temp%18 + 1;
+        int temp;
+
+        do {
+            rand_x = (rand() % game_data.sq) + mo_create_location.x;
+            rand_y = (rand() % game_data.sq) + mo_create_location.y;
         }
-        while(map[rand_x][rand_y]!=0);
-        Point create_location = Point(rand_x,rand_y);
+        while( rand_x < MAP_X && rand_y < MAP_Y &&map[rand_x][rand_y] != 0 && mx_zero > 0);
+
+        Point create_location = Point(rand_x, rand_y);
+
+        last_made_tick = current_tick;
         temp = rand()%10;
         int kind;
         if(temp<=growth_odd){
@@ -37,14 +52,18 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map){
         }else{
             kind = 2;
         }
+
+        game_data.mo_count[rand_x][rand_y] -=1;
+
         //Item add_item = Item(create_location, kind, current_tick);
         items.emplace_back(Item(create_location, kind, current_tick));
     }
 }
 
-int ItemManager::eatItem(const Point& next_head_point){
+int ItemManager::eatItem(const Point& next_head_point, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
         if(items[i].getPos() == next_head_point) {
+            game_data.mo_count[items[i].getPos().x/game_data.sq][items[i].getPos().y/game_data.sq]+=1;
             if(items[i].getKinds() == 1){
                 items.erase(items.begin()+i);
                 return 1;
@@ -61,8 +80,8 @@ void ItemManager::deleteItem(const int current_tick, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
         if(items[i].getCreatedTick() + disappear_tick <= current_tick ){
             game_data.setPositionInfo(items[i].getPos().x, items[i].getPos().y, 0);
+            game_data.mo_count[items[i].getPos().x/game_data.sq][items[i].getPos().y/game_data.sq]+=1;
             items.erase(items.begin()+i);
-
         }
     }
 }
@@ -73,9 +92,9 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
     Point next_head_point = game_data.getNextHeadPoint();
     vector<vector<int>> map = game_data.getMap();
 
-    makeItem(current_tick, map);
+    makeItem(current_tick, map, game_data);
     deleteItem(current_tick, game_data);
-    switch(eatItem(next_head_point))
+    switch(eatItem(next_head_point, game_data))
     {
         case 0:
             break;

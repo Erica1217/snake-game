@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++14
+CFLAGS = -std=c++14 -fshort-wchar
 
 LDFLAGS =
 LDLIBS = -lncursesw
@@ -55,7 +55,7 @@ GateManager.o : GateManager.cpp GateManager.h Point.h GameData.h GameSettings.h 
 Item.o: Item.cpp Item.h Point.h 
 	$(CC) -c Item.cpp
 
-ItemManager.o: ItemManager.cpp ItemManager.h Item.h Point.h UserData.h GameData.h
+ItemManager.o: ItemManager.cpp ItemManager.h Item.h Point.h UserData.h GameData.h GameSettings.h
 	$(CC) -c ItemManager.cpp
 
 clean :

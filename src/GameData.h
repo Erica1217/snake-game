@@ -58,6 +58,10 @@ public:
     int getKey() { return key; };
     void Render();
 
+    vector<vector<int>> mo_count;
+    vector<vector<Point>> mo_points;
+    int sq;
+
 private:
     Point next_point;
     Point next_head_point;
