@@ -44,6 +44,8 @@ void Snake::update(GameData& game_data, UserData& user_data)
 
     // 최종 결과물
     bodies.insert(bodies.begin(), head_pos); // 머리를 앞에 넣고
+    game_data.mo_count[head_pos.x/game_data.sq][head_pos.y/game_data.sq]-=1;
+    game_data.mo_count[bodies.back().x/game_data.sq][bodies.back().y/game_data.sq]+=1;
     bodies.pop_back(); // 맨 뒤를 삭제
     
     // 게이트를 통과했을 경우
@@ -54,12 +56,14 @@ void Snake::update(GameData& game_data, UserData& user_data)
             int nextDir = game_data.getGateDirections()[game_data.getCurrrentDirection()][1-i];
             bodies[0] = game_data.getGatePositions()[1-i].moveTo(nextDir);
             game_data.setCurrentDirection(nextDir);
+            game_data.mo_count[bodies[0].x/game_data.sq][bodies[0].y/game_data.sq]-=1;
+            game_data.mo_count[head_pos.x/game_data.sq][head_pos.y/game_data.sq]+=1;
             head_pos = bodies[0];
+            game_data.mo_count[head_pos.x/game_data.sq][head_pos.y/game_data.sq]-=1;
             break;
         }
     }
 
     game_data.updateSnakePosition(bodies); // 게임데이터에 스네이크 위치 넣어줌
-
     user_data.setCurrentLength(bodies.size()); // 유저데이터에 스네이크 길이 넣어줌
 }
