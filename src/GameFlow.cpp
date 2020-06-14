@@ -133,21 +133,26 @@ void GameFlow::RenderGameEnd()
       mvwprintw(window_end, i, j, " ");
     }
   }
+  mvwprintw(window_end, 6, 21, "Thank you For Playing!");
+  mvwprintw(window_end, 9, 24, "C++ Programming");
+  mvwprintw(window_end, 12, 22, "Project - Snake Game");
+
   wrefresh(window_end);
 
-  //usleep(1000000);
+  usleep(2000000);
   EraseWindow(window_end);
 }
 
 // 게임매니저가 첫 스테이지 시작 전 호출 (각 스테이지 클리어 시 자동호출)
 int GameFlow::RenderStageEnter(const int stage)
 { 
-  WINDOW* window_enter = newwin(MAP_Y, MAP_X * 2, 1, 1);
+  WINDOW* window_enter = newwin(MAP_Y / 2 + 1, MAP_X * 2, 6, 13);
 
   keypad(window_enter, TRUE);
   werase(window_enter);
-  mvwprintw(window_enter, 8, 18, "Stage %d", stage);
-  mvwprintw(window_enter, 11, 12, "Press Key to Start!");
+  mvwprintw(window_enter, 3, 17, "Stage %d", stage);
+  mvwprintw(window_enter, 6, 11, "Press Key to Start!");
+  wborder(window_enter, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
   wrefresh(window_enter);
 
   int key = wgetch(window_enter);
@@ -166,9 +171,10 @@ int GameFlow::RenderStageEnter(const int stage)
 // 게임매니저가 스테이지 클리어 시 호출
 int GameFlow::RenderStageClear(const int stage)
 {
-  WINDOW* window_clear = newwin(MAP_Y, MAP_X * 2, 1, 1);
+  WINDOW* window_clear = newwin(MAP_Y / 2, MAP_X * 2, 6, 13);
 
-  mvwprintw(window_clear, 9, 13, "Stage %d Clear!", stage);
+  mvwprintw(window_clear, 4, 14, "Stage %d Clear!", stage);
+  wborder(window_clear, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
   wrefresh(window_clear);
 
   usleep(1500000);

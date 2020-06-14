@@ -15,7 +15,7 @@ void NcursesSetting()
     resize_term(MAP_Y + 2, MAP_X * 3 + 4);
     start_color();
 
-    init_pair(1, COLOR_RED, COLOR_RED);
+    init_pair(1, COLOR_GREEN, COLOR_GREEN);
     attron(COLOR_PAIR(1));
     border('*', '*', '*', '*', '*', '*', '*', '*');
     //border(ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
