@@ -122,7 +122,7 @@ int GameFlow::RenderStartMenu()
 // 게임 종료 시 한번 호출
 void GameFlow::RenderGameEnd()
 {
-  WINDOW* window_end = newwin(MAP_Y, MAP_X * 3, 1, 1);
+  WINDOW* window_end = newwin(MAP_Y, MAP_X * 3 + 2, 1, 1);
 
   werase(window_end);
   wborder(window_end, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
