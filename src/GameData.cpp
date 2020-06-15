@@ -22,6 +22,9 @@ GameData::GameData(const int stage)
                 mo_count[x/sq][y/sq]++;
                 mo_points[(x/sq)*sq + (y/sq)].push_back(Point(x, y));
             }
+            else if(snake_map->getPositionInfo(x,y) == WALL) {
+                mo_count[x/sq][y/sq]++;
+            }
         }
     }
     

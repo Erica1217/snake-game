@@ -55,9 +55,8 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
             kind = 2;
         }
 
-        game_data.mo_count[rand_x/game_data.sq][rand_y/game_data.sq] -=1;
-
-    //     // Item add_item = Item(create_location, kind, current_tick);
+        game_data.mo_count[rand_x/game_data.sq][rand_y/game_data.sq] -=3;
+        // Item add_item = Item(create_location, kind, current_tick);
         items.push_back(Item(create_location, kind, current_tick));
     }    
 }
@@ -82,7 +81,7 @@ void ItemManager::deleteItem(const int current_tick, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
         if(items.at(i).getCreatedTick() + disappear_tick <= current_tick ){
             game_data.setPositionInfo(items.at(i).getPos().x, items.at(i).getPos().y, 0);
-            game_data.mo_count[items.at(i).getPos().x/game_data.sq][items.at(i).getPos().y/game_data.sq]+=1;
+            game_data.mo_count[items.at(i).getPos().x/game_data.sq][items.at(i).getPos().y/game_data.sq]+=3;
             items.erase(items.begin()+i);
         }
     }
