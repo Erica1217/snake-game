@@ -1,7 +1,7 @@
 # class 설계
 
 |View|
-|--|--|
+|--|
 |[Renderable](##Renderable)|
 
 |게임 흐름|비고|
@@ -16,7 +16,7 @@
 |--|--|
 |[GameData](##GameData)||
 |[SnakeMap](##SnakeMap)||
-|GameSettings|상수 선언|
+|<a href = "https://github.com/shinkeonkim/snake-game/blob/master/src/GameSettings.h"> GameSettings </a>|상수 선언|
 |[Mission](##Mission)|
 |[UserData](##UserData)|
 
@@ -40,33 +40,33 @@
 
 |access modifier|type|name||
 |--|--|--|--|
-|protected|Window*|window|화면에 표시되는 윈도우
+|protected|Window*|window|상속받는 객체들이 각자 제어할 윈도우|
 
 ### method
 
 |access modifier|return|name||
 |--|--|--|--|
-|public|void|Render()|윈도우에 정보를 표시하게 하는 가상함수
-|private|void|EraseWindow(Window* window)|윈도우를 지우는 함수
+|public|void|Render()|윈도우에 각각 렌더링 처리를 해 줄 가상함수|
+|private|void|EraseWindow(Window* window)|윈도우를 지우고 해제하는 함수|
 |public||~Renderable()|소멸자
 
 ## SnakeGame
 ### method
 |access modifier|return|name||
 |--|--|--|--|
-|public|int|main()|게임 실행
+|public|int|main()|게임 실행|
 
 ## Kbhit
 ### method
 |access modifier|return|name||
 |--|--|--|--|
-|public|int|kbhit()|
+|public|int|kbhit()|사용자가 키보드를 제어중인지 확인|
 
 ## NCursesSetting
 ### method
 |access modifier|return|name||
 |--|--|--|--|
-|public|void|NcursesSeting()|Ncurses를 사용하기 위한 설정
+|public|void|NcursesSeting()|Ncurses 관련 설정|
 
 ## GameFlow
 ### attribute
@@ -78,12 +78,12 @@
 |access modifier|return|name||
 |--|--|--|--|
 |public|GameFlow()
-|public|int|RenderStartMenu()
-|public|void|RenderMakers()
-|public|void|RenderGameEnd()
-|public|int|RenderStageEnter(const int stage)|게임 진입 시
-|public|int|RenderStageClear(const int stage)|클리어 시
-|private|void|EraseWindow(WINDOW* window)
+|public|int|RenderStartMenu()|게임 선택 창|
+|public|void|RenderMakers()|제작자들 렌더링|
+|public|void|RenderGameEnd()|게임 종료 시 프롬프트|
+|public|int|RenderStageEnter(const int stage)|게임 진입 시|
+|public|int|RenderStageClear(const int stage)|클리어 시|
+|private|void|EraseWindow(WINDOW* window)|윈도우 지우고 해제|
 
 ## Game
 
@@ -92,16 +92,16 @@
 |--|--|--|--|
 |public|bool|is_clear|mission 클리어 판단|
 |public|bool|isValid|유효성검사|
-|public|int|key||
-|private|int|my_stage||
-|private|Snake*|player||
-|private|GameData*|game_data||
-|private|userData*|user_data||
-|private|ItemManager*|item_manager||
-|private|Mission*|mission||
-|private|GateManager*|gate_manager||
-|private|int|my_start_tick||
-|private|Renderable*|panels[3]||
+|public|int|key|사용자 입력값|
+|private|int|my_stage|스테이지 번호|
+|private|Snake*|player|해당 스테이지의 플레이어(뱀)|
+|private|GameData*|game_data|해당 스테이지의 게임데이터|
+|private|userData*|user_data|해당 스테이지의 플레이 정보|
+|private|ItemManager*|item_manager|해당 스테이지의 아이템 관리자|
+|private|Mission*|mission|해당 스테이지의 미션 정보|
+|private|GateManager*|gate_manager|해당 스테이지의 게이트 관리자|
+|private|int|my_start_tick|스테이지 시작 틱|
+|private|Renderable*|panels[3]|렌더링할 객체들|
 
 ### method
 |access modifier|return|name||
@@ -109,11 +109,11 @@
 |public|Game|Game|Game| 생성자
 |public|void|Init(const int stage)| 게임별 맵 저장, 게임매니저 생성자에서 각각 호출|
 |public|void|setInput()|입력받은 키보드의 값 설정|
-|public|void|gameStart(const int tick)||
-|public|void|update(const int tick)| 매 프레임 유효성 검사되면 모든 정보를 추합해서 맵에 저장|
-|public|bool|isClear()| update 마친 후 호출 (mission 클리어 판단)|
+|public|void|gameStart(const int tick)|스테이지 시작 될 때 한번 호출|
+|public|void|update(const int tick)| 매 프레임 게임 업데이트|
+|public|bool|isClear()| update 마친 후 호출 ( 클리어 판단)|
 |public|int|IsValid()| 매프레임 게임 유효성 검사|
-|public|void|gameEnd()| 게임 끝나면 모든 정보 초기화 |
+|public|void|gameEnd()|스테이지 종료 시 한번 호출|
 
 ## GameData
 
@@ -166,23 +166,22 @@
 ### attribute
 |access modifier|type|name||
 |--|--|--|--|
-|private|int|tick
-|private|int|curStage
-|private|Game*|games
-|private|Game*|curGame
-|private|GameFlow|game_flow
-|public|vector<vector<int>>|GetCurMap()
+|private|int|tick|게임의 전체 틱|
+|private|int|curStage|현재 플레이중인 스테이지|
+|private|Game*|games|전체 게임 정보|
+|private|Game*|curGame|현재 게임 정보|
+|private|GameFlow|game_flow|게임플로우 렌더링 객체|
 
 ### method
 |access modifier|return|name||
 |--|--|--|--|
-|public|GameManager|GameManager(GameFlow& gameflow)|
-|public|void|start()|
-|public|void|end()|
-|public|void|setInput()|
-|public|int|isValid()|
-|public|void|update(const int tick)|
-|private|void|stageSetting()|
+|public|GameManager|GameManager(GameFlow& gameflow)|생성자|
+|public|void|start()|첫 스테이지 시작 전 호출|
+|public|void|end()|마지막 스테이지 종료 후 ㅎ출ㅗ|
+|public|void|setInput()|입력받은 키 값 세팅|
+|public|int|isValid()|유효성 검사|
+|public|void|update(const int tick)|게임 업데이트|
+|private|void|stageSetting()|스테이지 클리어시 관련 정보들 처리|
 
 ## SnakeMap
     
@@ -212,17 +211,17 @@
 ### attribute
 |access modifier|type|name||
 |--|--|--|--|
-|private|Point|next_pos
-|private|Point|head_pos
-|private|vector<Point>|bodies
+|private|Point|next_pos|머리가 향할 다음 위치|
+|private|Point|head_pos|머리의 현재 위치|
+|private|vector<Point>|bodies|스네이크 몸들의 위치|
 
 ### 멤버 함수
 |access modifier|return|name||
 |--|--|--|--|
-|public|Snake|Snake()|생성자
-|public|void|update(GameData& game_data, UserData& user_data)|
-|public|Point|getNextPoint(const int curDir)|
-|public|int|getSnakeLength()|
+|public|Snake|Snake()|생성자|
+|public|void|update(GameData& game_data, UserData& user_data)|뱀의 움직임 업데이트|
+|public|Point|getNextPoint(const int curDir)|유효성 검사할 때 뱀의 다음 머리 위치 반환|
+|public|int|getSnakeLength()|뱀의 길이 반환|
 
 ## Mission
 

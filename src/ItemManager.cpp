@@ -64,9 +64,9 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
 
 int ItemManager::eatItem(const Point& next_head_point, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
-        if(items[i].getPos() == next_head_point) {
-            game_data.mo_count[items[i].getPos().x/game_data.sq][items[i].getPos().y/game_data.sq]+=1;
-            if(items[i].getKinds() == 1){
+        if(items.at(i).getPos() == next_head_point) {
+            game_data.mo_count[items.at(i).getPos().x/game_data.sq][items.at(i).getPos().y/game_data.sq]+=1;
+            if(items.at(i).getKinds() == 1){
                 items.erase(items.begin()+i);
                 return 1;
             }        
@@ -80,9 +80,9 @@ int ItemManager::eatItem(const Point& next_head_point, GameData &game_data){
 }
 void ItemManager::deleteItem(const int current_tick, GameData &game_data){
     for(int i = 0; i<items.size(); i++){
-        if(items[i].getCreatedTick() + disappear_tick <= current_tick ){
-            game_data.setPositionInfo(items[i].getPos().x, items[i].getPos().y, 0);
-            game_data.mo_count[items[i].getPos().x/game_data.sq][items[i].getPos().y/game_data.sq]+=1;
+        if(items.at(i).getCreatedTick() + disappear_tick <= current_tick ){
+            game_data.setPositionInfo(items.at(i).getPos().x, items.at(i).getPos().y, 0);
+            game_data.mo_count[items.at(i).getPos().x/game_data.sq][items.at(i).getPos().y/game_data.sq]+=1;
             items.erase(items.begin()+i);
         }
     }
@@ -112,8 +112,8 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
     vector<int> items_type = {};
 
     for(int i = 0; i<items.size(); i++){
-        items_pos.push_back(items[i].getPos());
-        items_type.push_back(items[i].getKinds());
+        items_pos.push_back(items.at(i).getPos());
+        items_type.push_back(items.at(i).getKinds());
     }
 
     game_data.updateItemPosition(items_pos, items_type);

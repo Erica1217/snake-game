@@ -3,10 +3,10 @@
 
 Mission::Mission(const int stage){
     total_mission_list = {
-        {5,5,3,3},
-        {7,5,9,3},
-        {10,4,7,4},
-        {5,1,2,1}
+        {7 , 5, 3, 3},
+        {9 , 7, 4, 4},
+        {11, 9, 5, 5},
+        {13,11, 6, 6}
     };
     current_mission_list = total_mission_list[stage];
     current_state = {0, 0, 0, 0};
