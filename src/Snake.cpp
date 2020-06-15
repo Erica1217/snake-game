@@ -59,6 +59,8 @@ void Snake::update(GameData& game_data, UserData& user_data)
             game_data.mo_count[bodies[0].x/game_data.sq][bodies[0].y/game_data.sq]-=1;
             game_data.mo_count[head_pos.x/game_data.sq][head_pos.y/game_data.sq]+=1;
             head_pos = bodies[0];
+            
+            game_data.setNextHeadPoint(head_pos);
             game_data.mo_count[head_pos.x/game_data.sq][head_pos.y/game_data.sq]-=1;
             break;
         }
