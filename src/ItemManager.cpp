@@ -2,12 +2,22 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 #include "Item.h"
 #include "Point.h"
 #include "ItemManager.h"
 #include "GameSettings.h"
 
 using namespace std;
+
+struct ItemPortion {
+    Point p;
+    int weight;
+
+    bool operator<(const ItemPortion B) const{
+        return weight > B.weight;
+    }
+};
 
 ItemManager::ItemManager(){
     last_made_tick = 0;
@@ -21,17 +31,24 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
     if(items.size() < 3 && current_tick >= last_made_tick + delay)
     {   
         Point mo_create_location = Point(1,1);
-        int mx_zero = 0;
         int create_x, create_y;
 
+        vector <ItemPortion> temp_portion;
         for(int x=0; x<game_data.sq; x++) {
             for(int y=0; y<game_data.sq; y++) {
-                if(game_data.mo_count[x][y] > mx_zero && game_data.mo_count[x][y] > 0) {
-                    mo_create_location = Point(x,y);
-                    mx_zero = game_data.mo_count[x][y];
+                if(game_data.mo_count[x][y] > 0) {
+                    temp_portion.push_back({Point(x,y), game_data.mo_count[x][y]});
                 }
             }
         }
+
+        if(temp_portion.empty()) {
+            return;
+        }
+
+        sort(temp_portion.begin(), temp_portion.end());
+
+        mo_create_location = temp_portion[rand() % (temp_portion.size()>3?3:temp_portion.size())].p;
 
         int rand_x,rand_y,temp;
 
@@ -40,7 +57,7 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, Gam
             rand_x = game_data.mo_points[mo_create_location.x * game_data.sq + mo_create_location.y][rand_number].x;
             rand_y = game_data.mo_points[mo_create_location.x * game_data.sq + mo_create_location.y][rand_number].y;
         }
-        while(rand_x > 0 && rand_y > 0 && rand_x < MAP_X && rand_y < MAP_Y && map[rand_x][rand_y] != 0 && mx_zero > 0);
+        while(rand_x > 0 && rand_y > 0 && rand_x < MAP_X && rand_y < MAP_Y && map[rand_x][rand_y] != 0);
 
         Point create_location = Point(rand_x, rand_y);
         last_made_tick = current_tick;
