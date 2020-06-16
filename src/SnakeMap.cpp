@@ -104,7 +104,7 @@ int SnakeMap::getTotalStageCount() {
     return total_stage_count;
 }
 
-vector<vector<int>> SnakeMap::getCurrentMap() {
+vector<vector<int> > SnakeMap::getCurrentMap() {
     return current_map;
 }
 int SnakeMap::getPositionInfo(const int x, const int y) {

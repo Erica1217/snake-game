@@ -27,7 +27,7 @@ ItemManager::ItemManager(){
     items = {};
 }
 
-void ItemManager::makeItem(int current_tick, const vector<vector<int>>& map, GameData &game_data){
+void ItemManager::makeItem(int current_tick, const vector<vector<int> >& map, GameData &game_data){
     if(items.size() < 3 && current_tick >= last_made_tick + delay)
     {   
         Point mo_create_location = Point(1,1);
@@ -106,7 +106,7 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
 
     int current_tick = game_data.getCurrentTick();
     Point next_head_point = game_data.getNextHeadPoint();
-    vector<vector<int>> map = game_data.getMap();
+    vector<vector<int> > map = game_data.getMap();
 
     makeItem(current_tick, map, game_data);
     deleteItem(current_tick, game_data);

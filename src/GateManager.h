@@ -16,7 +16,7 @@ class GateManager
 private:
     const int GATE_MANAGER_IMMUNE_WALL=-2;
     pair<Point, Point> gates;
-    pair<vector<int>, vector<int>> gate_directions;
+    pair<vector<int>, vector<int> > gate_directions;
     bool is_passing = false; // 뱀이 통과중인가?
     int live_time=5;  // 게이트 생존시간 처리용
     int snake_entered_tick = -2100000000; // 뱀이 게이트에 처음 들어간 틱
@@ -41,7 +41,7 @@ private:
     vector<int> makeGateDirection(Point gate);
 
 public:
-    GateManager(const vector<vector<int>> snake_map);
+    GateManager(const vector<vector<int> > snake_map);
     void makeNewGate();
     void update(GameData &game_data, UserData &user_data);
     pair<Point, Point> getGates();

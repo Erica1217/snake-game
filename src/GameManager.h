@@ -19,7 +19,7 @@ public :
     int IsValid();
     void Update(const int tick);
 
-    vector<vector<int>> GetCurMap();
+    vector<vector<int> > GetCurMap();
 private :
     int tick;
     int curStage;

@@ -17,7 +17,7 @@ public:
 
     int checkItem(const Point& head);
     
-    vector<vector<int>> getMap();
+    vector<vector<int> > getMap();
 
     void setNextPoint(const Point& next_point);
 
@@ -39,11 +39,11 @@ public:
 
     void updateGatePosition(bool isExist, const vector<Point>& gates);
 
-    void updateGateDirection(bool isExist, const vector<vector<int>>& gate_directions);
+    void updateGateDirection(bool isExist, const vector<vector<int> >& gate_directions);
 
     vector<Point> getGatePositions();
 
-    vector<vector<int>> getGateDirections();
+    vector<vector<int> > getGateDirections();
 
     int getCurrrentDirection();
 
@@ -58,8 +58,8 @@ public:
     int getKey() { return key; };
     void Render();
 
-    vector<vector<int>> mo_count;
-    vector<vector<Point>> mo_points;
+    vector<vector<int> > mo_count;
+    vector<vector<Point> > mo_points;
     int sq;
 
 private:
@@ -70,7 +70,7 @@ private:
     int current_direction;
 
     vector<Point> gates;
-    vector<vector<int>> gate_directions;
+    vector<vector<int> > gate_directions;
 
     // 추가
     int key;
