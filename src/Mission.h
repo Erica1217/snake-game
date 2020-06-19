@@ -11,7 +11,7 @@ class Mission : public Renderable
 public:
     Mission(const int stage);
     bool isComplete(UserData &user_data);
-    void Render();
+    void render();
 
 private:
     vector<bool> current_mission_state;

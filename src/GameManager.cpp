@@ -1,5 +1,4 @@
 #include "GameManager.h"
-#include <iostream>
 
 GameManager::GameManager(GameFlow& gameflow) : game_flow(&gameflow)
 {

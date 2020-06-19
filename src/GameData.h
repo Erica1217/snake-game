@@ -17,7 +17,7 @@ public:
 
     int checkItem(const Point& head);
     
-    vector<vector<int> > getMap();
+    std::vector<std::vector<int> > getMap();
 
     void setNextPoint(const Point& next_point);
 
@@ -33,17 +33,17 @@ public:
     
     void updateDirection();
 
-    void updateSnakePosition(const vector<Point>& snake_body);
+    void updateSnakePosition(const std::vector<Point>& snake_body);
 
-    void updateItemPosition(const vector<Point>& item_positions, const vector<int>& item_infos);
+    void updateItemPosition(const std::vector<Point>& item_positions, const std::vector<int>& item_infos);
 
-    void updateGatePosition(bool isExist, const vector<Point>& gates);
+    void updateGatePosition(bool isExist, const std::vector<Point>& gates);
 
-    void updateGateDirection(bool isExist, const vector<vector<int> >& gate_directions);
+    void updateGateDirection(bool isExist, const std::vector<std::vector<int> >& gate_directions);
 
-    vector<Point> getGatePositions();
+    std::vector<Point> getGatePositions();
 
-    vector<vector<int> > getGateDirections();
+    std::vector<std::vector<int> > getGateDirections();
 
     int getCurrrentDirection();
 
@@ -56,10 +56,10 @@ public:
     void setPositionInfo(const int x, const int y, const int info);
     // 추가
     int getKey() { return key; };
-    void Render();
+    void render();
 
-    vector<vector<int> > mo_count;
-    vector<vector<Point> > mo_points;
+    std::vector<std::vector<int> > mo_count;
+    std::vector<std::vector<Point> > mo_points;
     int sq;
 
 private:
@@ -69,8 +69,8 @@ private:
     int current_tick;
     int current_direction;
 
-    vector<Point> gates;
-    vector<vector<int> > gate_directions;
+    std::vector<Point> gates;
+    std::vector<std::vector<int> > gate_directions;
 
     // 추가
     int key;

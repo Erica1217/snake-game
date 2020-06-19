@@ -5,21 +5,15 @@
 #include "Game.h"
 #include "GameSettings.h"
 
-using namespace std;
-
 class GameManager
 {
 public :
-    
     GameManager(GameFlow& gameflow);
-
     void start();
     void end();
     void setInput();
     int isValid();
     void update(const int tick);
-
-    vector<vector<int> > getCurMap();
 private :
     int tick;
     int curStage;

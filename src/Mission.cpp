@@ -32,7 +32,7 @@ bool Mission::isComplete(UserData &user_data){
     return isComplete;
 }
 
-void Mission::Render()
+void Mission::render()
 {
     wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
     mvwprintw(window, 1, 1, "------MISSION------");

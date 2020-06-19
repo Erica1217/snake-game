@@ -14,11 +14,9 @@ Snake::Snake()
 
 // 유효성검사할 때 호출, 다음 머리 위치 리턴
 Point Snake::getNextPoint(const int curDir)
-{   
-    //Point nextPos(head_pos.x, head_pos.y);
+{  
     next_pos = head_pos.moveTo(curDir);
     return next_pos;
-    //return head_pos.moveTo(curDir);
 }
 
 void Snake::update(GameData& game_data, UserData& user_data)
@@ -26,7 +24,6 @@ void Snake::update(GameData& game_data, UserData& user_data)
     head_pos = next_pos; // 유효성 검사에서 나온 다음 위치를 머리로
     
     // 아이템 처리
-    //int item = game_data.checkItem(head_pos);
     switch(game_data.checkItem(head_pos))
     {
         case -1 :

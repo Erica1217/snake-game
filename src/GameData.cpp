@@ -51,7 +51,7 @@ int GameData::checkItem(const Point& head)
     return 0;
 }
 
-vector<vector<int> > GameData::getMap()
+std::vector<std::vector<int> > GameData::getMap()
 {
     return snake_map->getCurrentMap();
 }
@@ -117,7 +117,7 @@ void GameData::updateDirection()
     }
 }
 
-void GameData::Render()
+void GameData::render()
 {
     std::vector<std::vector<int> > canvas = snake_map->getCurrentMap();
     wclear(window);
@@ -180,7 +180,7 @@ wchar_t GameData::changeMap(const int i)
     return temp;
 }
 
-void GameData::updateItemPosition(const vector<Point>& item_positions, const vector<int>& item_infos)
+void GameData::updateItemPosition(const std::vector<Point>& item_positions, const std::vector<int>& item_infos)
 {
     for (int i = 0; i < item_positions.size(); i++)
     {
@@ -188,7 +188,7 @@ void GameData::updateItemPosition(const vector<Point>& item_positions, const vec
     }
 }
 
-void GameData::updateSnakePosition(const vector<Point>& snake_body)
+void GameData::updateSnakePosition(const std::vector<Point>& snake_body)
 {
     snake_map->setPositionInfo(snake_body[0].x, snake_body[0].y, 1);
     for (int i = 1; i < snake_body.size(); i++)
@@ -197,7 +197,7 @@ void GameData::updateSnakePosition(const vector<Point>& snake_body)
     }
 }
 
-void GameData::updateGatePosition(bool isExist, const vector<Point>& gates)
+void GameData::updateGatePosition(bool isExist, const std::vector<Point>& gates)
 {
     if (isExist)
     {
@@ -222,7 +222,7 @@ void GameData::updateGatePosition(bool isExist, const vector<Point>& gates)
     }
 }
 
-void GameData::updateGateDirection(bool isExist, const vector<vector<int> >& gate_directions)
+void GameData::updateGateDirection(bool isExist, const std::vector<std::vector<int> >& gate_directions)
 {
     if (isExist)
     {
@@ -234,12 +234,12 @@ void GameData::updateGateDirection(bool isExist, const vector<vector<int> >& gat
     }
 }
 
-vector<Point> GameData::getGatePositions()
+std::vector<Point> GameData::getGatePositions()
 {
     return gates;
 }
 
-vector<vector<int> > GameData::getGateDirections()
+std::vector<std::vector<int> > GameData::getGateDirections()
 {
     return gate_directions;
 }

@@ -42,12 +42,12 @@ void UserData::setPoisonItemCount(const int poison_item_count) { //감소아이�
 
 }
 
-void UserData::GrowthItemIncrease() { //성장아이템 먹은 횟수+1
+void UserData::growthItemIncrease() { //성장아이템 먹은 횟수+1
     //this->growth_item_count = growth_item_count;
     growth_item_count++;
 }
 
-void UserData::PoisonItemIncrease() { //감소아이템 먹은 횟수+1
+void UserData::poisonItemIncrease() { //감소아이템 먹은 횟수+1
     //this->poison_item_count = poison_item_count;
     poison_item_count++;
 }
@@ -62,7 +62,7 @@ void UserData::setUsedGateCount(const int used_gate_count) { //게이트를 사�
     this->used_gate_count = used_gate_count;
 };
 
-void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
+void UserData::usedGateCountIncrease() { //게이트를 사용한 횟수+1
     this->used_gate_count = used_gate_count;
     used_gate_count++;
 }
@@ -75,7 +75,7 @@ void UserData::setCurrentTick(int current_tick) {
     this->current_tick = current_tick;
 }
 
-void UserData::Render() {
+void UserData::render() {
     wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
     mvwprintw(window, 1, 1, "----SCORE BOARD----");
     mvwprintw(window, 3, 1, "Score : %d", UserData::getScore());

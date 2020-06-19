@@ -8,7 +8,7 @@ void Renderable::EraseWindow(WINDOW* window)
   delwin(window);
 }
 
-void Renderable::Render()
+void Renderable::render()
 {
 
 }

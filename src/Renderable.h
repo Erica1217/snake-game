@@ -6,7 +6,7 @@
 class Renderable
 {
 public:
-    virtual void Render();
+    virtual void render();
     ~Renderable();
 
 protected :

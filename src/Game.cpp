@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "GameSettings.h"
-#include "GameData.h"
 
 Game::Game()
 {
@@ -87,7 +86,7 @@ void Game::update(const int tick)
 
     for(int i = 0 ; i < 3 ; i++)
     {
-        panels[i] -> Render();
+        panels[i] -> render();
     }
 }
 

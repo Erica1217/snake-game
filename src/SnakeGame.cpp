@@ -46,7 +46,7 @@ int main(void)
     // 게임업데이트는 0.25초
     if(timer > 40)
     {
-      // 유효성 검사 - 지금은 아무 키나 입력하면 종료됨
+      // 유효성 검사
       if(game_manager.isValid())
       {
         game_manager.update(tick++);  // 각종 게임 정보들 업데이트

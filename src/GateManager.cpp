@@ -1,8 +1,6 @@
 #include "GateManager.h"
 #include <iostream>
 
-using namespace std;
-
 void GateManager::makeWallMap(const int num, const int x, const int y)
 {
     for(int i=0 ; i<4 ; i++)
@@ -20,9 +18,9 @@ void GateManager::makeWallMap(const int num, const int x, const int y)
     }
 }
 
-vector<int> GateManager::makeGateDirection(Point gate)
+std::vector<int> GateManager::makeGateDirection(Point gate)
 {
-    vector<int> result;
+    std::vector<int> result;
     for(int i=0 ; i<4 ; i++)
     {
         for(int j=0 ; j<4 ; j++)
@@ -38,7 +36,7 @@ vector<int> GateManager::makeGateDirection(Point gate)
     return result;
 }
 
-GateManager::GateManager(const vector<vector<int> > snake_map)
+GateManager::GateManager(const std::vector<std::vector<int> > snake_map)
 {
     for(int i=0 ; i<MAP_X ; i++)
     {
@@ -100,7 +98,7 @@ void GateManager::makeNewGate()
 
     }
     
-    gates = make_pair(gate1, gate2);
+    gates = std::make_pair(gate1, gate2);
     gate_directions = make_pair(makeGateDirection(gate1), makeGateDirection(gate2));
 }
 
@@ -133,14 +131,14 @@ void GateManager::update(GameData &game_data, UserData &user_data)
         isExist = true;
     }
     game_data.updateGatePosition(isExist, {gates.first, gates.second});
-    vector<vector<int> > d = {};
+    std::vector<std::vector<int> > d = {};
     for(int x =0; x<gate_directions.first.size(); x++) {
         d.push_back({gate_directions.first[x], gate_directions.second[x]});
     }
     game_data.updateGateDirection(isExist, d);
 }
 
-pair<Point, Point> GateManager::getGates()
+std::pair<Point, Point> GateManager::getGates()
 {
     return gates;
 }

@@ -2,7 +2,6 @@
 #include "GameFlow.h"
 #include "kbhit.h"
 #include "GameSettings.h"
-#include <iostream>
 
 GameFlow::GameFlow()
 {

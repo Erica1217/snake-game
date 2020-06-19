@@ -1,7 +1,3 @@
-#include <ncurses.h>
-#include <sys/ioctl.h>
-#include <termios.h>
-#include <stdlib.h>
 #include "kbhit.h"
 
 int kbhit() 

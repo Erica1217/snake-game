@@ -8,8 +8,6 @@
 #include "ItemManager.h"
 #include "GameSettings.h"
 
-using namespace std;
-
 struct ItemPortion {
     Point p;
     int weight;
@@ -27,13 +25,13 @@ ItemManager::ItemManager(){
     items = {};
 }
 
-void ItemManager::makeItem(int current_tick, const vector<vector<int> >& map, GameData &game_data){
+void ItemManager::makeItem(int current_tick, const std::vector<std::vector<int> >& map, GameData &game_data){
     if(items.size() < 3 && current_tick >= last_made_tick + delay)
     {   
         Point mo_create_location = Point(1,1);
         int create_x, create_y;
 
-        vector <ItemPortion> temp_portion;
+        std::vector <ItemPortion> temp_portion;
         for(int x=0; x<game_data.sq; x++) {
             for(int y=0; y<game_data.sq; y++) {
                 if(game_data.mo_count[x][y] > 0) {
@@ -71,7 +69,7 @@ void ItemManager::makeItem(int current_tick, const vector<vector<int> >& map, Ga
         }
 
         game_data.mo_count[rand_x/game_data.sq][rand_y/game_data.sq] -=3;
-        // Item add_item = Item(create_location, kind, current_tick);
+        
         items.push_back(Item(create_location, kind, current_tick));
     }    
 }
@@ -106,7 +104,7 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
 
     int current_tick = game_data.getCurrentTick();
     Point next_head_point = game_data.getNextHeadPoint();
-    vector<vector<int> > map = game_data.getMap();
+    std::vector<std::vector<int> > map = game_data.getMap();
 
     makeItem(current_tick, map, game_data);
     deleteItem(current_tick, game_data);
@@ -115,15 +113,15 @@ void ItemManager::update(GameData &game_data, UserData &user_data){
         case 0:
             break;
         case 1:
-            user_data.GrowthItemIncrease();
+            user_data.growthItemIncrease();
             break;
         case 2:
-            user_data.PoisonItemIncrease();
+            user_data.poisonItemIncrease();
             break;
     }
 
-    vector<Point> items_pos = {};
-    vector<int> items_type = {};
+    std::vector<Point> items_pos = {};
+    std::vector<int> items_type = {};
 
     for(int i = 0; i<items.size(); i++){
         items_pos.push_back(items.at(i).getPos());

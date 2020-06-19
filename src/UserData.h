@@ -23,14 +23,14 @@ public:
     void setGrowthItemCount(const int growth_item_count);
     int getPoisonItemCount();
     void setPoisonItemCount(const int poison_item_count);
-    void GrowthItemIncrease();
-    void PoisonItemIncrease();
-    void UsedGateCountIncrease();
+    void growthItemIncrease();
+    void poisonItemIncrease();
+    void usedGateCountIncrease();
     int getScore();
     void setUsedGateCount(const int used_gate_count);
     int getUsedGateCount();
     void setCurrentTick(int current_tick);
-    void Render();
+    void render();
 };
 
 #endif
