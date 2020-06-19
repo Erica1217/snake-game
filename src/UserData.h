@@ -11,7 +11,6 @@ private:
     int poison_item_count;
     int used_gate_count;
     int current_tick;
-    int getScore();
 
 public:
     UserData();
@@ -27,6 +26,7 @@ public:
     void GrowthItemIncrease();
     void PoisonItemIncrease();
     void UsedGateCountIncrease();
+    int getScore();
     void setUsedGateCount(const int used_gate_count);
     int getUsedGateCount();
     void setCurrentTick(int current_tick);

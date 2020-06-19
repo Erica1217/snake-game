@@ -109,6 +109,11 @@ bool Game::isClear()
     return is_clear;
 }
 
+int Game::getScore()
+{
+    return user_data->getScore();
+}
+
 void Game::gameEnd()
 {
     delete player;

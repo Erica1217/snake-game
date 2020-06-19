@@ -28,7 +28,7 @@ private :
 
     GameFlow game_flow;
 
-    void stageSetting();
+    void stageSetting(const int score);
 };
 
 #endif

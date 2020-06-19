@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include <iostream>
 
 GameManager::GameManager(GameFlow &gameflow) : game_flow(gameflow)
 {
@@ -49,15 +50,18 @@ void GameManager::update(const int tick)
     this -> tick = tick;
     curGame->update(tick);
 
+    int score = curGame ->getScore();
+    game_flow.setStageScore(curStage + 1, score);
+    std::cout <<score <<std::endl;
     if (curGame->isClear())
     {
         curGame->gameEnd();
-        stageSetting();
+        stageSetting(score);
     }
 }
 
 // 스테이지 클리어 시 다음 스테이지 세팅, 대기창 띄워줌
-void GameManager::stageSetting()
+void GameManager::stageSetting(const int score)
 {
     // 마지막 스테이지가 아니라면
     if (++curStage < MAX_STAGE)
@@ -69,7 +73,7 @@ void GameManager::stageSetting()
     }
 
     // 해당 스테이지 클리어 렌더링, 입력대기
-    if (game_flow.renderStageClear(curStage) == 0)
+    if (game_flow.renderStageClear(curStage, score) == 0)
     {
         // 대기중 백스페이스 눌렀을 경우 종료
         curGame->is_valid = false;

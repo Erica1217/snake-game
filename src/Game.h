@@ -25,6 +25,7 @@ public :
     bool isClear();
     int isValid();
     void gameEnd();
+    int getScore();
 private :
     int my_stage;
     Snake* player;

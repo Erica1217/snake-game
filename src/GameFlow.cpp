@@ -136,6 +136,13 @@ void GameFlow::renderGameEnd()
   mvwprintw(window_end, 6, 21, "Thank you For Playing!");
   mvwprintw(window_end, 9, 24, "C++ Programming");
   mvwprintw(window_end, 12, 22, "Project - Snake Game");
+  int sum = 0;
+  for(int i = 0 ; i < 4 ; i++)
+  {
+    mvwprintw(window_end, 13 + i, 22, "stage %d : %d", i + 1, scores[i]);
+    sum += scores[i];
+  }
+  mvwprintw(window_end, 18, 22, "total : %d", sum);
 
   wrefresh(window_end);
 
@@ -169,9 +176,11 @@ int GameFlow::renderStageEnter(const int stage)
 }
 
 // 게임매니저가 스테이지 클리어 시 호출
-int GameFlow::renderStageClear(const int stage)
+int GameFlow::renderStageClear(const int stage, const int score)
 {
   WINDOW* window_clear = newwin(MAP_Y / 2, MAP_X * 2, 6, 13);
+
+  scores[stage - 1] = score;
 
   mvwprintw(window_clear, 4, 14, "Stage %d Clear!", stage);
   wborder(window_clear, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
@@ -197,4 +206,8 @@ void GameFlow::eraseWindow(WINDOW* window)
   werase(window);
   wrefresh(window);
   delwin(window);
+}
+
+void GameFlow::setStageScore(int stage, int score) {
+  scores[stage-1] = score;
 }
