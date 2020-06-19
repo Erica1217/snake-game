@@ -19,9 +19,9 @@ public :
     int renderStageClear(const int stage, const int score); // 클리어 시
     void setStageScore(int stage, int score);
 
-    std::vector<int> scores = {0, 0, 0, 0};
 private :
     char text[400] = "      Makers\n\n\n  20191564 김신건\n\n  20152635 김상홍\n\n  20191567 김유진\n\n  20185290 이하영\n\n  20191678 최영락\n\n\n   Press Any Key";
+    std::vector<int> scores = {0, 0, 0, 0};
     std::string explain[17] = 
     {
         "                                                        ", 

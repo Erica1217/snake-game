@@ -51,7 +51,7 @@ int Game::isValid()
     {
     case WALL : // 벽에 닿았을 때
     case SNAKE_BODY : // 자기 몸통
-    case SNAKE_HEAD : // 헤드 // 닿을 일이 있나?
+    case SNAKE_HEAD : // 헤드 //
         is_valid = false;
         break;
     case POSION_ITEM : // 감소 아이템
