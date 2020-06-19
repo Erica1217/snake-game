@@ -1,7 +1,7 @@
 #include "GameManager.h"
 #include <iostream>
 
-GameManager::GameManager(GameFlow &gameflow) : game_flow(gameflow)
+GameManager::GameManager(GameFlow& gameflow) : game_flow(&gameflow)
 {
     curStage = 0;
     tick = 1;
@@ -21,7 +21,7 @@ void GameManager::start()
     curGame = games;
     curGame->gameStart(tick);
     // 스테이지1 시작 프롬프트
-    if (game_flow.renderStageEnter(curStage + 1) == 0)
+    if (game_flow->renderStageEnter(curStage + 1) == 0)
     {
         curGame->is_valid = false;
     }
@@ -51,8 +51,8 @@ void GameManager::update(const int tick)
     curGame->update(tick);
 
     int score = curGame ->getScore();
-    game_flow.setStageScore(curStage + 1, score);
-    std::cout <<score <<std::endl;
+    game_flow->setStageScore(curStage, score);
+    
     if (curGame->isClear())
     {
         curGame->gameEnd();
@@ -73,7 +73,7 @@ void GameManager::stageSetting(const int score)
     }
 
     // 해당 스테이지 클리어 렌더링, 입력대기
-    if (game_flow.renderStageClear(curStage, score) == 0)
+    if (game_flow->renderStageClear(curStage, score) == 0)
     {
         // 대기중 백스페이스 눌렀을 경우 종료
         curGame->is_valid = false;

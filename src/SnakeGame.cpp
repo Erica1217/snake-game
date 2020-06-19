@@ -22,7 +22,7 @@ int main(void)
     }
     else if(game_status == 1) 
     {
-      game_flow.renderAbout(); // 제작자들 말고 게임설명 들어가는것도 좋을듯
+      game_flow.renderAbout();
     }
     else
     {
@@ -59,10 +59,10 @@ int main(void)
       timer = 0;
     }
 
-    usleep(5000); // 시간 간격 정확히 확인 필요
+    usleep(5000);
   }
 
-  game_flow.renderGameEnd();  // 종료 시 보여줄 화면 // 아직안만듦
+  game_flow.renderGameEnd();  // 종료 시 보여줄 화면
   game_flow.renderMakers();   // 크레딧
 
   endwin();

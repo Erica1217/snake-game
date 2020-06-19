@@ -2,10 +2,11 @@
 #include "GameFlow.h"
 #include "kbhit.h"
 #include "GameSettings.h"
+#include <iostream>
 
 GameFlow::GameFlow()
 {
-    
+
 }
 
 void GameFlow::renderAbout()
@@ -139,9 +140,10 @@ void GameFlow::renderGameEnd()
   int sum = 0;
   for(int i = 0 ; i < 4 ; i++)
   {
-    mvwprintw(window_end, 13 + i, 22, "stage %d : %d", i + 1, scores[i]);
-    sum += scores[i];
+    mvwprintw(window_end, 13 + i, 22, "stage %d : %d", i + 1, this->scores[i]);
+    sum += this->scores[i];
   }
+
   mvwprintw(window_end, 18, 22, "total : %d", sum);
 
   wrefresh(window_end);
@@ -180,8 +182,6 @@ int GameFlow::renderStageClear(const int stage, const int score)
 {
   WINDOW* window_clear = newwin(MAP_Y / 2, MAP_X * 2, 6, 13);
 
-  scores[stage - 1] = score;
-
   mvwprintw(window_clear, 4, 14, "Stage %d Clear!", stage);
   wborder(window_clear, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
   wrefresh(window_clear);
@@ -208,6 +208,7 @@ void GameFlow::eraseWindow(WINDOW* window)
   delwin(window);
 }
 
-void GameFlow::setStageScore(int stage, int score) {
-  scores[stage-1] = score;
+void GameFlow::setStageScore(int stage, int score) 
+{  
+  scores[stage] = score;
 }

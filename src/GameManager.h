@@ -26,7 +26,7 @@ private :
     Game* games;
     Game* curGame;
 
-    GameFlow game_flow;
+    GameFlow* game_flow;
 
     void stageSetting(const int score);
 };
