@@ -67,9 +67,18 @@ void UserData::UsedGateCountIncrease() { //게이트를 사용한 횟수+1
     used_gate_count++;
 }
 
+int UserData::getScore() {
+    return max_length*10 + growth_item_count*5 + poison_item_count*5 + used_gate_count*20 + current_tick;
+}
+
+void UserData::setCurrentTick(int current_tick) {
+    this->current_tick = current_tick;
+}
+
 void UserData::Render() {
     wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
     mvwprintw(window, 1, 1, "----SCORE BOARD----");
+    mvwprintw(window, 2, 1, "Score : %d", UserData::getScore());
     mvwprintw(window, 3, 1, "B : %d / %d", current_length, max_length);
     mvwprintw(window, 4, 1, "+ : %d", growth_item_count);
     mvwprintw(window, 5, 1, "- : %d", poison_item_count);
