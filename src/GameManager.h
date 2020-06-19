@@ -13,13 +13,13 @@ public :
     
     GameManager(GameFlow& gameflow);
 
-    void Start();
-    void End();
-    void SetInput();
-    int IsValid();
-    void Update(const int tick);
+    void start();
+    void end();
+    void setInput();
+    int isValid();
+    void update(const int tick);
 
-    vector<vector<int> > GetCurMap();
+    vector<vector<int> > getCurMap();
 private :
     int tick;
     int curStage;
@@ -28,7 +28,7 @@ private :
 
     GameFlow game_flow;
 
-    void StageSetting();
+    void stageSetting();
 };
 
 #endif

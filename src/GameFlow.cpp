@@ -8,7 +8,7 @@ GameFlow::GameFlow()
     
 }
 
-void GameFlow::RenderAbout()
+void GameFlow::renderAbout()
 {
     WINDOW* window_about = newwin(MAP_Y - 2, MAP_X * 3 - 3, 2, 3);
     keypad(window_about, TRUE);
@@ -23,11 +23,11 @@ void GameFlow::RenderAbout()
     wrefresh(window_about);
     wgetch(window_about);
 
-    EraseWindow(window_about);
+    eraseWindow(window_about);
 }
 
 // 크레딧 출력하는 창
-void GameFlow::RenderMakers()
+void GameFlow::renderMakers()
 {
     WINDOW* window_makers = newwin(18, 19, 3, 24);
     keypad(window_makers, TRUE);
@@ -44,11 +44,11 @@ void GameFlow::RenderMakers()
     // 버퍼비워주기
     getchar();
 
-    EraseWindow(window_makers);
+    eraseWindow(window_makers);
 }
 
 // 첫화면 시작메뉴 (처음 한번만 호출)
-int GameFlow::RenderStartMenu()
+int GameFlow::renderStartMenu()
 {
   WINDOW* window_start = newwin(12, 16, 5, 25);
   keypad(window_start, TRUE);
@@ -107,11 +107,11 @@ int GameFlow::RenderStartMenu()
         choice++;
         break;
       case KB_BACKSPACE:
-        EraseWindow(window_start);
+        eraseWindow(window_start);
         return 2;
         break;
       case KB_ENTER:
-        EraseWindow(window_start);
+        eraseWindow(window_start);
         return choice;
         break;
     }
@@ -120,7 +120,7 @@ int GameFlow::RenderStartMenu()
 
 
 // 게임 종료 시 한번 호출
-void GameFlow::RenderGameEnd()
+void GameFlow::renderGameEnd()
 {
   WINDOW* window_end = newwin(MAP_Y, MAP_X * 3 + 2, 1, 1);
 
@@ -140,11 +140,11 @@ void GameFlow::RenderGameEnd()
   wrefresh(window_end);
 
   usleep(2000000);
-  EraseWindow(window_end);
+  eraseWindow(window_end);
 }
 
 // 게임매니저가 첫 스테이지 시작 전 호출 (각 스테이지 클리어 시 자동호출)
-int GameFlow::RenderStageEnter(const int stage)
+int GameFlow::renderStageEnter(const int stage)
 { 
   WINDOW* window_enter = newwin(MAP_Y / 2 + 1, MAP_X * 2, 6, 13);
 
@@ -156,7 +156,7 @@ int GameFlow::RenderStageEnter(const int stage)
   wrefresh(window_enter);
 
   int key = wgetch(window_enter);
-  EraseWindow(window_enter);
+  eraseWindow(window_enter);
 
   if(key == 263)
   {
@@ -169,7 +169,7 @@ int GameFlow::RenderStageEnter(const int stage)
 }
 
 // 게임매니저가 스테이지 클리어 시 호출
-int GameFlow::RenderStageClear(const int stage)
+int GameFlow::renderStageClear(const int stage)
 {
   WINDOW* window_clear = newwin(MAP_Y / 2, MAP_X * 2, 6, 13);
 
@@ -178,11 +178,11 @@ int GameFlow::RenderStageClear(const int stage)
   wrefresh(window_clear);
 
   usleep(1500000);
-  EraseWindow(window_clear);
+  eraseWindow(window_clear);
 
   if(stage < MAX_STAGE)
   {
-    if(RenderStageEnter(stage + 1))
+    if(renderStageEnter(stage + 1))
     {
       return 1;
     }
@@ -191,7 +191,7 @@ int GameFlow::RenderStageClear(const int stage)
   return 0;
 }
 
-void GameFlow::EraseWindow(WINDOW* window)
+void GameFlow::eraseWindow(WINDOW* window)
 {
   keypad(window, FALSE);
   werase(window);

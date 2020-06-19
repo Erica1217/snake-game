@@ -13,17 +13,17 @@ class Game
 {
 public :
     bool is_clear;
-    bool isValid;
+    bool is_valid;
     int key;
 
     Game();
-    void Init(const int stage);
-    void SetInput();
+    void init(const int stage);
+    void setInput();
 
     void gameStart(const int tick);
     void update(const int tick);
     bool isClear();
-    int IsValid();
+    int isValid();
     void gameEnd();
 private :
     int my_stage;
