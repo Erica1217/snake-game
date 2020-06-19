@@ -134,17 +134,17 @@ void GameFlow::renderGameEnd()
       mvwprintw(window_end, i, j, " ");
     }
   }
-  mvwprintw(window_end, 6, 21, "Thank you For Playing!");
-  mvwprintw(window_end, 9, 24, "C++ Programming");
-  mvwprintw(window_end, 12, 22, "Project - Snake Game");
+  mvwprintw(window_end, 4, 21, "Thank you For Playing!");
+  mvwprintw(window_end, 6, 24, "C++ Programming");
+  mvwprintw(window_end, 8, 22, "Project - Snake Game");
   int sum = 0;
   for(int i = 0 ; i < 4 ; i++)
   {
-    mvwprintw(window_end, 13 + i, 22, "stage %d : %d", i + 1, this->scores[i]);
+    mvwprintw(window_end, 10 + i, 24, "stage %d : %4d", i + 1, this->scores[i]);
     sum += this->scores[i];
   }
 
-  mvwprintw(window_end, 18, 22, "total : %d", sum);
+  mvwprintw(window_end, 15, 24, "total : %5d", sum);
 
   wrefresh(window_end);
 

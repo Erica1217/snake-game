@@ -78,10 +78,10 @@ void UserData::setCurrentTick(int current_tick) {
 void UserData::Render() {
     wborder(window, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
     mvwprintw(window, 1, 1, "----SCORE BOARD----");
-    mvwprintw(window, 2, 1, "Score : %d", UserData::getScore());
-    mvwprintw(window, 3, 1, "B : %d / %d", current_length, max_length);
-    mvwprintw(window, 4, 1, "+ : %d", growth_item_count);
-    mvwprintw(window, 5, 1, "- : %d", poison_item_count);
-    mvwprintw(window, 6, 1, "G : %d", used_gate_count);
+    mvwprintw(window, 3, 1, "Score : %d", UserData::getScore());
+    mvwprintw(window, 4, 1, "B : %d / %d", current_length, max_length);
+    mvwprintw(window, 5, 1, "+ : %d", growth_item_count);
+    mvwprintw(window, 6, 1, "- : %d", poison_item_count);
+    mvwprintw(window, 7, 1, "G : %d", used_gate_count);
     wrefresh(window);
 }
