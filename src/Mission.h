@@ -16,7 +16,7 @@ public:
 private:
     vector<bool> current_mission_state;
     vector<int> current_mission_list;
-    vector<vector<int>> total_mission_list;
+    vector<vector<int> > total_mission_list;
     vector<int> current_state;
 };
 

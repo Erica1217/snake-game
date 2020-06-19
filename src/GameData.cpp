@@ -51,7 +51,7 @@ int GameData::checkItem(const Point& head)
     return 0;
 }
 
-vector<vector<int>> GameData::getMap()
+vector<vector<int> > GameData::getMap()
 {
     return snake_map->getCurrentMap();
 }
@@ -119,7 +119,7 @@ void GameData::updateDirection()
 
 void GameData::Render()
 {
-    std::vector<std::vector<int>> canvas = snake_map->getCurrentMap();
+    std::vector<std::vector<int> > canvas = snake_map->getCurrentMap();
     wclear(window);
     for (int i = 0; i < canvas.size(); i++)
     {
@@ -222,7 +222,7 @@ void GameData::updateGatePosition(bool isExist, const vector<Point>& gates)
     }
 }
 
-void GameData::updateGateDirection(bool isExist, const vector<vector<int>>& gate_directions)
+void GameData::updateGateDirection(bool isExist, const vector<vector<int> >& gate_directions)
 {
     if (isExist)
     {
@@ -239,7 +239,7 @@ vector<Point> GameData::getGatePositions()
     return gates;
 }
 
-vector<vector<int>> GameData::getGateDirections()
+vector<vector<int> > GameData::getGateDirections()
 {
     return gate_directions;
 }

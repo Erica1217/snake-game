@@ -38,7 +38,7 @@ vector<int> GateManager::makeGateDirection(Point gate)
     return result;
 }
 
-GateManager::GateManager(const vector<vector<int>> snake_map)
+GateManager::GateManager(const vector<vector<int> > snake_map)
 {
     for(int i=0 ; i<MAP_X ; i++)
     {
@@ -133,7 +133,7 @@ void GateManager::update(GameData &game_data, UserData &user_data)
         isExist = true;
     }
     game_data.updateGatePosition(isExist, {gates.first, gates.second});
-    vector<vector<int>> d = {};
+    vector<vector<int> > d = {};
     for(int x =0; x<gate_directions.first.size(); x++) {
         d.push_back({gate_directions.first[x], gate_directions.second[x]});
     }
