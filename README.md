@@ -72,3 +72,8 @@
 # 🔥 클래스 설계 🔥
 
 [클래스 설계](https://github.com/shinkeonkim/snake-game/blob/master/docs/class%20%EC%84%A4%EA%B3%84.md)를 참조해주세요.
+
+# :tv: 게임 플레이 영상 :tv:
+
+[![Snake Game 플레이 영상](https://img.youtube.com/vi/U7oR8bssnOs/0.jpg)](https://www.youtube.com/watch?v=U7oR8bssnOs)
+
