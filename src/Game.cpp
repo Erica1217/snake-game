@@ -79,6 +79,7 @@ void Game::update(const int tick)
 {
     game_data -> mapReset();   
     game_data -> setCurrentTick(tick - my_start_tick);
+    user_data -> setCurrentTick(tick - my_start_tick);
     
     player -> update(*game_data, *user_data);
     item_manager -> update(*game_data, *user_data);
