@@ -1,6 +1,5 @@
 #include "Snake.h"
 #include "GameSettings.h"
-#include <iostream>
 
 Snake::Snake()
 {
